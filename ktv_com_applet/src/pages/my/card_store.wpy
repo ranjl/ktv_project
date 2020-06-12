@@ -1,0 +1,155 @@
+<style lang="scss">
+@import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box {
+            // 搜索框盒子
+            .input_box {
+                height: 65rpx;
+                margin: 30rpx 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                input {
+                    width: 560rpx;
+                    height: 100%;
+                    border: 2rpx solid $c339;
+                    border-radius: 33rpx;
+                    padding-left: 60rpx;
+                    box-sizing: border-box;
+                }
+                input::-webkit-input-placeholder {
+                    color: $c753;
+                }
+                text {
+                    color: $c753;
+                }
+                .iconfont {
+                    position: absolute;
+                    left: 16rpx;
+                    font-size: 36rpx;
+                }
+            }
+
+            // 定位城市
+            .city{
+                color:$cf6f;
+                display:flex;
+                align-items: center;
+                margin-bottom: $p30;
+                text{
+                    font-size: $fs36;
+                    color:$cfff;
+                    margin-left: 10rpx;
+                }
+            }
+
+            // 列表
+            .lists{
+                margin-top: 30rpx;
+                // 模板
+                .alone{
+                    height:80rpx;
+                    background:$cfff;
+                    border-radius: 10rpx;
+                    margin-bottom: $p30;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    color:$pagebg;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="box">
+        <view class="typearea">
+            <!-- 搜索 -->
+            <view class="input_box" wx:if='{{1==2}}'>
+                <text class="iconfont icon-sousuo"></text>
+                <input type="text" placeholder="搜索" placeholder-style="color:$c753" bindinput='getCtiy'>
+                <text @tap.stop='confirm'>确定</text>
+            </view>
+
+            <!-- 默认城市 -->
+            <view class="city" wx:if='{{1==2}}'>门店:<text>{{store}}</text></view>
+
+            <!-- 列表 -->
+            <view class="lists">
+                <view class="alone" wx:for='{{stores}}' wx:key='{{index}}' @tap.stop='skip' 
+                    data-value='{{item.shop_name}}' data-id='{{item.id}}'>{{item.shop_name}}</view>
+            </view>
+        </view>
+
+        
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class ChoiceStore extends wepy.page {
+    config = {
+        navigationBarTitleText: '门店选择'
+    }
+
+    components = {}
+
+    data = {
+        store:'高新区金融城', // 默认门店
+        stores:[], // 门店列表
+    }
+
+    computed = {}
+
+    methods = {
+        // 输入的门店名称
+        getCtiy(e){
+            this.store = e.detail.value
+        },
+
+        // 确定搜索
+        confirm(){
+            wx.showModal({
+                content:this.store,
+                showCancel:false,
+                confirmText:'知道啦 !',
+                confirmColor:'#72B9C3',
+            })
+        },
+
+        // 选择门店
+        skip(e){
+            var store = e.currentTarget.dataset.value
+            var sid = e.currentTarget.dataset.id
+            wx.navigateTo({
+                url:'/pages/my/value_card?store=' + store +'&sid=' + sid
+            })
+        }
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取门店列表
+        this.getStoreList()
+    }
+
+
+    // 获取门店列表
+    getStoreList(){
+        var _this = this 
+        commonGetData.getData('shop/list','POST',function(res){
+            var resData = res.data.data
+            console.log('门店列表',resData)
+            _this.stores = resData
+            _this.$apply()
+        })
+    }
+}
+</script>

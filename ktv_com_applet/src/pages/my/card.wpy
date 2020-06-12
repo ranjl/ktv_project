@@ -1,0 +1,175 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .typearea{
+            // 充值
+            button{
+                margin: $p30 0;
+                background:$changebg;
+            }
+
+            // 模板
+            .alone{
+                width:100%;
+                height: 300rpx;
+                margin: 0 auto;
+                border-radius: 20rpx;
+                position:relative;
+                margin-bottom: 20rpx;
+
+                // 背景图片
+                image{
+                    width:100%;
+                    height: 100%;
+                    position:absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: -1;
+                }
+
+                // 门店名称
+                .name{
+                    width:100%;
+                    height: 80rpx;
+                    position: absolute;
+                    top: 52rpx; 
+                    display:flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+
+                // 余额 充值
+                .box{
+                    width:100%;
+                    height: 80rpx;
+                    position: absolute;
+                    bottom: 30rpx;
+                    display:flex;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    // 余额
+                    .balance{
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        text{
+                            font-size: $fs42;
+                        }
+                    }
+                   
+                    // 去充值
+                    .recharge{
+                        width:150rpx;
+                        height:60rpx;
+                        background:$c753;
+                        border-radius: 20rpx;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="box">
+        <view class="typearea">
+            <!-- 充值 -->
+            <button @tap.stop='direct'>充值</button>
+
+            <!-- 模板 -->
+            <view class="alone" wx:for='{{cards}}' wx:key='{{index}}'>
+                <!-- 背景图片 -->
+                <image src="{{bg0}}" />
+
+                <!-- 门店 -->
+                <view class="name">{{item.shop_name}}</view>
+
+                <!-- 余额 充值 -->
+                <view class="box">
+                    <!-- 余额 -->
+                    <view class="balance">余额:<text>￥{{item.money}}</text></view>
+
+                    <!-- 去充值 -->
+                    <view class="recharge" data-sid='{{item.id}}' data-store='{{item.shop_name}}' @tap.stop='recharge'>去充值</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class Card extends wepy.page {
+    config = {
+        navigationBarTitleText: '储值卡'
+    }
+
+    components = {}
+
+    data = {
+        bg0:'../../static/imgs/card_bg0.png', 
+        cards:[], //
+    }
+
+    computed = {}
+
+    methods = {
+        // 直接充值
+        direct(){
+            wx.navigateTo({
+                url:'/pages/my/value_card'
+            })
+        },
+
+
+        // 去充值
+        recharge(e){
+            var store = e.currentTarget.dataset.store
+            var sid = e.currentTarget.dataset.sid
+            console.log(store,sid)
+            wx.navigateTo({
+                url:'/pages/my/value_card?store=' + store +'&sid=' + sid
+            })
+        }
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取会员钱包
+        this.getWallet()
+    }
+
+    onShow(){
+        // 获取会员钱包
+        this.getWallet()
+    }
+
+    onUnload(){
+        console.log('按了返回键')
+        wx.switchTab({
+            url: '/pages/my'
+        })
+    }
+
+
+    // 获取会员钱包
+    getWallet(){
+        var _this = this
+        commonGetData.getDataOrder('member/wallet','POST',function(res){
+            console.log('会员钱包',res.data.data)
+            _this.cards = res.data.data
+            _this.$apply();
+        })
+    }
+}
+</script>

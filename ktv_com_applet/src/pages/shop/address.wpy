@@ -1,0 +1,113 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        height: 100%;
+        .box{
+            height: 100%;
+
+            .label{
+                width: 393rpx;
+                height: 70rpx;
+                background:#D54753;
+                border-radius: 12rpx;
+            }
+        }
+
+    }
+</style>
+<template>
+    <view class="box">
+        <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" 
+            markers="{{markers}}" 
+            bindmarkertap="markertap"  bindregionchange="regionchange" bindcontroltap="controltap"
+            bindcallouttap='callout'
+            show-location style="width:100%; height:100%;">
+        </map>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class Address extends wepy.page {
+    config = {
+        navigationBarTitleText: '详细地址'
+    }
+
+    components = {}
+
+    data = {
+        longitude:25.8233360,
+        latitude:25.8233360,
+        // 标记点
+        markers: [ 
+            {
+                iconPath: "../../static/imgs/location.png",
+                id: 0,
+                latitude: 25.8233360,
+                longitude: 25.8233360,
+                width: 36,
+                height: 36,
+                callout: {
+                    content: 'XOW门店',
+                    color: '#fff',
+                    bgColor:'#D54753',
+                    fontSize: 15,
+                    padding:8,
+                    borderRadius: 5,
+                    display: 'ALWAYS',
+                }
+            }
+
+        ],
+    }
+
+    // 视野发生变化时触发
+    regionchange(e) {
+        console.log(e.type)
+    }
+
+    // 点击标记点时触发
+    markertap(e) {
+        console.log(e.markerId)
+    }
+
+    // 点击控件时触发
+    controltap(e) {
+        console.log(e.controlId)
+    }
+
+    // 点击气泡触发
+    callout(e){
+        var that = this
+        wx.openLocation({ // 要到的地方
+            latitude: Number(that.latitude),
+            longitude: Number(that.longitude),
+            name:that.markers[0].callout.content,
+            scale: 20
+        })
+    }
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    onLoad(options) {
+        this.latitude = Number(options.lat)
+        this.longitude = Number(options.lng)
+        this.markers[0].latitude = Number(options.lat)
+        this.markers[0].longitude = Number(options.lng)
+        this.markers[0].callout.content = options.name
+
+        // this.latitude = 30.5702
+        // this.longitude = 104.06476
+        // this.markers[0].latitude = 30.5702
+        // this.markers[0].longitude = 106.06476
+    }
+}
+</script>

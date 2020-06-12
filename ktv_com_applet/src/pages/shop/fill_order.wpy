@@ -1,0 +1,962 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            padding-bottom: 110rpx;
+            box-sizing: border-box;
+            // 提交订单
+            .submit{
+                width:100%;
+                height:100rpx;
+                background:$c730;
+                position:fixed;
+                bottom: 0;
+                z-index: 10;
+                display:flex;
+                justify-content: space-between;
+                // 左侧
+                .left{
+                    width:70%;
+                    padding-left: 45rpx;
+                    box-sizing: border-box;
+                    display:flex;
+                    justify-content:space-between;
+                    align-items: center;
+                    // 还需支付
+                    .pay{
+                        display:flex;
+                        align-items: center;
+                        text:nth-child(1){
+                            font-size: $fs28;
+                            color:$cf6f;
+                        }
+                        text:nth-child(2){
+                            font-size: $fs42;
+                            color:$c753;
+                        }
+                    }
+                    // 查看
+                    .look{
+                        font-size: $fs28;
+                        color:$cf6f;
+                        margin-right: 20rpx;
+                    }
+                }
+                // 提交按钮
+                .submitbtn{
+                    width:220rpx;
+                    height: 100%;
+                    background:$c847;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: $fs36;
+                }
+            }
+
+            // 取消政策
+            .cancel{
+                margin-top: 30rpx;
+                color:$cf6f;
+                padding: 10rpx 0 20rpx;
+                box-sizing: border-box;
+                border-bottom: 1rpx solid $cf36;
+            }
+
+            // 订单概要
+            .outline{
+                .name{
+                    font-size: $fs36;
+                    margin: 30rpx 0;
+                }
+                // 包间
+                .room{
+                    font-size: $fs28;
+                    .room_text{
+                        border: 1px solid $c753;
+                        border-radius: 8rpx;
+                        padding: 3rpx 14rpx 4rpx;
+                        box-sizing: border-box;
+                        color:$c753;
+                    }
+                }
+                // 时间
+                .time{
+                    color:$c753;
+                    margin: 30rpx 0;
+                    display:flex;
+                    align-items: center;
+                    .week{
+                        color:$cf6f;
+                        margin-left: 20rpx;
+                    }
+                }
+            }
+
+            // 留白
+            .test{
+                height: 30rpx;
+                background:$cf6f;
+            }
+
+            // 联系人 性别 联系电话 会员权益
+            .template{
+                height: 100rpx;
+                border-bottom: 1rpx solid $cf36;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                .left{
+                    color:$cf6f;
+                    width: 150rpx;
+                }
+                // 右
+                .right{
+                    display:flex;
+                    // 姓名电话输入框
+                    input{
+                        text-align: right;
+                    }
+                    // 性别选择
+                    .alone{
+                        display:flex;
+                        align-items: center;
+                        margin-left: 50rpx;
+                        .out{
+                            width:30rpx;
+                            height:30rpx;
+                            border:1rpx solid $cf36;
+                            border-radius: 100%;
+                            margin:8rpx 20rpx 0 0;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            view{
+                                display:inline-block;
+                                width:20rpx;
+                                height:20rpx;
+                                background:$c753;
+                                border-radius: 100%;
+                            }
+                        }
+                        .outactive{
+                            border: 1rpx solid $c753;
+                        }
+                    }
+                    
+                }
+            }
+
+            // 选购美食
+            .foods{
+                color:$cea7;
+                // 标题
+                .title{
+                    margin:30rpx 0;
+                }
+
+                // 模板
+                .alone{
+                    height:200rpx;
+                    padding-bottom: $p30;
+                    box-sizing: border-box;
+                    border-bottom: 1px solid $cf6f;
+                    margin-bottom: $p30;
+                    display:flex;
+                    // 左侧图片
+                    image{
+                        height:100%;
+                        width:200rpx;
+                        border-radius: 20rpx;
+                    }
+
+                    // 右侧
+                    .right{
+                        width:65%;
+                        height:100%;
+                        margin-left: 20rpx;
+                        padding:5rpx 0;
+                        box-sizing: border-box;
+                        display:flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+
+                        // 名称
+                        .name{
+                            color:$cfff;
+                            font-weight: 700;
+                        }
+
+                        // 剩余份数
+                        .surplus{
+                            font-size: $fs28;
+                            color:$c753;
+                        }
+
+                        // 选择份数
+                        .price_number{
+                            display:flex;
+                            justify-content: space-between;
+                            // 价格
+                            .price_box{
+                                color:$c847;
+                                text{
+                                    font-size: $fs36;
+                                }
+                            }
+
+                            // 数量选择
+                            .number{
+                                height:100%;
+                                width:42%;
+                                display:flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                font-size: $fs36;
+                                .iconfont{
+                                    font-size: $fs36;
+                                    margin-top: 5rpx;
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            // 用途
+            .use{
+                color:$cea7;
+                // 标题
+                .title{
+                    margin:30rpx 0;
+                }
+                // 选择盒子
+                .use_box{
+                    margin-bottom: 30rpx;
+                    display:flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: flex-start;
+                    .use_son{
+                        display:inline-block;
+                        background:$cea7;
+                        border-radius: 25rpx;
+                        padding: 6rpx 16rpx;
+                        box-sizing: border-box;
+                        margin-bottom: 20rpx;
+                        margin-right: 20rpx;
+                        color:#fff;
+                    }
+                    .use_son_active{
+                        background: #F74947;
+                    }
+                }
+            }
+
+            // 备注
+            ._remark{
+                color:$cea7;
+                // 标题
+                .title{
+                    margin:30rpx 0;
+                }
+
+                // 备注输入框
+                .remark{
+                    border:1rpx solid #2D2F36;
+                    margin-bottom: 30rpx;
+                    height: 80rpx;
+                    padding-left: 16rpx;
+                    box-sizing: border-box;
+                }
+            }
+
+            // 会员权益
+            .member{
+                height:100rpx;
+                display:flex;
+                align-items: center;
+                view{
+                    margin-right: 20rpx;
+                }
+                .txt{
+                    color:$cf6f;
+                }
+                .icon{
+                    padding: 5rpx 10rpx;
+                    box-sizing: border-box;
+                    border: 1rpx solid $cf6f;
+                    border-radius: 10rpx;
+                    font-size: $fs28;
+                    display:flex;
+                    align-items: center;
+                    .iconfont{
+                        margin: 6rpx 8rpx 0 0;
+                        color:$c753;
+                    }
+                }
+
+            }
+
+            // 套餐选购
+            .buytitle{
+                margin: 40rpx 0;
+            }
+            .buy{
+                padding: 30rpx;
+                box-sizing: border-box;
+                border: 1rpx solid $cf6f;
+                border-radius: 20rpx;
+                margin-bottom: 30rpx;
+                // 套餐名
+                .mealname{
+                    margin-bottom: 30rpx;
+                    display:flex;
+                    justify-content: space-between;
+                    .txt{
+                        color:$c753;
+                    }
+                    // 图标
+                    .iconfont{
+                        color:$cf6f;
+                        font-size: 50rpx;
+                    }
+                    // 激活样式
+                    .iconfontactive{
+                        color:$c753;
+                    }
+                }
+                // 套餐
+                .meal{
+                    display:flex;
+                    justify-content: space-between;
+                    margin-bottom: 15rpx;
+                    .num{
+                        color:$cf6f;
+                    }
+                    .price{
+                        color:$c753;
+                        text{
+                            font-size: $fs36;
+                        }
+                    }
+                }
+            }
+
+            // 查看详情
+            .lookdetails{
+                width:100%;
+                height: 100%;
+                background:rgba(0,0,0,.5);
+                position: fixed;
+                bottom: 100rpx;
+                // 内容
+                .content{
+                    width:100%;
+                    background:$cf6f;
+                    border-radius: 20rpx 20rpx 0 0;
+                    position:absolute;
+                    bottom: 0;
+                    padding: 20rpx 45rpx;
+                    box-sizing: border-box;
+                    // title
+                    .fill_order_title{
+                        text-align: center;
+                        margin-bottom: 20rpx;
+                    }
+
+                    // list
+                    .list{
+                        display:flex;
+                        justify-content: space-between;
+                        margin-bottom: 20rpx;
+                        font-size:$fs28;
+                        view:nth-child(1){
+                            width: 30%;
+                        }
+                        view:nth-child(2){
+                            width: 30%;
+                            text-align: center;
+                        }
+                    }
+
+                    // 第一个
+                    .list_title{
+                        padding-bottom: 20rpx;
+                        box-sizing: border-box;
+                        border-bottom:1px solid $cea7;
+                        font-size:$fs32;
+                    }
+
+                    // 最后一个
+                    .list:last-child{
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="box">
+        <!-- 提交订单 -->
+        <view class='submit'>
+            <view class="left">
+                <view class="pay">
+                    <text>还需支付</text>
+                    <text>￥{{price}}</text>
+                </view>
+                <view class="look" @tap.stop='look' wx:if='{{1==2}}'>查看明细</view>
+            </view>
+            <view class="submitbtn" @tap='submit'>提交订单</view>
+        </view>
+
+
+
+        <!--  -->
+        <view class="typearea">
+            <!-- 取消政策 -->
+            <view class="cancel">
+                <view>取消政策：</view>
+                <view>支付完成后将不可取消且无法退款</view>
+            </view>
+
+            <!-- 订单概要 -->
+            <view class="outline">
+                <view class="name">{{storeName}}</view>
+                <view class="room">
+                    <text>{{rooms.name}}({{rooms.member}})</text>
+                    <text class="room_text" wx:if='{{mealIndex == 0}}'>包厢买断</text>
+                    <text class="room_text" wx:if='{{mealIndex == 1}}'>按小时欢唱</text>
+                </view>
+                <view class="time">
+                    <text>{{dates.full_day}}  {{startTime}} ~ {{endTime}}</text>
+                    <text class="week">({{dates.week}})</text>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+
+        <!-- 联系人、性别、手机号码 -->
+        <view class="typearea">
+            <!-- 联系人 -->
+            <view class="template">
+                <view class="left">联系人</view>
+                <view class="right">
+                    <input type="text" placeholder="{{userInfo.name}}" bindinput ="name">
+                </view>
+            </view>
+
+            <!-- 性别 -->
+            <view class="template">
+                <view class="left">性别</view>
+                <view class="right">
+                    <view class="alone" wx:for='{{genders_arr}}' wx:key='{{index}}' 
+                        data-index='{{index}}' data-value='{{item.txt}}' @tap='sex'>
+                        <view class="out {{genders==index+1?'outactive':''}}">
+                            <view wx:if='{{genders==index+1}}'></view>
+                        </view>
+                        <text>{{item.txt}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 联系电话 -->
+            <view class="template">
+                <view class="left">联系电话</view>
+                <view class="right">
+                    <input type="text" placeholder="{{userInfo.phone}}" bindinput ="phone">
+                </view>
+            </view>
+
+            <!-- 会员权益(9.0版本暂无此功能) -->
+            <view class="member" wx:if='{{1==2}}'>
+                <view class='txt'>会员权益</view>
+                <view class="icon">
+                    <text class="iconfont icon-youhuiquan1"></text>
+                    <text>优惠券</text>
+                </view>
+                <view class='icon'>充值金额优惠</view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 商品选择 -->
+        <view class="typearea">
+            <view class="foods">
+                <view class="title">美食选购</view>
+
+                <!-- 模板 -->
+                <view class="alone" wx:for='{{foods}}' wx:key='{{index}}'>
+                    <!-- 左侧图片 -->
+                    <image src='https://ab-kev-pdev.abontest.com{{item.cover_img}}' />
+
+                    <!-- 右侧内容 -->
+                    <view class="right">
+                        <view class="name">{{item.goods_name}}</view>
+                        <view class="surplus"></view>
+                        <view class="price_number">
+                            <!-- <view class="price_box" wx:if='{{item.act_flag == 0}}'>￥ <text>{{item.price}}</text> </view> -->
+                            <view class="price_box">￥<text>{{item.price}}</text> </view>
+                            <view class="number">
+                                <text class="iconfont icon-ziyuan" @tap.stop='subtract' data-index='{{index}}'></text>
+                                <text>{{item.num}}</text>
+                                <text class="iconfont icon-jia" @tap.stop='plus' data-index='{{index}}'></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 用途 -->
+        <view class="typearea">
+            <view class="use">
+                <!-- title -->
+                <view class="title">用途(单选)</view>
+
+                <!-- 用途选择盒子 -->
+                <view class="use_box">
+                    <view wx:for='{{uses}}' wx:key='{{index}}' 
+                        class="use_son {{item.show?'use_son_active':''}}"  
+                        @tap.stop='select' data-index='{{index}}'>{{item.name}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 备注 -->
+        <view class="typearea">
+            <view class="_remark">
+                <!-- title -->
+                <view class="title">备注(选填)</view>
+
+                <input type="text" class="remark" bindinput='getRemark' placeholder="请输入备注内容" />
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 套餐选购(9.0版本暂无此功能) -->
+        <view class="typearea" wx:if='{{1==2}}'>
+            <view class="buytitle">套餐选购</view>
+
+            <view class="buy" wx:for='{{2}}' wx:key='{{index}}' @tap='buy' data-index='{{index}}'>
+                <view class="mealname">
+                    <text class="txt">酒水套餐</text>
+                    <text class="iconfont icon-zhengque {{iconfont==index?'iconfontactive':''}}"></text>
+                </view>
+                <view class="meal">
+                    <view>12瓶百威套+纸巾</view>
+                    <view class="num">*1</view>
+                    <view class="price">￥<text>99</text></view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 查看详情 -->
+        <view class="lookdetails" wx:if='{{lookdetailsisshow}}'>
+            <view class="content">
+                <view class="fill_order_title">2019年08月20日</view>
+
+                <view class="list list_title">
+                    <view>消费明细</view>
+                    <view>时段</view>
+                    <view>数量</view>
+                    <view>价格</view>
+                </view>
+
+                <view class="list" wx:for='{{lookdetails}}' wx:key='{{index}}'>
+                    <view>{{item.datails}}</view>
+                    <view>{{item.time}}</view>
+                    <view>{{item.num}}</view>
+                    <view>{{item.price}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class fillOrder extends wepy.page {
+    config = {
+        navigationBarTitleText: '填写订单'
+    }
+
+    components = {}
+
+    data = {
+        storeName:'', // 门店名称
+        rooms:{
+            name:'', // 名称
+            num:'', // 人数
+        },
+        dates:{
+            date:'',  // 日期(2019-01-01)
+            week:'',  // 星期-
+        },
+        startTime:'', // 开始时间
+        endTime:'', // 结束时间
+        mealIndex:0, // 选择的何种套餐
+        price:0, // 价格
+        price1:0, // 中间变量
+
+        userInfo: {}, // 用户信息
+        genders_arr:[
+            {txt:'先生',is:false},
+            {txt:'女士',is:false}
+        ],
+        genders:1, // 性别
+        // 修改后的姓名、性别、电话
+        name:'',
+        gender:'',
+        phone:'',
+
+        foods:[], // 商品
+
+        uses:[], // 用途数据
+        test:[],
+
+        // 订单提交成功后返回的订单号(id)
+        orderId:0,
+
+
+        remark:'', // 备注信息
+
+
+        lookdetailsisshow:false, // 查看详情弹框的默认不显示
+        falg:true,
+        lookdetails:[
+            {datails:'酒水套餐一',time:'13:00-17:00',num:'1',price:"￥29"},
+            {datails:'包间（中包）',time:'14:00-15:00',num:'1',price:"￥29"}
+        ]
+    }
+
+    computed = {}
+
+    methods = {
+        // 姓名输入
+        name(e){
+            this.name = e.detail.value
+        },
+
+        // 性别选择
+        sex(e){
+            var index = e.currentTarget.dataset.index
+            this.genders = index+1
+            if(index == 0 ){
+                this.gender = 1
+            }else{
+                this.gender = 2
+            }
+        },
+
+
+        // 电话输入
+        phone(e){
+            this.phone = e.detail.value
+        },
+
+
+        // 减
+        subtract(e){
+            var index = e.currentTarget.dataset.index
+            console.log('哪件商品加减',index)
+            if(this.foods[index].num == 0){
+                this.foods[index].num = 0
+            }else{
+                this.foods[index].num -- 
+            }
+            this.$apply()
+
+            // 计算价格
+            var plusPrice = []
+            for(var i=0; i<this.foods.length; i++){
+                plusPrice.push(Number(this.foods[i].num) * Number(this.foods[i].price))
+            }
+            this.price = Number(this.sum(plusPrice)) + Number(this.price1)
+        },
+
+
+        // 加
+        plus(e){
+            var index = e.currentTarget.dataset.index
+            console.log('哪件商品加减',index)
+
+            // 确保在库存的范围内
+            if(this.foods[index].num == this.foods[index].store ){
+                wx.showModal({
+                    content:'选择的商品超过该商品库存',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                this.foods[index].num++
+                this.$apply()
+                
+                // 计算价格
+                var plusPrice = []
+                for(var i=0; i<this.foods.length; i++){
+                    plusPrice.push(Number(this.foods[i].num) * Number(this.foods[i].price))
+                }
+                this.price = Number(this.sum(plusPrice)) + Number(this.price1)
+            }
+        },
+
+
+        // 用途选择
+        select(e){
+            this.test = []
+            var _this = this
+            var index = e.currentTarget.dataset.index
+
+            if(!this.uses[index].show){ 
+                for(var i=0; i<this.uses.length; i++){
+                    this.uses[i].show = false
+                    this.$apply()
+                }
+                this.uses[index].show = true
+            }else{
+                this.uses[index].show = false
+            }
+
+            for(var i = 0; i < this.uses.length; i++){
+                if(this.uses[i].show){
+                    this.test.push(this.uses[i])
+                }
+            } 
+        },
+
+
+        // 获取备注信息
+        getRemark(e){
+            this.remark = e.detail.value
+        },
+
+        
+        // 查看明细
+        look(){
+            if(this.falg){
+                this.lookdetailsisshow=true
+                this.falg=false
+            }else{
+                this.lookdetailsisshow=false
+                this.falg=true
+            }
+        },
+
+
+        // 提交订单
+        submit(){
+            // 创建订单
+            this.setUpOrder()
+        }
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取门店包厢信息
+        this.getRoomInfo()
+
+        // 获取用户信息
+        this.getUserInfo()
+
+        // 获取商品数据
+        this.getFoods()
+
+        // 获取用途数据
+        this.getUse()
+    }
+
+    // 得到门店包厢信息
+    getRoomInfo(){
+        //当前页面的上一个页面
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        console.log('门店信息', prevPage.data.Storedetails)
+        console.log('选择的包间',prevPage.data.StoreRoom[prevPage.data.roomIndex])
+        console.log('选择的日期',prevPage.data.MakeDate[prevPage.data.makeIndex])
+        console.log('选择的档期',prevPage.data.StoreRoomDate[prevPage.data.reserveIndex])
+        console.log('选择的时间段',prevPage.data.times_order)
+        console.log('选择的套餐',prevPage.data.mealIndex)
+        console.log('价格',prevPage.data.calculate_price)
+        this.storeName = prevPage.data.Storedetails.shop_name
+        this.rooms = prevPage.data.StoreRoom[prevPage.data.roomIndex]
+        this.dates = prevPage.data.MakeDate[prevPage.data.makeIndex]
+        if(prevPage.data.times_order.length == 2){
+            this.startTime = prevPage.data.times_order[0]
+            this.endTime = prevPage.data.times_order[1]
+        }else{
+            this.startTime = prevPage.data.StoreRoomDate[prevPage.data.reserveIndex].start
+            this.endTime = prevPage.data.StoreRoomDate[prevPage.data.reserveIndex].end
+        }
+        this.mealIndex = prevPage.data.mealIndex
+        this.price1 = prevPage.data.calculate_price
+        this.price = this.price1
+
+    }
+
+    // 得到用户信息
+    getUserInfo(){
+        var _this = this 
+        commonGetData.getDataOrder('member','get',function(res){
+            var resData = res.data.data
+            console.log('用户信息',resData)
+            if(resData.name == null){
+                resData.name = resData.nickname
+            }
+            _this.userInfo = resData
+            _this.genders = resData.gender
+            _this.$apply();
+        })
+    }
+
+    // 获取用途数据
+    getUse(){
+        var _this = this
+        //当前页面的上一个页面
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        var sid = prevPage.data.storeId // 门店ID
+        commonGetData.getDataOrder('roomUse/list/'+sid,'post',function(res){
+            var resData = res.data.data
+            for(var i = 0; i<resData.length; i++){
+                resData[i].show = false
+            }
+            _this.uses = resData
+            console.log('用途数据',_this.uses)
+            _this.$apply()
+        }) 
+    }
+
+    // 获取商品数据
+    getFoods(){
+        var _this = this
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        console.log('门店sid', prevPage.data.storeId)
+        var parameter = {}
+        parameter.sid = prevPage.data.storeId
+        parameter.type = 1
+        commonGetData.getDataOrder('goods/list','post',function(res){
+            console.log('商品数据',res.data.data)
+            for(var i=0; i<res.data.data.length; i++){
+                res.data.data[i].num = 0
+            }
+            
+            _this.foods = res.data.data
+            _this.$apply()
+        },parameter)
+    }
+
+
+    // 创建订单
+    setUpOrder(){
+        var _this = this 
+
+        var parameter = {}
+
+        // 用途
+        for(var i = 0; i < this.uses.length; i++){
+            if(this.uses[i].show){
+                parameter.use_id = this.uses[i].id
+            }
+        }
+
+        // 备注
+        if(this.remark != ''){
+            parameter.description = this.remark
+        }
+
+        //当前页面的上一个页面
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+
+        
+        parameter.sid = prevPage.data.storeId // 门店ID
+        parameter.tid = prevPage.data.roomType // 包间类型ID
+        parameter.full_day = prevPage.data.MakeDate[prevPage.data.makeIndex].full_day // 日期
+        if(this.name == '' ){
+            this.name = this.userInfo.name
+        }
+        if(this.gender == ''){
+            this.gender = this.userInfo.gender
+        }
+        if(this.phone == ''){
+            this.phone = this.userInfo.phone
+        }
+        parameter.name = this.name // 姓名
+        parameter.gender = this.gender // 性别
+        parameter.phone = this.phone // 电话
+
+        if(this.mealIndex == 0){ // 根据选择的何种套餐选择提交订单的参数
+            parameter.package_id = prevPage.data.package_id  // 套餐ID
+        }else{
+            parameter.part_id = prevPage.data.partId // 档期ID
+            parameter.part_start_key = prevPage.data.part_start_key // 开始时间的下标
+            parameter.part_end_key = prevPage.data.part_end_key 
+        }
+
+        parameter.goods = []
+        for(var i = 0; i < this.foods.length; i++){
+            parameter.goods.push({id:this.foods[i].id,number:this.foods[i].num})
+        }
+        
+        console.log('创建订单的参数',parameter)
+        commonGetData.getDataOrder('order/add','POST',function(res){
+            console.log('创建订单',res.data)
+            if(res.data.code == 200){ // 成功
+                _this.orderId = res.data.data.id
+
+                // 跳转到支付页面
+                wx.navigateTo({
+                    url:'/pages/shop/pay'
+                })
+            }else{
+                wx.showModal({
+                    content:res.data.msg,
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                    success (res) {
+                    if (res.confirm) {
+                        wx.switchTab({
+                            url:'/pages/order'
+                        })
+                    } else if (res.cancel) {
+                        console.log('失败')
+                    }
+                }
+                })
+            }
+        },parameter)
+    }
+
+
+    // 数组求和
+    sum(arr) {
+        var s = 0;
+        for (var i=arr.length-1; i>=0; i--) {
+            s += arr[i];
+        }
+        return s;
+    }
+}
+</script>

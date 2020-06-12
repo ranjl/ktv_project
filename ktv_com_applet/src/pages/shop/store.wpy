@@ -1,0 +1,1241 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            // banner
+            .banner{
+                width: 100%;
+                height: 300rpx;
+                margin: 0 0 10rpx;
+                swiper {
+                    swiper-item {
+                        display:flex;
+                        justify-content: center;
+                        image{
+                            height: 300rpx;
+                            width:100%;
+                            margin: 0 15rpx;
+                            border-radius: 20rpx;
+                        }
+                    }
+                }
+            }
+
+            // title
+            .title{
+                border-bottom: 1rpx solid $cf36;
+                font-size: $fs36;
+                display:flex;
+                flex-direction: column;
+                // 五星
+                .star{
+                    margin: 5rpx 0 10rpx;
+                    color:$c753;
+                    display:flex;
+                    align-items: center;
+                    text{
+                        margin-right: 10rpx;
+                    }
+                }
+            }
+
+            
+            // 门店信息
+            .store{
+                // 地址电话图标盒子
+                .address_icon{
+                    margin: 10rpx 0;
+                    display:flex;
+                    justify-content: space-between;
+                    // 地址
+                    .address{
+                        font-size: $fs32;
+                        line-height: 12rpx;
+                        .down{
+                            height: 100%;
+                            display:flex;
+                            align-items: center;
+                            // 定位
+                            .iconfont{
+                                color:$c847;
+                                margin-right: 10rpx;
+                            }
+                            text{
+                                color:$cf6f;
+                            }
+                        }
+                    }
+
+                    // 电话图标
+                    .icon-dianhua{
+                        font-size: 60rpx;
+                        color:$c753;
+                    }
+                }
+
+                // 电话
+                .phone{
+                    margin-top: 10rpx;
+                    color:$c753;
+                }
+
+                // 标签
+                .label{
+                    display:flex;
+                    margin: 20rpx 0 30rpx;
+                    view{
+                        font-size: $fs28;
+                        padding: 5rpx 10rpx;
+                        box-sizing: border-box;
+                        margin-right: 10rpx;
+                        background:$cf6f;
+                        border-radius: 16rpx;
+                    }
+                }
+            }
+
+            // 留白
+            .test{
+                height: 30rpx;
+                background:$cf6f;
+            }
+
+
+            // 线上商城
+            .line{
+                width:100%;
+                height: 100rpx;
+                margin: $p30 0 10rpx;
+                border: 1px solid $c339;
+                border-radius: 20rpx;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+            // 房费买断盒子
+            .buy_title{
+                border-bottom: 1rpx solid $cf36;
+                padding: 20rpx 0;
+                box-sizing: border-box;
+                color:$cf6f;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                // 标签
+                .label{
+                    color:#B0C29A;
+                    font-size: 26rpx;
+                    height: 100%;
+                    display:flex;
+                    align-items: center;
+                    text{
+                        margin-right: 10rpx;
+                        margin-top: 5.5rpx;
+                        font-size: 24rpx;
+                    }
+                }
+            }
+            
+
+            // 时间选择
+            .time{
+                height:130rpx;
+                border: 1rpx solid transparent;
+                border-bottom: 1rpx solid $cf36;
+                display:flex;
+                white-space: nowrap;
+                // 模板
+                .alone{
+                    display:inline-block;
+                    height: 130rpx;
+                    width: 120rpx;
+                    margin-right: 20rpx;
+                    text-align: center;
+                    padding-top: 20rpx;
+                    box-sizing: border-box;
+                    // 日期
+                    .date{
+                        border:1px solid transparent;
+                    }
+                    // 星期
+                    .week{
+                        font-size: $fs24;
+                        color:$cf6f;
+                    }
+                    .weekactive{
+                        color:$c753;
+                        font-size: $fs24;
+                    }
+                }
+
+                // 激活样式
+                .timeactive{
+                    color:$c753;
+                    border-bottom: 6rpx solid $c753;
+                }
+            }
+            // 指示箭头
+            .timeicon{
+                font-size: 18rpx;
+                color:$c753;
+                position: absolute;
+                top: 142rpx;
+                right:42rpx;
+            }
+            
+
+            // 包间选择
+            .room{
+                height:130rpx;
+                border: 1rpx solid transparent;
+                border-bottom: 1rpx solid $cf36;
+                padding: 20rpx 0;
+                box-sizing: border-box;
+                display:flex;
+                white-space: nowrap;
+                // 模板
+                .alone{
+                    display:inline-block;
+                    width:116rpx;
+                    height: 90rpx;
+                    background:$cf6f;
+                    border-radius: 10rpx;
+                    margin-right: 20rpx;
+                    text-align: center;
+                    padding-top: 14rpx;
+                    box-sizing: border-box;
+                    // 包间类型
+                    .txt{
+                        overflow: hidden;
+                        text-overflow:ellipsis;
+                        white-space: nowrap;
+                        padding: 0 10rpx;
+                        box-sizing: border-box;
+                        font-size: 26rpx;
+                    }
+                    // 容纳人数
+                    .num{
+                        font-size: 24rpx;
+                        color:#ccc;
+                    }
+                }
+                .alone:last-child{
+                    margin-right: 0;
+                }
+                // 激活样式
+                .aloneactive{
+                    background:$c847;
+                }
+            }
+            // 指示箭头
+            .roomicon{
+                font-size: 18rpx;
+                color:$c753;
+                position: absolute;
+                top: 276rpx;
+                right:42rpx;
+            }
+            
+
+            // 档期
+            .select{
+                margin-top: 30rpx;
+                height: 120rpx;
+                border: 1rpx solid $cf36;
+                border-radius: 20rpx;
+                display:flex;
+                justify-content: space-around;
+                align-items: center;
+                // 时间
+                .select_time{
+                    font-size: $fs28;
+                    color:$cf6f;
+                    margin-top: 8rpx;
+                }
+                // 价格
+                .price{
+                    color:$c847;
+                }
+                // 预定
+                .reserve{
+                    width: 120rpx;
+                    height: 60rpx;
+                    background:$c847;
+                    border-radius: 10rpx;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .reserve0{
+                    background:rgb(113, 139, 132);
+                    color:#000;
+                }
+                .reserve1{
+                    background:#ccc;
+                    color:#000;
+                }
+            }
+
+
+            // 套餐选择盒子
+            .setMealBox{
+                width:100%;
+                height:100%;
+                background:rgba(0,0,0,.5);
+                position: fixed;
+                bottom:0;
+                // 内容
+                .setMeal{
+                    width:100%;
+                    max-height:100%;
+                    overflow-y: auto;
+                    background:$cf6f;
+                    border-radius: 20rpx 20rpx 0 0;
+                    position:absolute;
+                    bottom: 0;
+                    // 标题
+                    .s_title{
+                        border-bottom: 1rpx solid $cea7;
+                        padding: 45rpx 45rpx 0;
+                        box-sizing: border-box;
+                        .title_down{
+                            margin: 20rpx 0;
+                            font-size: 28rpx;
+                            display:flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            // 总价
+                            .s_price{
+                                display:flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                text{
+                                    font-size: $fs36;
+                                }
+                            }
+                        }
+
+                    }
+
+                    // 内容
+                    .sBtnBox{
+                        padding: 30rpx 45rpx;
+                        box-sizing: border-box;
+                        // 选择包断或者小时的按钮
+                        .s_btn{
+                            height:90rpx;
+                            border: 1rpx solid $cea7;
+                            border-radius: 6rpx;
+                            display:flex;
+                            justify-content: space-around;
+                            align-items: center;
+                            margin-bottom: 30rpx;
+                            .s_icon{
+                                width:60%;
+                                .iconfont{
+                                    margin-right: 20rpx;
+                                }
+                            }
+                            .s_price{
+                                width:40%;
+                                display:flex;
+                                align-items: center;
+                                justify-content: flex-end;
+                                text{
+                                    font-size: $fs36;
+                                }
+                            }
+                        }
+                        .s_btn:last-child{
+                            margin-bottom: 0;
+                        }
+                        // 激活样式
+                        .s_btn_active{
+                            background:$c753;
+                            border: 1rpx solid $c753 !important
+                        }
+                        // 选择时间盒子
+                        .s_time_box{
+                            display:flex;
+                            flex-wrap: wrap;
+                            justify-content: center;
+                            align-items: flex-start;
+                            // 时间
+                            .s_time{
+                                width:80%;
+                                display:flex;
+                                flex-wrap: wrap;
+                                .s_alone{
+                                    width:124rpx;
+                                    height:50rpx;
+                                    border: 1px solid $cea7;
+                                    border-radius: 25rpx;
+                                    display:flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin:0 70rpx 20rpx 0;
+                                }
+                                .s_alone:nth-child(3n){
+                                    margin-right: 0;
+                                }
+                            }
+                            // 提示文本
+                            .s_time_txt{
+                                margin-top: 10rpx;
+                            }
+                        }
+                    }
+
+                    // 确定
+                    .s_confirm{
+                        height:100rpx;
+                        background:$c753;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: $fs36;
+                    }
+                }
+
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="box">
+        <!-- banner -->
+        <view class="banner">
+            <swiper
+                indicator-dots="false" circular="true" autoplay="true"
+                interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
+                <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                    <swiper-item >
+                        <image src="https://ab-kev-pdev.abontest.com{{item.path}}"/>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+
+        <!-- 门店信息 -->
+        <view class="typearea">
+            <!-- title -->
+            <view class='title'>
+                <text>  {{Storedetails.shop_name}} </text>
+
+                <!-- 5星 -->
+                <view class='star'>
+                    <text wx:for='{{5}}' wx:key='{{index}}' class='iconfont icon-xingji1'></text>
+                    <text>5分</text>
+                </view>
+            </view>
+
+            <!-- 门店信息 -->
+            <view class="store">
+                <!-- 地址电话图标 -->
+                <view class="address_icon">
+                    <view class='address'>
+                        <view wx:if='{{1==2}}'>{{Storedetails.add}}</view>
+
+                        <view class="down" @tap.stop='address'>
+                            <text class='iconfont icon-dingwei'></text>
+                            <text>{{Storedetails.address}}</text>
+                        </view>
+                    </view>
+                    <text class='iconfont icon-dianhua' @tap='call'></text>
+                </view>
+
+                <view class="phone" wx:if='{{1==2}}'>门店电话:{{Storedetails.mobile}}</view>
+                <view class="label" wx:if='{{1==2}}'>
+                    <view wx:for='{{labels}}' wx:key='{{index}}'>{{item.tag}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 线上商城入口 -->
+        <view class="typearea">
+            <view class='line' @tap.stop='line'>线上商城</view>
+        </view>
+
+
+        <!-- 房费买断 -->
+        <view class="typearea" style='position:relative;'>
+            <view class="buy_title">
+                <view>房费买断</view>
+                <view class="label">
+                    <text class='iconfont icon-zhengque1'></text> 40人大包,免停车费
+                </view>
+            </view>
+            
+
+            <!-- 时间选择 -->
+            <scroll-view scroll-x class="time">
+                <view class="alone {{timeactive==index?'timeactive':''}}" 
+                    wx:for='{{MakeDate}}' wx:key='{{index}}' @tap='time' data-index='{{index}}'>
+                    <view class="date">{{item.day}}</view>
+                    <view class="week {{timeactive==index?'weekactive':''}}">{{item.week}}</view>
+                </view>
+            </scroll-view>
+            <!-- 指示箭头 -->
+            <text class='iconfont icon-jiantouyou timeicon'></text>
+
+
+            <!-- 包间选择 -->
+            <scroll-view scroll-x class='room'>
+                <view class="alone {{roomactive==index?'aloneactive':''}}" 
+                    wx:for='{{StoreRoom}}' wx:key='{{index}}' @tap='room' data-index='{{index}}' >
+                    <view class='txt'>{{item.name}}</view>
+                    <view class="num">{{item.member}}</view>
+                </view>
+            </scroll-view>
+            <!-- 指示箭头 -->
+            <text class='iconfont icon-jiantouyou roomicon' wx:if='{{1==2}}'></text>
+
+
+            <!-- 档期选择 -->
+            <view class="select" wx:for='{{StoreRoomDate}}' wx:key='{{index}}}'>
+                <view >{{item.name}}</view>
+                <view class='select_time'>{{item.start}}-{{item.end}}</view>
+                <view class="price"> ￥<text>{{item.price}}/起</text> </view>
+                <view class='reserve reserve0' wx:if='{{item.click == 1}}'>预定</view>
+                <view class='reserve' @tap='reserve'  data-index='{{index}}' data-id='{{item.id}}' wx:if='{{item.click == 2}}'>预定</view>
+                <view class='reserve reserve1' wx:if='{{item.click == 3}}'>满房</view>
+            </view>
+        </view>
+
+        <!-- 套餐选择弹框 -->
+        <view class="setMealBox" @tap.stop='cancel' wx:if={{setMeal}}>
+            <view class="setMeal">
+                <!-- 选择套餐 -->
+                <view class="s_title">
+                    <view>选择套餐</view>
+                    <view class="title_down">
+                        <view>{{roomName}},{{roomWeek}}({{roomDay}})</view>
+                        <view>{{startTime}}-{{endTime}}</view>
+                        <view class="s_price">总价<text>￥{{calculate_price}}</text></view>
+                    </view>
+                </view>
+
+                <!-- 选择包断或者小时 -->
+                <view class="sBtnBox">
+                    <!-- 选择类型 -->
+                    <view class="s_btn {{sBtnactive==index?'s_btn_active':''}}" wx:for={{s_btns}} wx:key='{{index}}' 
+                        @tap.stop='skip' data-index="{{index}}">
+                        <view class="s_icon">
+                            <text class="iconfont {{item.icon}}"></text>
+                            <text>{{item.name}}</text>
+                        </view>
+                        <view class="s_price">￥<text>{{item.price}}</text></view>
+                    </view>
+
+                    <!-- 选择时间盒子 -->
+                    <view class="s_time_box" wx:if='{{s_time}}'>
+                        <!-- 时间 -->
+                        <view class="s_time">
+                            <view wx:for='{{times}}' wx:key='{{index}}' class="s_alone {{item.show?'s_btn_active':''}}" 
+                                @tap.stop='time_skip' data-index='{{index}}'>{{item.value}}</view>
+                        </view>
+
+                        <!-- 提示文本 -->
+                        <view class="s_time_txt">{{marked}}</view>
+                    </view>
+                </view>
+                
+                <!-- 确定 -->
+                <view class="s_confirm" @tap.stop='s_confirm'>确定</view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class Store extends wepy.page {
+    config = {
+        navigationBarTitleText: '门店预定详情'
+    }
+
+    components = {}
+
+    data = {
+        imgUrls: [],  // banner图
+        
+        num:1, // 获取跟新数据标杆
+
+        storeId: 8, // 门店id
+        Storedetails: {}, // 门店详情
+        labels:[], // 门店标签
+
+        MakeDate: [], // 预约日期列表
+        timeactive:0,  // 默认选择当天
+        roomDate:'', // 日期(2019-01-01)
+        roomWeek:'', // 星期
+        roomDay:'', // 日期(01-01)
+        makeIndex:0, //日期index(默认为0)
+
+        StoreRoom: [], // 门店包间类型
+        roomactive:0, // 默认选择第一种包间类型
+        roomType:'', // 包间类型(id)
+        roomName:'' , // 包间类型的名称
+        roomIndex:0, // 包间index
+
+        StoreRoomDate: [] , // 包间下的档期
+        reserveIndex: 0, // 选择的档期的index
+
+        setMeal:false, // 套餐选择弹框默认不显示
+        startTime:'', // 开始时间
+        endTime:'', // 结束时间
+        calculate_price:0, // 价格
+        modelData:{}, // 请求回的弹框数据
+        s_btns:[], // 处理后要渲染的弹框数据
+        mealIndex:0, // 选择包段或者按小时欢唱(默认选择第一个)
+        sBtnactive:0, // 选择包段或者按小时欢唱的激活样式
+        package_id:undefined, // 套餐id
+        partId: undefined, // 档期id
+        s_time:false, //时间选择默认不显示
+        times:[], // 所有的时间点
+        time_value:[], // 选择的时间点的下标
+        times_order:[], // 选择的时间点的值
+        part_start_key: 0, // 开始时间在返回时间数组中的索引
+        part_end_key: 0,
+    }
+
+ 
+
+    computed = {}
+
+
+    methods = {
+        // 线上商城
+        line(){
+            // wx.showModal({
+            //     content:'暂未开放,敬请期待',
+            //     showCancel:false,
+            //     confirmText:'知道啦 !',
+            //     confirmColor:'#72B9C3',
+            // })
+            var that = this 
+            if(wepy.$instance.globalData.token != null){
+                // console.log('线上商城',wepy.$instance.globalData.token)
+                wx.navigateTo({
+                    url: '/pages/line_store/index'
+                })
+            }else{
+                wx.showLoading({title:'加载中'})
+
+                // 微信登陆
+                that.login() 
+            
+                // 查看是否授权
+                wx.getSetting({
+                    success: function(res) {
+                        if (res.authSetting['scope.userInfo']) { // 已经授权
+                            wx.getUserInfo({
+                                success: function(res) {
+                                    console.log('已经授权','用户信息:',res)
+                                    wepy.$instance.globalData.userInfo = res.userInfo
+                                    that.userInfo = res.userInfo
+                                    that.getToken1() // 提交用户信息得到token
+                                }
+                            });
+                        } else {  // 用户没有授权
+                            wx.switchTab({
+                                url: '/pages/my'
+                            })
+                        }
+                    }
+                });
+            }
+        },
+
+        // 地图
+        address(){
+            var _this = this 
+            var name = _this.Storedetails.shop_name
+            var lat = _this.Storedetails.latitude
+            var lng = _this.Storedetails.longitude
+            wx.navigateTo({
+                url:'/pages/shop/address?lat='+lat +'&lng='+lng +'&name='+name
+            }) 
+        },
+
+        // 拨打电话
+        call(){
+            var _this =this 
+            wx.showModal({
+                title: '提示',
+                content: '是否确定拨打电话',
+                success (res) {
+                    if (res.confirm) {
+                        wx.makePhoneCall({
+                            phoneNumber: _this.Storedetails.mobile,
+                            success: function () {
+                                console.log("拨打电话成功！")
+                            },
+                            fail: function () {
+                                console.log("拨打电话失败！")
+                            }
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+        },
+
+
+        // 日期选择
+        time(e){
+            this.makeIndex = e.currentTarget.dataset.index
+            this.timeactive = this.makeIndex  // 给选择的时间添加激活样式
+
+            this.roomDate = this.MakeDate[this.makeIndex].full_day // 保存选择的时间(string)
+
+            // 根据日期和房间类型获取档期列表
+            if(!this.roomType){ // 包间类型没有选择默认为当天的第一种包间类型
+                this.roomType = this.StoreRoom[this.roomIndex].id
+            } 
+            var parameter = this.storeId +'/'+ this.roomType +'/'+ this.roomDate
+            this.getStoreRoomDate(parameter)
+        },
+
+
+        // 包间类型选择
+        room(e){
+            this.roomIndex = e.currentTarget.dataset.index
+            this.roomactive = this.roomIndex
+            this.roomType = this.StoreRoom[this.roomIndex].id // 保存选择的包间类型(id-int)
+
+            // 根据日期和房间类型获取档期列表
+            if(!this.roomDate){ // 日期没有选择默认为当天
+                this.roomDate = this.MakeDate[this.makeIndex].full_day
+            } 
+            var parameter = this.storeId +'/'+ this.roomType +'/'+ this.roomDate
+            this.getStoreRoomDate(parameter)
+        },
+
+
+        // 预定(档期选择)
+        reserve(e){
+            var that = this 
+            if(wepy.$instance.globalData.token !=null){
+                that.reserveIndex = e.currentTarget.dataset.index 
+                that.setMeal=true // 显示弹框
+                
+                // 根据门店id、档期id、包间id获取弹框数据
+                var id = e.currentTarget.dataset.id
+                console.log(111,that.storeId,id, that.roomType )
+                var parameter = that.storeId + '/' + id + '/' + that.roomType 
+                that.getReserveData(parameter)
+
+                // 显示包间类型和日期
+                that.roomName = that.StoreRoom[that.roomIndex].name
+                that.roomWeek = that.MakeDate[that.makeIndex].week
+                that.roomDay = that.MakeDate[that.makeIndex].day
+
+                // 默认的显示时间
+                that.startTime = that.StoreRoomDate[that.reserveIndex].start
+                that.endTime = that.StoreRoomDate[that.reserveIndex].end
+            }else{
+                wx.showLoading({title:'加载中'})
+                that.e = e
+
+                // 微信登陆
+                that.login() 
+            
+                // 查看是否授权
+                wx.getSetting({
+                    success: function(res) {
+                        if (res.authSetting['scope.userInfo']) { // 已经授权
+                            wx.getUserInfo({
+                                success: function(res) {
+                                    console.log('已经授权','用户信息:',res)
+                                    that.userInfo = res.userInfo
+                                    that.getToken() // 提交用户信息得到token
+                                }
+                            });
+                        } else {  // 用户没有授权
+                            wx.switchTab({
+                                url: '/pages/my'
+                            })
+                        }
+                    }
+                });
+            }
+           
+        },
+
+
+        // 选择套餐
+        skip(e){
+            var index=e.currentTarget.dataset.index
+            this.sBtnactive = index // 添加激活样式
+
+            // 保存选择是套餐还是档期
+            this.mealIndex = index
+
+            if(this.s_btns.lenght == 1){ // 包间买断或者按时欢唱其中之一无数据
+            
+            }else{ // 都有数据
+                if(index == 1){ // 选择了按时欢唱
+                    this.s_time = true // 显示选择时间模块
+
+                    // 保存档期ID(弹框内的)
+                    this.partId = this.s_btns[index].id
+
+                }else{ // 选择了包厢买断
+                    this.s_time = false
+
+                    // 切换时间
+                    this.startTime = this.StoreRoomDate[this.reserveIndex].start
+                    this.endTime = this.StoreRoomDate[this.reserveIndex].end
+
+                    // 切换价格
+                    this.calculate_price = this.s_btns[this.sBtnactive].price
+
+                    // 保存套餐ID
+                    this.package_id = this.s_btns[index].id
+                }
+
+                // 保存选择是套餐还是档期
+                this.mealIndex = index  
+            }
+        },
+
+
+        // 选择时间段
+        time_skip(e){
+            var _this =this
+            var index=e.currentTarget.dataset.index
+
+            // 切换时间标签的激活样式
+            if(!this.times[index].show){ 
+                this.times[index].show = true
+            }else{
+                this.times[index].show = false
+            }
+
+            // 动态渲染时间和价格
+            _this.time_value = []
+            _this.times_order = []
+            for ( let i = 0; i < _this.times.length; i++){
+                if(_this.times[i].show == true){
+                    _this.time_value.push(i) // 下标
+                    _this.times_order.push(_this.times[i].value) // 下标对应的值(即起始时间点)
+                }
+            }
+
+            // 当且仅当选择了两个时间点才触发
+            if(this.times_order.length == 2){
+                // 时间
+                this.startTime = this.times_order[0]
+                this.endTime = this.times_order[1]
+
+                // 价格
+                var start = this.time_value[0] 
+                var end = this.time_value[1]
+
+                if(_this.s_btns.length == 1){ // 包间买断无数据
+                    var price = Number( _this.s_btns[0].price.split('.')[0] )
+                    _this.calculate_price = ((end - start)*price).toFixed(2)
+                }
+                
+                else{ // 包间买断有数据
+                    console.log(1212,_this.s_btns[1].price)
+                    var price = Number( _this.s_btns[1].price.split('/')[0] )
+                    _this.calculate_price = ((end - start)*price).toFixed(2)
+                }
+            }
+        },
+
+
+        // 取消
+        cancel(){
+            this.setMeal=false // 销毁弹窗
+            this.sBtnactive = 0 // 重置激活状态
+            this.s_time = false  // 时间选择栏隐藏
+            this.times = [] // 重置要渲染的时间点(下次进入弹框重新获取数据)
+            this.s_btns = [] // 重置要渲染的弹框数据
+
+            // 获取更新数据
+            this.update() 
+        },
+
+
+        // 确定
+        s_confirm(){
+            var _this = this
+            
+            if(this.s_btns.length == 1){ 
+                if(this.modelData.part != null){ // 按时欢唱
+                    // 判断时间是否合法
+                    _this.judgeDate()
+
+                    // 保存档期ID
+                    this.partId = this.s_btns[this.sBtnactive].id
+                }else{ // 包间买断
+                    _this.times_order = []
+
+                    // 保存套餐ID
+                    this.package_id = this.s_btns[this.sBtnactive].id
+                    
+                    // 跳转
+                    wx.navigateTo({
+                        url:'/pages/shop/fill_order'
+                    })
+                }  
+            }else{
+                if(this.sBtnactive == 1){ // 按小时欢唱
+                    // 判断时间是否合法
+                    _this.judgeDate()
+                }else{ // 包间买断
+                    _this.times_order = []
+
+                    // 保存套餐ID
+                    this.package_id = this.s_btns[this.sBtnactive].id
+
+                    // 跳转
+                    wx.navigateTo({
+                        url:'/pages/shop/fill_order'
+                    })
+                }
+            }
+        }
+    }
+
+    // 接受传值
+    events = {}
+
+    // 页面加载
+    onLoad(options) {
+        // 获取门店ID
+        this.storeId = Number(options.id)
+
+        // 获取门店详情
+        this.getStoredetails()
+
+        // 获取预约日期列表
+        this.getMakeDate()
+
+        // 更新房间状态
+        this.update()
+
+        // 更新订单超时未使用状态
+        this.updateOrder()
+    }
+
+    // 页面隐藏
+    onHide(){
+        this.setMeal=false // 销毁弹窗
+        this.sBtnactive = 0 // 重置激活状态
+        this.s_time = false  // 时间选择栏隐藏
+        this.times = [] // 重置要渲染的时间点(下次进入弹框重新获取数据)
+        this.s_btns = [] // 重置要渲染的弹框数据
+    }
+
+    // 页面显示
+    onShow(){
+        // 除第一次外每次进入页面获取一次跟新数据
+        if(this.num > 1){ 
+            console.log('非第一次显示')
+
+            // 更新房间状态
+            this.update()
+
+            // 更新订单超时未使用状态
+            this.updateOrder()
+        }
+        this.num ++
+    }
+    
+    
+
+    // 获取门店详情
+    getStoredetails(){
+        var _this = this
+        commonGetData.getData('shop/info/','POST',function(res){
+            console.log('门店详情',res.data.data)
+            _this.imgUrls = res.data.data.banner
+            _this.Storedetails = res.data.data;
+            _this.labels = res.data.data.tag
+            wepy.$instance.globalData.store_name = res.data.data.shop_name // 门店名称
+            wepy.$instance.globalData.lat = res.data.data.latitude  // 门店经纬度
+            wepy.$instance.globalData.lon = res.data.data.longitude
+            wepy.$instance.globalData.phone = res.data.data.mobile // 门店电话
+            wepy.$instance.globalData.sid = res.data.data.id // 门店id
+            _this.$apply();
+        },_this.storeId)
+    }
+
+    // 获取预约日期列表
+    getMakeDate(){
+        var _this = this
+        commonGetData.getData('shop/days','POST',function(res){
+            console.log('预约日期列表',res.data)
+            _this.MakeDate = res.data.data;
+    
+            _this.roomDate = res.data.data[_this.makeIndex].full_day // 设置默认日期
+
+            _this.$apply();
+
+            // 获取门店房间类型列表
+            _this.getStoreRoom()
+        })
+    }
+
+    // 获取门店房间类型列表
+    getStoreRoom(){
+        var _this = this
+        commonGetData.getData('room/type/','POST',function(res){
+            console.log('门店房间类型列表',res.data.data)
+            _this.StoreRoom = res.data.data;
+
+            _this.roomType = res.data.data[_this.roomIndex].id // 设置默认包间类型
+
+            _this.$apply();
+            
+            // 页面加载完成默认加载该门店当天第一种包间类型下的档期
+            var parameter = _this.storeId +'/'+ _this.roomType +'/'+ _this.roomDate
+            _this.getStoreRoomDate(parameter)
+        },_this.storeId)
+    }
+
+    // 获取门店类型下档期列表
+    getStoreRoomDate(parameter){
+        var _this = this
+        commonGetData.getData('part/list/'+ parameter,'POST',function(res){
+            var resData = res.data.data
+            resData.map((v,i)=>{
+                if(resData[i].time_status == 0){ // 超时
+                    resData[i]['click'] = 1
+                }if(resData[i].time_status == 1 && resData[i].status == 1){ // 不超时预定
+                    resData[i]['click'] = 2
+                }if(resData[i].time_status == 1 && resData[i].status == 0){ // 不超时满房
+                    resData[i]['click'] = 3
+                } 
+            })
+            console.log('门店类型下档期列表',resData)
+            _this.StoreRoomDate = resData;
+            _this.$apply()
+        })
+    }
+
+    // 获取弹窗数据
+    getReserveData(parameter){
+        var _this = this
+        commonGetData.getDataOrder('part/info/' + parameter,'POST',function(res){
+            var resData = res.data.data
+            _this.modelData = resData
+            console.log('弹窗数据',resData) 
+
+            if(resData.package == null && resData.part != null){ // 包厢买断无数据
+                _this.s_btns[0] = resData.part 
+
+                _this.calculate_price = resData.part.price // 渲染按时欢唱的小时单价
+
+                _this.s_btns[0].name = _this.s_btns[0].name + '/按时欢唱'
+                _this.s_btns[0].price = _this.s_btns[0].price + '/小时'
+
+                var arr = JSON.parse(resData.part.hour) // 时间段
+                arr.map((v,i)=>{
+                    _this.times.push( {'value':v, 'show':false} )
+                })
+
+                _this.s_time = true // 直接展开时间选择
+
+                // 保存选择是套餐还是档期
+                _this.mealIndex = 1
+            }
+
+            if(resData.package != null && resData.part == null){ // 按时欢唱无数据
+                _this.s_btns[0] = resData.package 
+                _this.calculate_price = resData.package.price // 渲染包厢买断的价格
+
+                // 保存选择是套餐还是档期
+                _this.mealIndex = 0 
+            }
+
+            if(resData.package != null && resData.part != null){ // 两者都有数据
+                _this.s_btns[0] = resData.package
+                _this.s_btns[1] = resData.part
+
+                _this.calculate_price = resData.package.price // 默认渲染包厢买断的价格
+
+                _this.s_btns[1].name = _this.s_btns[1].name + '/按时欢唱'
+                _this.s_btns[1].price = _this.s_btns[1].price + '/小时'
+                
+                var arr = JSON.parse(resData.part.hour) // 时间段
+                // console.log('按时欢唱的时间',arr)
+                // var time = new Date()
+                // var d = time.getDate()
+                // var h = time.getHours()
+                // var m = time.getMinutes()
+                // console.log('时间',h)
+                arr.map((v,i)=>{
+                //     var getTime = Number( v.slice(0,2) )
+                //     // console.log(123,getTime)
+                //     if(getTime == 0){
+                //         getTime = 25
+                //     }if(getTime == 1){
+                //         getTime = 26
+                //     }
+                //     if(getTime>h){
+                        _this.times.push( {'value':v, 'show':false} )
+                //     }
+                })
+            }
+            
+            // 渲染到视图
+            _this.$apply()
+        })
+    }
+
+
+
+    // 获取订单超时未使用状态
+    updateOrder(){
+        commonGetData.getData('order/update','POST',function(res){
+            console.log('订单更新成功')
+        })
+    }
+
+
+    // 更新已订房间数据状态
+    update(){
+        var _this = this
+        commonGetData.getData('roomLog/update','POST',function(res){
+            console.log('房间状态更新成功')
+            // 获取预约日期列表
+            _this.getMakeDate()
+        })
+    }
+
+
+    // 按时欢唱时判断选择的时间段是否合法(两个时间点且大于等于两小时)
+    judgeDate(){
+        var _this = this
+        
+        if(_this.time_value.length != 2){
+            wx.showModal({
+                content:'请选择起始两个时间点',
+                showCancel:false,
+                confirmText:'知道啦 !',
+                confirmColor:'#72B9C3',
+            })
+        }else if(_this.time_value.length == 2 ){
+            if(_this.time_value[1] - _this.time_value[0] < 2){
+                wx.showModal({
+                    content:'请至少选择两个小时',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                wx.navigateTo({
+                    url:'/pages/shop/fill_order'
+                })
+            }
+        }
+
+        // 保存选择的时间点在返回的时间数组中的索引(下标)
+        this.part_start_key = _this.time_value[0] 
+        this.part_end_key = _this.time_value[1]
+    }
+
+
+
+    // 微信登陆
+    login(){
+        wx.login({
+            success : res => {
+                console.log('登陆成功',res)
+                this.code = res.code
+            },
+            fail: res => {
+                console.log('登陆失败',res)
+            },
+            complete: res => {
+                console.log('登陆完成',res)
+            }
+        })
+    }
+
+    // 提交用户信息给后台获取token
+    getToken(){
+        var _this = this
+        var parameter = {}
+        parameter.code = this.code
+        parameter.nickName = this.userInfo.nickName
+        parameter.avatarUrl = this.userInfo.avatarUrl
+        parameter.gender = this.userInfo.gender
+        parameter.province = this.userInfo.province
+        parameter.country = this.userInfo.country
+        parameter.city = this.userInfo.city
+        console.log('提交的用户信息',parameter)
+        commonGetData.getData('member/login','post',function(res){
+            console.log('提交用户信息结果',res.data.msg)
+
+            // 保存token到全局变量
+            wepy.$instance.globalData.token = res.data.data.token
+
+
+            wx.hideLoading()
+            _this.reserveIndex = _this.e.currentTarget.dataset.index 
+            _this.setMeal=true // 显示弹框
+            
+            // 根据门店id、档期id、包间id获取弹框数据
+            var id = _this.e.currentTarget.dataset.id
+            console.log(222,_this.storeId,id,_this.roomType)
+            var parameter = _this.storeId + '/' + id + '/' + _this.roomType 
+            _this.getReserveData(parameter)
+
+            // 显示包间类型和日期
+            _this.roomName = _this.StoreRoom[_this.roomIndex].name
+            _this.roomWeek = _this.MakeDate[_this.makeIndex].week
+            _this.roomDay = _this.MakeDate[_this.makeIndex].day
+
+            // 默认的显示时间
+            _this.startTime = _this.StoreRoomDate[_this.reserveIndex].start
+            _this.endTime = _this.StoreRoomDate[_this.reserveIndex].end
+        },parameter)
+    }
+
+    // 提交用户信息给后台获取token(线上商城使用)
+    getToken1(){
+        var _this = this
+        var parameter = {}
+        parameter.code = this.code
+        parameter.nickName = this.userInfo.nickName
+        parameter.avatarUrl = this.userInfo.avatarUrl
+        parameter.gender = this.userInfo.gender
+        parameter.province = this.userInfo.province
+        parameter.country = this.userInfo.country
+        parameter.city = this.userInfo.city
+        console.log('提交的用户信息',parameter)
+        commonGetData.getData('member/login','post',function(res){
+            console.log('提交用户信息结果',res.data.msg)
+
+            // 保存token到全局变量
+            wepy.$instance.globalData.token = res.data.data.token
+
+            // 关闭loading
+            wx.hideLoading()
+
+            // 跳转到线上商城页面
+            wx.navigateTo({
+                url: '/pages/line_store/index'
+            })
+        },parameter)
+    }    
+}
+</script>

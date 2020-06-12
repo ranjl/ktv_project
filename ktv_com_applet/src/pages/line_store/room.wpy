@@ -1,0 +1,182 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        // 搜索模块
+        .search{
+            width:100%;
+            height: 100rpx;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+
+            // 输入框
+            input{
+                width:66%;
+                height: 60%;
+                border:1rpx solid $c339;
+                border-radius: 20rpx;
+                padding-left: 16rpx;
+                box-sizing: border-box;
+            } 
+
+            // 图标
+            .iconfont{
+                position: absolute;
+                top: 27rpx;
+                right: 108rpx;
+                font-size: $fs42;
+                color:$cf6f;
+                z-index: 1001;
+            }
+
+            // 确定
+            .confirm{
+                color:$c753;
+            }
+        }
+
+        // 房间列表
+        .lists{
+            width:66%;
+            background:$cf6f;
+            border-radius: 20rpx;
+            margin-left: 128rpx;
+            padding: 20rpx 45rpx;
+            box-sizing: border-box;
+            // 模板
+            .alone{
+                margin-top: 20rpx;
+                display:flex;
+                justify-content: space-between;
+
+            }
+            .alone:nth-child(1){
+                margin-top: 0;
+            }
+        }
+        
+    }
+</style>
+
+
+<template>
+    <view class="typearea">
+        <!-- 搜索 -->
+        <view class="search">
+            <view class="roomNum">房间号</view>
+            <input type="text" placeholder='请输入您的房间号' bindinput='getValue' @tap.stop='clickInput'>
+            <text class="iconfont icon-cuowu" @tap.stop='clean'></text>
+            <view class="confirm" @tap.stop='confirm'>确定</view>
+        </view>
+
+        <!-- 房间列表 -->
+        <view class="lists" wx:if='{{show}}'>
+            <view class="alone" wx:for='{{lists}}' wx:key='{{index}}' @tap.stop='click' data-index='{{index}}'>
+                <text>{{item.name}}</text>
+                <text>{{item.code}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class Room extends wepy.page {
+    config = {
+        navigationBarTitleText: '选择包间'
+    }
+
+    components = {}
+
+    data = {
+        value:'', // 搜索的关键字
+        show:false, // 默认不显示房间列表
+        lists:[], // 搜索到的房间列表
+    }
+
+    computed = {}
+
+
+    methods = {
+        // 点击input框事件
+        clickInput(){
+            this.getRoomNum(this.value)
+        },
+
+        // 获取输入框输入的内容
+        getValue(e){
+            this.value = e.detail.value
+        },
+
+
+        // 清空输入的关键字
+        clean(){
+            this.value = ''
+            this.lists = []
+            this.show  = false
+            this.$apply()
+        },
+
+
+        // 确定
+        confirm(){
+            console.log('关键字',this.value)
+            // 获取关键字搜索的房间
+            this.getRoomNum(this.value)
+        },
+
+        
+        // 选择房间
+        click(e){
+            var index = e.currentTarget.dataset.index
+            var parameter = this.lists[index]
+            console.log('选择的房间',parameter)
+            wx.navigateTo({
+                url: '/pages/line_store/affirmOrder?parameter='+JSON.stringify(parameter)
+            })
+        }
+    }
+
+
+    events = {}
+
+    onLoad() {}
+
+   
+
+    // 获取包间号码
+    getRoomNum(e){
+        var that = this
+        var parameter = {}
+        parameter.sid = wepy.$instance.globalData.sid
+        parameter.code = e
+        commonGetData.getDataOrder('room/list','POST',function(res){
+            var resData = res.data.data
+            if(e == ''){
+                resData.unshift({id:-1,code:'大厅',name:'大厅'});
+            }
+            console.log('搜索的房间',resData)
+            that.lists = resData
+
+            if(resData.length != 0){
+                that.show = true
+            }else{
+                that.show = false
+                wx.showModal({
+                    content:'暂无数据',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }
+            
+            that.$apply()
+        },parameter)
+    }
+}
+</script>

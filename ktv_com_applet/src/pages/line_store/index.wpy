@@ -1,0 +1,918 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        height: 100%; 
+        .box{
+            height: 100%;
+            box-sizing: border-box;
+
+            // 上面部分
+            .up{
+                height:28%;
+                // 搜索盒子
+                .search{    
+                    width:100%;
+                    height:15%;
+                    margin-bottom: 2%;
+                    padding: 0 45rpx;
+                    box-sizing: border-box;
+                    // 搜索
+                    .search_box{
+                        width:100%;
+                        height: 100%;
+                        border:1rpx solid $c753;
+                        border-radius: 50rpx;
+                        color:$cf6f;
+                        display:flex;
+                        align-items: center;
+                        // 图标
+                        .iconfont{
+                            font-size: 50rpx;
+                            color:$c753;
+                            margin: 0 20rpx;
+                        }
+                    }
+                }
+
+                // 门店
+                .store{
+                    height: 32%;
+                    width: 100%;
+                    margin-bottom: 2%;
+                    padding: 0 45rpx;
+                    box-sizing: border-box;
+                    display:flex;
+                    align-items: center;
+                    // 图片
+                    image{
+                        height:100%;
+                        width:36%;
+                        border-radius: 20rpx;
+                        margin-right: 10rpx;
+                    }
+                }
+
+                // banner
+                .banner{
+                    height: 43%;
+                    width: 100%;
+                    margin-bottom: 2%;
+                    swiper {
+                        height:100%;
+                        swiper-item {
+                            display:flex;
+                            justify-content: center;
+                            image{
+                                height: 100%;
+                                width:100%;
+                                margin: 0 15rpx;
+                                border-radius: 20rpx;
+                                z-index: 1001;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 内容
+            .content{
+                height: 64%;
+                display:flex;
+                // 左
+                .left{
+                    width: 25%;
+                    height: 100%;
+                    // 模板
+                    .alone{
+                        height: 9%;
+                        padding-left: 45rpx;
+                        box-sizing: border-box;
+                        display:flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color:$cf6f;
+                        .iconfont{
+                            color:$c753;
+                            font-size: $fs28;
+                            padding-top: 5rpx;
+                            box-sizing: border-box;
+                        }
+                    }
+                    // 激活样式
+                    .leftaloneactive{
+                        color:$c753;
+                        background:$c730;
+                    }
+                }
+
+                // 右
+                .right{
+                    width:75%;
+                    height: 100%;
+                    background:$c730;
+
+                    // 子类(未使用)
+                    .subclass{
+                        padding: 0 40rpx;
+                        box-sizing: border-box;
+                        border-bottom:1rpx solid $cf6f;
+                        overflow: auto;
+                        display:flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        // 模板
+                        .alone{
+                            padding: 5rpx 20rpx;
+                            box-sizing: border-box;
+                            background:$cf6f;
+                            border-radius: 16rpx;
+                            margin-right: 10rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        // 激活样式
+                        .active{
+                            background:$c753;
+                        }
+                    }
+
+                    // 排序盒子
+                    .filtr{
+                        height: 9%;
+                        display:flex;
+                        align-items: center;
+                        padding:0 40rpx;
+                        box-sizing: border-box;
+                        // 排序模板
+                        .alone{
+                            width:139rpx;
+                            height: 54rpx;
+                            border: 2rpx solid $c339;
+                            margin-left: 11rpx;
+                            border-radius: 27rpx;
+                            color:$c753;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            // 三角形盒子
+                            .sjx{
+                                height: 100%;
+                                width:32rpx;
+                                margin-left: 10rpx;
+                                position:relative;
+                                // 向上的三角形
+                                .icon-shangsanjiaoxing{
+                                    color:#66342D;
+                                    position:absolute;
+                                    top: 0;
+                                }
+                                // 向下的三角形
+                                .icon-xiasanjiaoxing{
+                                    color:#66342D;
+                                    position:absolute;
+                                    bottom: 0;
+                                }
+                                // 三角形的激活样式
+                                .sjx_active{
+                                    color:$c753;
+                                }
+                            }
+                        }
+
+                        
+                    }
+
+                    // 商品
+                    .commodity{
+                        height: 91%;
+                        padding: 5rpx 40rpx 0;
+                        box-sizing: border-box;
+                        display:flex;
+                        flex-wrap: wrap;
+                        // 模板
+                        .rightalone{
+                            width: 100%;
+                            margin: 20rpx 0 30rpx;
+                            display:flex;
+                            justify-content: space-between;
+                
+                            // 图片盒子
+                            .imageBox{
+                                width: 180rpx;
+                                height: 180rpx;
+                                background:#fff;
+                                border-radius: 10rpx;
+                                display:flex;
+                                justify-content: center;
+                                align-items: center;
+                                // 图片
+                                image{
+                                    width: 85%;
+                                    height: 85%;
+                                    border-radius: 10rpx;
+                                }
+                            }
+
+                            // 右侧文本
+                            .rightTxt{
+                                width:58%;
+                                display:flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                // 月销
+                                .oldprice{
+                                    color:$cf6f;
+                                    font-size: $fs28;
+                                    line-height: 20rpx;
+                                }
+
+                                // 现价
+                                .price_add{
+                                    display:flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    color:$c753;
+                                    // 价格
+                                    // .price{
+                                    //     text{
+                                    //         font-size: $fs36;
+                                    //     }
+                                    // }
+
+                                    // 添加减少盒子
+                                    .add{
+                                        display:flex;
+                                        align-items: center;
+                                        // 添加、减少
+                                        .iconfont{
+                                            color:$c753;
+                                            font-size: $fs42;
+                                        }
+                                        // 数量
+                                        .number{
+                                            margin: 0 10rpx;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 购物车盒子
+            .card{
+                width: 100%;
+                height: 8%;
+                padding: 0 0 0 40rpx;
+                box-sizing: border-box;
+                display:flex;
+
+                // 购物车
+                .cart{
+                    width:60%;
+                    height: 100%;
+                    display:flex;
+                    align-content: space-between;
+                    align-items: center;
+                    // 文本
+                    .txt{
+                        display:flex;
+                        align-items: center;
+                        position:relative;
+                        // 购物车激活样式
+                        .cartActive{
+                            color:$c753;
+                        }
+
+                        // 商品数量
+                        .num{
+                            width:36rpx;
+                            height:36rpx;
+                            border-radius: 100%;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            background:$c753;
+                            position:absolute;
+                            left: 36rpx;
+                            top:-12rpx;
+                            font-size: 24rpx;
+                        }
+                    }
+
+                    // 价格
+                    .price{
+                        margin-left: 30rpx;
+                        display:flex;
+                        align-items: center;
+                        color:$c753;
+                        text{
+                            font-size: $fs42;
+                        }
+                    }
+                }
+
+                // 结算
+                .account{
+                    width:40%;
+                    height: 100%;
+                    background:$c753;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: $fs36;
+                }
+                .account1{
+                    background:$cf6f;
+                }
+                
+            }
+
+            // 购物车
+            .cardBox{
+                width:100%;
+                height: 92%;
+                position: fixed;
+                bottom:8%;
+                background:rgba(0,0,0,.5);
+                // 内容
+                .cardContent{
+                    width:100%;
+                    position: absolute;
+                    bottom: 0;
+                    background:$cfff;
+                    border-radius: 20rpx 20rpx 0 0 ;
+                    padding: 45rpx;
+                    box-sizing: border-box;
+
+                    // 列表
+                    .lists{
+                        // 名称
+                        .c_name{
+                            width:30%;
+                        }
+
+                        // 数量
+                        .c_num{
+                            width:50%;
+                            text-align: center;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            // 图标
+                            .iconfont{
+                                font-size: $fs42;
+                            }
+                            // 数量
+                            .number{
+                                margin: 0 20rpx;
+                            }
+                        }
+
+                        // 价格
+                        .c_price{
+                            width:20%;
+                            text-align: right;
+                        }
+
+                        // 表头 // 列表类容
+                        .th,.td{
+                            color:#000;
+                            display:flex;
+                            justify-content: space-between;
+                        }
+                        .th{
+                            border-bottom: 1rpx solid #000;
+                            padding-bottom: 10rpx;
+                            box-sizing: border-box;
+                        }
+                        .td{
+                            margin-top:20rpx;
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="box">
+        <!-- 上面部分 -->
+        <view class="up">
+            <!-- 搜索 -->
+            <view class="search" @tap.stop='search'>
+                <view class="search_box">
+                    <text class="iconfont icon-sousuo"></text>
+                    <text>请输入商品名称搜索</text>
+                </view>
+            </view>
+
+            <!-- 门店 -->
+            <view class="store">
+                <image src='{{storeImg}}'/>
+                <view>{{storeName}}</view>
+            </view>
+
+            <!-- banner -->
+            <view class="banner">
+                <swiper
+                    indicator-dots="true" circular="true" autoplay="true"
+                    interval="3000" duration="600" previous-margin="30rpx" next-margin="30rpx">
+                    <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                        <swiper-item >
+                            <image src="{{item.img}}"/>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
+        </view>
+
+        <!-- 内容 -->
+        <view class="content">
+            <!-- 左 -->
+            <scroll-view scroll-y class="left">
+                <view class="alone {{leftaloneisshow==index?'leftaloneactive':''}}" wx:for='{{leftMenus}}' wx:key='{{index}}' 
+                    data-index='{{index}}' @tap='leftclick'>
+                    <text>{{item.name}}</text>
+                    <text class='iconfont icon-yousanjiaoxing' wx:if='{{sjxisshow==index}}'></text>
+                </view>
+            </scroll-view>
+
+            <!-- 右 -->
+            <view class="right">
+                <!-- 人气价格排序 -->
+                <view class="filtr">
+                    <!--销量 -->
+                    <view class="alone" @tap.stop='person'>
+                        <view class="filtrson">销量</view>
+                        <view class="sjx">
+                            <text class="iconfont icon-shangsanjiaoxing {{person==0?'sjx_active':''}}"></text>
+                            <text class="iconfont icon-xiasanjiaoxing {{person==1?'sjx_active':''}}"></text>
+                        </view>
+                    </view>
+                    
+                    <!-- 价格 -->
+                    <view class="alone" @tap.stop='price'>
+                        <view class="filtrson">价格</view>
+                         <view class="sjx">
+                            <text class="iconfont icon-shangsanjiaoxing {{price==0?'sjx_active':''}}"></text>
+                            <text class="iconfont icon-xiasanjiaoxing {{price==1?'sjx_active':''}}"></text>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 商品 -->
+                <scroll-view scroll-y class="commodity">
+                    <!-- 模板 -->
+                    <view class="rightalone" wx:for='{{goods}}' wx:key='{{index}}'>
+                        <!-- 左侧图片 -->
+                        <view class="imageBox">
+                            <image src='https://ab-kev-pdev.abontest.com{{item.cover_img}}'/>
+                        </view>
+
+                        <!-- 右侧文本 -->
+                        <view class="rightTxt">
+                            <view class='name'>{{item.goods_name}}</view>
+                            <view class="oldprice">月销1000</view>
+                            <view class="price_add">
+                                <view class="price">￥<text>{{item.price}}</text></view> 
+                                <view class='add'>
+                                    <text class="iconfont icon-ziyuan"  data-index='{{index}}' @tap.stop='reduce'></text>
+                                    <text class="number">{{item.num}}</text>
+                                    <text class="iconfont icon-jiahao"  data-index='{{index}}' @tap.stop='add'></text>
+                                </view>
+                            </view>
+                        </view>
+                       
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+
+        <!-- 底部购物车 -->
+        <view class="card">
+            <!-- 购物车(数量、金额)) -->
+            <view class="cart" @tap.stop='card'>
+                <view class="txt">
+                    <text class="iconfont icon-gouwuche {{numberSettleShow?'cartActive':''}}" style='font-size:50rpx; margin-right:20rpx'></text>
+                    <text>购物车</text>
+                    <text class="num" wx:if='{{numberSettleShow}}'>{{goodsNum}}</text>
+                </view>
+                <view class="price">￥ <text>{{allPrice}}</text></view>
+            </view>
+            
+            <!-- 结算 -->
+            <view class="account" wx:if='{{numberSettleShow}}' @tap.stop='total'>结算</view>
+            <view class="account account1" wx:if='{{!numberSettleShow}}'>结算</view>
+        </view>
+
+
+        <!-- 购物车 -->
+        <view class="cardBox" wx:if='{{cardActive}}'>
+            <!-- 内容 -->
+            <view class="cardContent">
+                <!-- 列表 -->
+                <view class="lists">
+                    <!-- 表头- -->
+                    <view class="th">
+                        <view class="c_name">商品名称</view>
+                        <view class="c_num">数量</view>
+                        <view class="c_price">价格</view>
+                    </view>
+
+                    <!-- 表格内容 -->
+                    <view class='td' wx:for='{{lists}}' wx:key='{{index}}'>
+                        <view class="c_name">{{item.goods_name}}</view>
+                        <view class="c_num">
+                            <text class="iconfont icon-ziyuan" data-index='{{index}}' @tap.stop='creduce'></text>
+                            <text class="number">{{item.num}}</text>
+                            <text class="iconfont icon-jiahao" data-index='{{index}}' @tap.stop='cadd'></text>
+                        </view>
+                        <view class="c_price">￥{{item.addPrice}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class Store extends wepy.page {
+    config = {
+        navigationBarTitleText: '线上商城'
+    }
+
+    components = {}
+
+    data = {
+        storeImg:'https://ab-kev-pdev.abontest.com/uploads/5d7a1b89c7f9b.png', // 默认的门店图片
+        imgUrls: [ // 默认的banner图
+            {img:'https://ab-kev-pdev.abontest.com/uploads/5d7a1ba538287.png'},
+            {img:'https://ab-kev-pdev.abontest.com/uploads/5d7a1ba538287.png'},
+        ], 
+        storeName:'', // 门店名称
+        allGoods:[], // 该页面请求回的所有分类的商品
+        leftMenus:[], // 左侧菜单
+        leftaloneisshow:0, // 左侧默认选中第一项
+        sjxisshow:0, // 左侧默认激活第一项的小三角形
+        person:1, // 人气筛选标杆(默认降序)
+        price:1,  // 价格筛选标杆(默认降序)
+        goods:[], // 左侧分类对应的右侧商品
+        selectGoods:[], // 两个页面已经选择的商品 ***
+        numberSettleShow:false, // 数量和结算的显示与隐藏
+        goodsNum:0, // 商品的数量 
+        allPrice:'0.00', // 默认的商品总价
+        cardActive:false, // 购物车和默认不显示
+        lists:[], // 购物车商品
+    }
+
+    computed = {}
+
+    methods = {
+        // 搜索
+        search(){
+            // 页面跳转
+            wx.navigateTo({
+                url: '/pages/line_store/search'
+            })
+        },
+
+
+        // 左侧选择
+        leftclick(e){
+            var index = e.currentTarget.dataset.index
+            this.leftaloneisshow = index
+            this.sjxisshow = index
+
+            // 渲染左侧分类对应的商品
+            this.goods = this.allGoods[index].goods
+            // console.log('左侧索引',index)
+            // console.log('对应的右侧的商品',this.goods)
+            this.$apply()
+        },
+
+
+        // 销量和价格筛选
+        // 按销量排序
+        person(e){
+            if(this.person == 1){ 
+                this.person = 0
+                console.log('销量升序')
+            }else if(this.person == 0){ 
+                this.person = 1
+                console.log('销量降序')
+            }
+            this.goods.reverse()
+        },
+        // 按价格排序
+        price(){
+            if(this.price == 1){ 
+                this.price = 0
+                console.log('价格升序')
+            }else if(this.price == 0){
+                this.price = 1
+                console.log('价格降序')
+            }
+            this.goods.reverse()
+        },
+
+
+        // 分类选择的减少与添加
+        // 减少
+        reduce(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断商品选择的最小数量
+            if(this.goods[index].num == 0){
+                this.goods[index].num == 0
+            }else{
+                this.goods[index].num --
+            }
+
+            // 计算价格和数量
+            this.getPriceNum()
+           
+            // 渲染页面
+            this.$apply()
+        },
+        // 添加
+        add(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断选择是否超过库存
+            if(this.goods[index].num == this.goods[index].store ){
+                wx.showModal({
+                    content:'选择的商品超过该商品库存',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                this.goods[index].num ++
+            }
+            
+            // 计算价格和数量
+            this.getPriceNum()
+
+            // 渲染页面
+            this.$apply()
+        },
+
+
+        // 购物车列表显示与隐藏
+        card(){
+            this.lists = wepy.$instance.globalData.allGoods // 读取两个页面选择的商品赋值给购物车
+            console.log('购物车商品',this.lists)
+            if(this.lists.length == 0 ){ // 购物车为空
+                // 不执行操作
+            } else { 
+                // 切换显示与隐藏
+                this.cardActive = !this.cardActive
+
+                // 列表赋值
+                var goods = this.lists
+                var price = 0
+                goods.map((v,i)=>{
+                    price = ( Number(v.price) * Number(v.num) ).toFixed(2)
+                    goods[i]['addPrice'] = price
+                })
+                this.lists  = goods
+                console.log('数据处理后购物车商品',this.lists)
+            }
+            this.$apply()
+        },
+
+
+
+        // 购物车列表的减少与添加
+        // 减少
+        creduce(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断商品选择的最小数量
+            if(this.lists[index].num == 0){
+                this.lists[index].num == 0
+            }else{
+                this.lists[index].num --
+            }
+
+            // 渲染购物车中每项产品的总价
+            this.getCardPriceNum()
+
+            // 渲染页面
+            this.$apply()
+        },
+        // 添加
+        cadd(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断选择是否超过库存
+            if(this.lists[index].num == this.lists[index].store ){
+                wx.showModal({
+                    content:'选择的商品超过该商品库存',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                this.lists[index].num ++
+            }
+
+            this.getCardPriceNum()
+           
+
+            // 渲染页面
+            this.$apply()
+
+        },
+
+
+        // 结算
+        total(){
+            wx.navigateTo({
+                url: '/pages/line_store/affirmOrder'
+            })
+        },
+    }
+
+
+    events = {}
+    onLoad() {}
+
+
+    // 页面显示
+    onShow(){
+        // 设置门店名称
+        this.storeName = wepy.$instance.globalData.store_name
+
+        // 清空之前的商品
+        this.allGoods = [] 
+        this.leftMenus = [] // 左侧
+        this.goods = [] // 右侧
+        
+        // 重新获取商品
+        this.getStoreGoodsLists()
+
+        // 判断是否有选择的商品了
+        this.isGoods() 
+
+        // 渲染页面
+        this.$apply()
+    }
+
+
+    // 获取门店商品列表
+    getStoreGoodsLists(){
+        var that = this 
+        var parameter = {}
+        parameter.sid = wepy.$instance.globalData.sid
+        parameter.type = 2
+        parameter.sort_column = 'price' // 价格
+        parameter.sort_type = 3 // 降序
+        commonGetData.getDataOrder('goods/list','POST',function(res){
+            var resData = res.data.data
+            resData.map((v,i)=>{
+                v.goods.map((k,l)=>{
+                    k['num'] = 0 // 默认选择的商品数量为0
+                })
+                that.leftMenus.push({name:v.type_name,id:v.id})  // 左侧分类
+            })
+            that.allGoods = resData // 保存包含所有分类的商品  // resData[1].goods[0].store = 3 // 测试用
+            that.goods = resData[0].goods  // 右侧默认渲染左侧第一类的商品
+            console.log('所有的商品',that.allGoods)
+            console.log('右侧默认渲染的商品',that.goods)
+            console.log('左侧分类',that.leftMenus)
+            that.$apply()
+        },parameter)
+    }
+
+
+    // 判断是否有选择的商品
+    isGoods(){
+        console.log('两个页面选择的商品',wepy.$instance.globalData.allGoods)       
+        this.selectGoods = wepy.$instance.globalData.allGoods // 读取两个页面选择的商品赋值给购物车状态栏
+        
+        if(this.selectGoods != null){
+            var numArr = [] // 保存已选择商品数量的数组
+            var priceNum = 0 // 选择的每种商品的总数
+            var priceArr = [] // 保存已选择商品价格的数组
+            this.selectGoods.map((v,i)=>{
+                numArr.push(v.num)
+                priceNum = ( Number(v.price) * Number(v.num) ).toFixed(2)
+                priceArr.push(priceNum)
+            })
+            // 判断购物车栏激活与否
+            if(this.sum(numArr) != 0){
+                this.numberSettleShow = true
+            }else{
+                this.numberSettleShow = false
+            }
+
+            // 计算数量和价格
+            this.goodsNum = this.sum(numArr)
+            this.allPrice = this.sum(priceArr).toFixed(2)
+                
+            // 渲染页面
+            this.$apply()
+        }
+        
+    }
+
+
+    // 分类商品加减时计算数量和价格
+    getPriceNum(){ 
+        console.log('两个页面已经选择了的商品',this.selectGoods)
+
+        var allGoods = this.allGoods
+        console.log('本页面所有的商品',allGoods)
+        var arr = [] // 保存本页面选择的商品
+        allGoods.map((v,i)=>{
+            v.goods.map((k,l)=>{
+                if(k.num != 0){
+                    arr.push(k)
+                }
+            })
+        })
+        console.log('本页面选择的商品',arr)
+
+        var centerGoods = this.selectGoods.concat(arr) // 将本页面选择的商品合并到两个页面选择的商品中
+        console.log('点击后两个页面选择的商品',centerGoods)
+        wepy.$instance.globalData.allGoods = centerGoods  // 将在分类中加减操作后的商品缓存
+        
+        var arr1 = [] // 保存两个页面选择的商品的数量
+        var price = 0 // 两个页面选择的每种商品的总价
+        var arr2 = [] // 保存两个页面所有商品的总价
+        centerGoods.map((v,i)=>{
+            arr1.push(v.num)
+            price = ( Number(v.price) * Number(v.num) ).toFixed(2)
+            arr2.push(price)
+        })
+    
+        if(this.sum(arr1) != 0){
+            this.numberSettleShow = true 
+        }else{
+            this.numberSettleShow = false
+        }
+
+        this.goodsNum = this.sum(arr1)
+        this.allPrice = this.sum(arr2).toFixed(2)
+
+        this.$apply()
+        console.log('-----------------------------------------------------------------------------------------------')
+    }
+
+
+    // 操作购物车列表商品时计算数量和价格
+    getCardPriceNum(){
+        console.log('购物车中产品',this.lists)
+        var cArr = [] // 保存购物车中选择后的产品
+        this.lists.map((v,i)=>{
+            if(v.num !=0 ){
+                cArr.push(v)
+            }
+        })
+        console.log('点击后购物车中的商品',cArr)
+        this.lists = cArr // 购物车中该商品数量为0则不显示 ***
+        wepy.$instance.globalData.allGoods = cArr // 在购物车加减后的商品重新缓存 *** 
+       
+        var cArr1 = [] // 保存购物车中每种商品的的数量
+        var cPrice = 0 // 默认购物车中每种商品的总价
+        var cArr2 = [] // 保存购物车中选择的每种产品的总价
+        this.lists.map((v,i)=>{
+            cArr1.push(v.num)
+            cPrice = ( Number(v.price) * Number(v.num) ).toFixed(2)
+            cArr2.push(cPrice)
+            this.lists[i].addPrice = cPrice // 将计算后的每种商品的总价添加到原来的数组中
+        })
+        this.goodsNum = this.sum(cArr1) // 购物车栏商品总数
+        this.allPrice = this.sum(cArr2).toFixed(2) // 购物车栏商品总价
+        if(this.goodsNum != 0){
+            this.numberSettleShow = true
+        }else{
+            this.numberSettleShow = false // 不能结算
+            this.cardActive = false // 不显示购物车列表
+        }
+        // 渲染页面
+        this.$apply()
+    }
+
+
+    // 数组求和
+    sum(arr) {
+        var s = 0;
+        for (var i=arr.length-1; i>=0; i--) {
+            s += Number(arr[i]);
+        }
+        return s;
+    }
+}
+</script>

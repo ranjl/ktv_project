@@ -1,0 +1,222 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 200rpx;
+            box-sizing: border-box;
+            // 头像
+            .img{
+                height: 220rpx;
+                width: 220rpx;
+                border-radius: 100%;
+                background:linear-gradient(157deg,rgba(215,98,57,1) 0%,rgba(212,58,94,1) 100%);
+                margin-bottom: 40rpx;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                image{
+                    height: 200rpx;
+                    width: 200rpx;
+                    border-radius: 100%;
+                }
+            }
+
+            // 信息
+            .info{
+                width:80%;
+                height: 60rpx;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 40rpx;
+                .txt{
+                    height:100%;
+                    width:30%;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .value{
+                    height:100%;
+                    width:320rpx;
+                    display:flex;
+                    align-items: center;
+                }
+                // 输入框
+                input{
+                    height: 100%;
+                    width:320rpx;
+                    background:#26272E;
+                    border-radius: 4rpx;
+                }
+                // 性别选择
+                .sex{
+                    height:100%;
+                    background:#26272E;
+                    border-radius: 4rpx;
+                    display:flex;
+                    align-items: center;
+                    margin-right:230rpx;
+                    .iconfont{
+                        margin-left: 30rpx;
+                    }
+                }
+            }
+
+
+            // 完成
+            .accomplish{
+                width:320rpx;
+                height:56rpx;
+                border:2rpx solid transparent;
+                border-image:linear-gradient(138deg, rgba(215,98,57,1), rgba(212,53,99,1)) 2 2;
+                border-radius: 10%;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                color:$c753;
+                font-size: $fs28;
+                margin-top: 80rpx;
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="box">
+        <!-- 头像 -->
+        <view class="img">
+            <image src='{{userDetail.avatar}}'/>
+        </view>
+        
+        <!-- 昵称 -->
+        <view class="info">
+            <view class="txt">昵称</view>
+            <view class="value">{{userDetail.nickname}}</view>
+        </view>
+
+        <!-- 姓名 -->
+        <view class="info">
+            <view class="txt">会员姓名</view>
+            <input type="text" placeholder="{{userDetail.name}}" bindinput ="name">
+        </view>
+
+        <!-- 性别 -->
+        <view class="info">
+            <view class="txt">性别</view>
+            <view class="sex" @tap.stop='sex'>
+                <text>{{userDetail.gender == 1 ?'男':'女'}}</text>
+                <text class="iconfont icon-xiasanjiaoxing"></text>
+            </view>
+        </view>
+
+        <!-- 手机 -->
+        <view class="info">
+            <view class="txt">手机</view>
+            <input type="text" placeholder="{{userDetail.phone}}" bindinput ="phone">
+        </view>
+
+        <!-- 完善更改资料 -->
+        <view class="accomplish" @tap.stop='accomplish'>完成</view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class My extends wepy.page {
+    config = {
+        navigationBarTitleText: '个人中心'
+    }
+
+
+    data = {
+        // 头像
+        portrait: undefined,  
+        // 昵称
+        nickName: '艾邦智汇', 
+        userDetail:{}
+    }
+
+    
+
+    computed = {}
+
+    methods = {
+        // 性别选择
+        sex(){
+            this.userDetail.gender = 1 === this.userDetail.gender  ? 2 : 1;
+        },
+
+        // 姓名输入
+        name(e){
+            this.userDetail.name = e.detail.value
+        },
+
+        // 电话输入
+        phone(e){
+            this.userDetail.phone = e.detail.value
+        },
+
+        // 完成
+        accomplish(){
+            // 调用修改会员信息的方法
+            this.amendUserInfo()
+        },
+    }
+
+    events = {}
+
+    onShow(){}
+    
+    onLoad() {
+        // 从后台获取用户信息
+        this.getUserInfo()
+    }
+
+    // 从后台获取用户信息回填页面
+    getUserInfo(){
+        var _this = this
+        commonGetData.getDataOrder('member','get',function(res){
+            var resData = res.data.data
+            console.log('会员信息',resData)
+            _this.userDetail = resData;
+            _this.$apply();
+        })
+    }
+
+
+    // 修改会员信息
+    amendUserInfo(){
+        var _this = this
+        var parameter = {}
+        parameter.name = _this.userDetail.name,
+        parameter.phone = _this.userDetail.phone,
+        parameter.gender = _this.userDetail.gender,
+        console.log('修改的信息',parameter)
+        commonGetData.getDataOrder('member/edit','get',function(res){
+            console.log('修改信息的结果',res)
+            if(res.data.code == 200){
+                wx.switchTab({
+                    url:'/pages/my'
+                })
+            }else{
+                wx.showModal({
+                    content:res.data.msg,
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }
+        },parameter)
+    }
+}
+</script>

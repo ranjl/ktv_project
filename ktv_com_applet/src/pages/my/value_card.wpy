@@ -1,0 +1,537 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            // title
+            .title{
+                margin: 20rpx 0;
+                font-size: $fs32;
+                color: $c753;
+                font-weight: 700;
+            }
+
+            // card
+            .card{
+                width: 660rpx;
+                height: 290rpx;
+                margin: 0 auto;
+                border-radius: 20rpx;
+                padding: 30rpx 45rpx 0;
+                box-sizing: border-box;
+                position:relative;
+
+                // 背景图片
+                image{
+                    width:100%;
+                    height: 100%;
+                    position:absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: -1;
+                }
+                
+                // 上
+                .up{
+                    display:inline-flex;
+                    border:1px solid $cfff;
+                    // border:1px solid #000;
+                    padding: 10rpx 30rpx;
+                    box-sizing: border-box;
+                    border-radius: 30rpx;
+                    // 向下的三角形
+                    .iconfont{
+                        margin-left: 20rpx;
+                        color:$c753;
+                        font-size: $fs42;
+                    }
+                }
+                
+                // 下
+                .down{
+                    margin-top: 50rpx;
+                    height: 80rpx;
+                    font-size: 50rpx;
+                    input{
+                        height: 100%;
+                        border-bottom: 1rpx solid $cfff;
+                        // border-bottom:1px solid #000;
+                    } 
+                }
+            }
+
+            // 充值
+            .recharge{
+                // title
+                .title{
+                    margin: 50rpx 0 0;
+                    font-size: $fs32;
+                    color: $c753;
+                    font-weight: 700;
+                }
+
+                // 盒子
+                .recharge_box{
+                    margin: 30rpx 0 0;
+                    display:flex;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    // 模板
+                    .alone{
+                        width:47%;
+                        height:220rpx;
+                        position:relative;
+                        margin-bottom: $p30;
+                        color:#D53E5B;
+                        display:flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 20rpx;
+
+                        // 背景图片
+                        image{
+                            width:100%;
+                            height: 100%;
+                            position:absolute;
+                            left: 0;
+                            top: 0;
+                            z-index: -1;
+                        }
+
+                        // 充值的金额
+                        .value{
+                            font-size: $fs42;
+                        }
+
+                        // 赠送金额
+                        .give{
+                            font-size: $fs28; 
+                        }
+                    }
+                    
+                    // 激活样式
+                    .active{
+                        background:$changebg;
+                        color:$cfff;
+                    }
+                }
+            }
+
+            // 温馨提示
+            .hint{
+                display:flex;
+                align-content: center;
+                .btn{
+                    padding: 10rpx 20rpx;
+                    box-sizing: border-box;
+                    background: $c847;
+                    border-radius: 20rpx;
+                }
+                // 文本
+                .txt{
+                    display:flex;
+                    align-items: center;
+                    font-size: $fs28;
+                    color: $cf6f;
+                    margin-left: 20rpx;
+                }
+            }
+
+            // 立即充值
+            .chongzhi{
+                height: 80rpx;
+                border:1px solid $c339;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                color:$c339;
+                border-radius: $p40;
+                margin-top: $p40;
+            }
+
+            // 储值卡充值支付
+            .model{
+                width: 100%;
+                height: 100%;
+                background:rgba(0,0,0,.5);
+                position: fixed;
+                top: 0;
+                // 倒计时
+                .time{
+                    height: 230rpx;
+                    background:$cf6f;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    text{
+                        font-size: 72rpx;
+                    }
+                }
+
+                // 支付
+                .pay{
+                    width: 100%;
+                    height:234rpx;
+                    position: absolute;
+                    bottom: 0;
+                    // 选择微信支付
+                    .wxpay{
+                        height: 138rpx;
+                        background:$cf6f;
+                        padding: 0 80rpx;
+                        box-sizing: border-box;
+                        display:flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        // 左
+                        .icon {
+                            display:flex;
+                            align-items: center;
+                            .iconfont{
+                                font-size: 60rpx;
+                                color:#3ABF6E;
+                                margin-right: 20rpx;
+                            }
+                        }
+                        // 右
+                        .btn{
+                            width: 60rpx;
+                            height: 60rpx;
+                            border: 1rpx solid $c753;
+                            border-radius: 100%;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            .circle{
+                                width: 40rpx;
+                                height: 40rpx;
+                                background:$c753;
+                                border-radius: 100%;
+                            }
+
+                        }
+                    }
+                    // 确定 取消盒子
+                    .confirm_box{
+                        height: 96rpx;
+                        display:flex;
+                        view{
+                            width: 50%;
+                            height: 100%;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                        .cancel{
+                            background:$pagebg;
+                        }
+                        .confirm{
+                            background:$c753;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+</style>
+
+<template>
+    <view class="box">
+        <view class="typearea">
+            <!-- title -->
+            <view class="title">储值卡充值</view>
+
+            <!-- card -->
+            <view class='card'>
+                <!-- 背景图片 -->
+                <image src="{{bg1}}" />
+                <view class="up" @tap.stop='store'>
+                    <text>{{store}}</text>
+                    <text class="iconfont icon-xiasanjiaoxing"></text>
+                </view>
+                <view class="down">
+                    <input type="text" value="{{phone}}" bindinput='phone'>
+                </view>
+            </view>
+           
+
+            <!-- 充值 -->
+            <view class="recharge">
+                <!-- title -->
+                <view class="title">充值金额</view>
+                
+                <view class="recharge_box">
+                    <view class="alone {{ active == index ?'active' :''}}" wx:for='{{ruleLists}}' wx:key='{{index}}' data-index='{{index}}' 
+                        data-id='{{item.id}}' @tap.stop='select' >
+                        <!-- 背景图片 -->
+                        <image src="{{bg2}}" />
+
+                        <view class="value">{{item.price}}元</view>
+                        <view class='give' wx:if='{{item.gift_flag == 1}}'>赠{{item.gift_price}}元</view>
+                    </view> 
+                </view> 
+            </view>
+
+            <!-- 温馨提示 -->
+            <view class="hint">
+                <view class="btn">温馨提示</view>
+                <view class="txt">已充值金额不可退</view>
+            </view>
+
+            <!-- 立即充值 -->
+            <view class="chongzhi" @tap.stop='recharge'>立即充值</view>
+        </view>
+
+
+
+
+        <!-- 储值卡充值支付 -->
+        <view class="model" wx:if='{{modelisshow}}'>
+            <!-- 倒计时 -->
+            <view class="time">
+                <view>支付剩余时间</view>
+                <view>
+                    <text>00</text>:<text>{{minute}}</text>:<text>{{second}}</text>
+                </view>
+            </view>
+
+            <!-- 支付 -->
+            <view class="pay">
+                <!-- 微信支付 -->
+                <view class="wxpay">
+                    <!-- 左 -->
+                    <view class="icon">
+                        <text class="iconfont icon-weixinzhifu"></text>
+                        <text>微信支付</text>
+                    </view>
+                    <!-- 右 -->
+                    <view class="btn" @tap='wxpay'>
+                        <view class="circle" wx:if='{{wxpayisactive}}'></view>
+                    </view>
+                </view>
+
+                <!-- 确认 取消 -->
+                <view class="confirm_box">
+                    <view class="cancel">取消</view>
+                    <view class='confirm'>确定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class ValueCard extends wepy.page {
+    config = {
+        navigationBarTitleText: '储值卡充值'
+    }
+
+    components = {}
+
+    data = {
+        storeLists:[], // 门店列表
+        store:'', // 默认门店
+        phone:'', // 电话号码
+        bg1:'../../static/imgs/card_bg1.png',
+        bg2:'../../static/imgs/card_bg2.png',
+        bg3:'../../static/imgs/card_bg3.png',
+        active:-1, // 默认不选择充值金额
+        id:null, // 充值故意则ID
+
+        ruleLists:[], // 充值规则
+
+        modelisshow:false, // 模态框
+        wxpayisactive:false, // 微信支付
+        minute:30, // min
+        second:5, // s
+    }
+
+    computed = {}
+
+    methods = {
+        // 选择要充值的门店
+        store(){
+            wx.navigateTo({
+                url:'/pages/my/card_store'
+            })
+        },
+
+
+        // 输入电话号码
+        phone(e){
+            this.phone = e.detail.value
+        },
+
+
+        // 选择充值金额
+        select(e){
+            var index = e.currentTarget.dataset.index
+            this.active = index 
+
+            this.id = e.currentTarget.dataset.id
+            console.log('选择充值的金额',this.id)
+        },
+
+
+        // 立即充值
+        recharge(){
+            var _this = this 
+            var parameter = {}
+            parameter.id = this.id
+            parameter.phone = this.phone
+            console.log('参数',parameter)
+            commonGetData.getDataOrder('recharge/pay','POST',function(res){
+                console.log('立即充值预支付结果',res)
+                var resData = JSON.parse(res.data.data.bridgeConfig)
+                var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
+                if(res.data.code == 200){
+                    // 微信支付
+                    wx.requestPayment({
+                        timeStamp: time , // 当前的时间戳
+                        nonceStr: str, // 随机字符串(32个以下)
+                        package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+                        signType: 'MD5',
+                        paySign: paySignid, // 签名
+                        success (res) { 
+                            console.log('支付',res)
+                            wx.navigateTo({
+                                url:'/pages/my/card'
+                            })
+                        },
+                        fail (res) {  }
+                    })
+                }
+            },parameter)
+        },
+
+       
+    }
+
+    events = {}
+
+    onLoad(options) {
+        var that = this 
+        // 读取默认电话号码
+        wx.getStorage({
+            key: 'phone',
+            success (res) {
+                that.phone = res.data
+            }
+        })
+
+        console.log('门店sid',options.sid)
+        console.log('门店名称',options.store)
+        if(options.sid != undefined){
+            this.store = options.store
+            this.$apply()
+
+            var parameter = {}
+            parameter.sid = options.sid
+            // 获取门店充值规则
+            this.getRechargeLists(parameter)
+        }else{
+            // 获取门店列表
+            this.getStoreList()
+        }
+    }
+
+
+
+    // 获取门店列表
+    getStoreList(){
+        var _this = this 
+        commonGetData.getData('shop/list','POST',function(res){
+            var resData = res.data.data
+            console.log('门店列表',resData)
+            _this.storeLists = resData
+
+            _this.getLocation()
+        })
+    }
+
+
+    
+    // 获取对应门店的充值规则
+    getRechargeLists(parameter){
+        var _this = this
+        commonGetData.getDataOrder('recharge/list','POST',function(res){
+            var resData = res.data.data
+            console.log('充值规则',resData)
+            _this.ruleLists = resData
+            _this.$apply()
+        },parameter) 
+    }
+
+
+
+    // 获取本地经纬度
+    getLocation(){
+        var _this = this 
+        wx.getLocation({
+            type: 'wgs84',
+            success: (res)=> {
+                console.log('我的位置',res)
+                _this.latitude = res.latitude
+                _this.longitude = res.longitude
+
+                _this.storeLists.map((v,i)=>{
+                    console.log('门店纬度',v.latitude) // 经度X1
+                    console.log('门店精度',v.longitude) // 纬度Y1
+                    _this.distance(v.latitude,v.longitude,wepy.$instance.globalData.latitud,wepy.$instance.globalData.longitude,function(s){
+                        console.log('距离',s)
+                        _this.storeLists[i].dis = s.toFixed(0)
+                    })
+                })
+                _this.$apply()
+
+
+                console.log('门店信息从近到远',this.storeLists.sort(this.sortWay("dis")))
+                this.store  = this.storeLists.sort(this.sortWay("dis"))[0].shop_name
+
+                var parameter = {}
+                parameter.sid = this.storeLists.sort(this.sortWay("dis"))[0].id
+                // 获取门店充值规则
+                this.getRechargeLists(parameter)
+            }
+        })
+    }
+
+
+    // 计算距离
+    distance(lat1, lng1, lat2, lng2,cb){
+        var radLat1 = lat1*Math.PI / 180.0;
+        var radLat2 = lat2*Math.PI / 180.0;
+        var a = radLat1 - radLat2;
+        var b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+        Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+        s = s *6378.137 ;
+        s = Math.round(s * 10000) / 10000;
+        cb && cb(s)
+    }
+
+
+    // 排序
+    sortWay(parameter){
+        return function(object1,object2){
+            var value1=object1[parameter];
+            var value2=object2[parameter];
+            if(value1<value2){
+                return -1;
+            }else if(value1>value2){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+
+}
+</script>

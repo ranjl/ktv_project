@@ -1,0 +1,668 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            padding-bottom: 110rpx;
+            box-sizing: border-box;
+            // 剩余时间
+            .surplus_time{
+                width: 660rpx;
+                height: 230rpx;
+                margin: 50rpx auto 40rpx;
+                border:1rpx solid $cf6f;
+                border-radius: 20rpx;
+                display:flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                // 倒计时
+                .time1 text{
+                    font-size: 72rpx;
+                }
+                // 提示文本
+                .txt2{
+                    font-size: $fs28;
+                    color:$cf6f;
+                }
+            }
+
+            // 概况
+            .general{
+                border-bottom: 1rpx solid $cf36;
+                // 门店名称
+                .name{
+                    font-size: $fs36;
+                }
+                // 包间信息
+                .room{
+                    font-size: $fs28;
+                    margin-top: 30rpx;
+                    .room_text{
+                        margin-left: 30rpx;
+                        border: 1px solid $c753;
+                        border-radius: 8rpx;
+                        padding: 3rpx 14rpx 4rpx;
+                        box-sizing: border-box;
+                        color:$c753;
+                    } 
+                }
+                // 时间
+                .time2{
+                    color:$c753;
+                    display:flex;
+                    align-items: center;
+                    margin: 30rpx 0;
+                    .time{
+                        color:$cf6f;
+                        margin-left: 20rpx;
+                    }
+                }
+            }
+
+            // 地址、电话
+            .address_phone{
+                padding: 30rpx 0;
+                box-sizing: border-box;
+                color:$cf6f;
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                .iconfont{
+                    font-size: 50rpx;
+                    color:$c753;
+                    margin-left: 50rpx;
+                }
+            }
+
+            // 留白
+            .test{
+                height:30rpx;
+                background:$cf36;
+            }
+
+            // 订单详情
+            .order_detailed{
+                padding-bottom: 20rpx;
+                border-bottom: 1rpx solid $cf36;
+                // 标题
+                .o_title{
+                    margin: 30rpx 0 24rpx;
+                    color:$c753;
+                    font-size: $fs36;
+                }
+                // 列表
+                .o_lists{
+                    display:flex;
+                    justify-content: space-between;
+                    margin-bottom: 10rpx;
+                    .o_after{
+                        color:$c753;
+                    }
+
+                    // 商品部分
+                    ._name{
+                        width:40%;
+                    }
+                    ._num{
+                        width:40%;
+                        color:$cf6f;
+                    }
+                    ._price{
+                        width:20%;
+                        display:flex;
+                        justify-content: flex-end;
+                        color:$c753;
+                    }
+                }
+            }
+
+            // 支付方式模块
+            .pay_way{
+                padding: 40rpx 0;
+                box-sizing: border-box;
+                border-bottom: 1rpx solid $cf36;
+
+                // 支付的方式选择
+                .pay_box{
+                    height: 120rpx;
+                    margin-top: 30rpx;
+                    display:flex;
+                    justify-content: space-around;
+                    // 模板
+                    .alone{
+                        width:45%;
+                        height:100%;
+                        border:1rpx solid $cf36;
+                        border-radius: 20rpx;
+                        display:flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    // 激活样式
+                    .active{
+                        border:1rpx solid $c753;
+                        color:$c753;
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            // 订单须知
+            .know{
+                color:$cf6f;
+                .k_title{
+                    margin: 30rpx 0;
+                }
+                .k_view{
+                    margin:10rpx 0;
+                }
+                .k_hint{
+                    font-size: $fs28;
+                    margin: 28rpx 0;
+                }
+            }
+            
+            // 底部
+            .footer{
+                width: 100%;
+                height: 98rpx;
+                display:flex;
+                position:fixed;
+                bottom: 0;
+                view{
+                    width: 50%;
+                    height:100%;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .cancel{
+                    background:#252730;
+                    color:$cf6f;
+                }
+                .pay{
+                    background:$c753;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="box">
+        <!-- 剩余支付时间_概况_地址、电话 -->
+        <view class="typearea">
+            <!-- 剩余支付时间 -->
+            <view class="surplus_time">
+                <view class="txt1">支付剩余时间</view>
+                <view class="time1">
+                    <!-- <text>00</text>:<text>0{{m}}</text>:<text>{{s}}</text> -->
+                    <text>00 : </text><text>{{show}}</text>
+                </view>
+                <view class='txt2'>超时将自动取消订单</view>
+            </view>
+
+            <!-- 概况 -->
+            <view class="general">
+                <view class="name">{{orderDetails.shop_name}}</view>
+                <view class="room">
+                    <text>{{orderDetails.code}}</text>
+                    <text>{{orderDetails.type_name}}({{orderDetails.member}})</text>
+                    <text class="room_text" wx:if="{{orderDetails.type==1}}">包厢买断</text>
+                    <text class="room_text" wx:if="{{orderDetails.type==2}}">按时欢唱</text>
+                </view>
+                <view class="time2">
+                    <text>{{orderDetails.day}}  {{orderDetails.start}} ~ {{orderDetails.end}}</text>
+                    <text class='time'>({{orderDetails.hour_count}}小时)</text>
+                </view>
+            </view>
+
+            <!-- 地址、电话 -->
+            <view class="address_phone">
+                <view>{{orderDetails.address}}</view>
+                <view>
+                    <text class="iconfont icon-dingwei" @tap.stop='nav'></text>
+                    <text class="iconfont icon-dianhua" @tap.stop='phone'></text>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 订单详情_信支付_消费信息_订单须知 -->
+        <view class="typearea">
+            <!-- 订单详情 -->
+            <view class="order_detailed">
+                <view class="o_title">订单详情</view>
+                <view class="o_lists" wx:for='{{orders}}' wx:key='{{index}}'>
+                    <text class="o_before">{{item.before}}</text>
+                    <text class="o_after">{{item.value}}</text>
+                </view>
+            </view>
+
+        
+            <!-- 包厢消费 -->
+            <view class="order_detailed">
+                <view class="o_title">包厢消费</view>
+                <view class="o_lists">
+                    <text class="o_before">包厢费</text>
+                    <text class="o_after">￥{{roomPrice}}</text>
+                </view>
+            </view>
+
+            <!-- 其它消费 -->
+            <view class="order_detailed">
+                <view class="o_title">其它费用</view>
+                <view class="o_lists" wx:for='{{goods}}' wx:key='{{index}}'>
+                    <text class="_name" wx:if='{{item.count != 0 }}'>{{item.goods_name}}</text>
+                    <text class="_num" wx:if='{{item.count != 0 }}'>{{item.count}} x {{item.price}}</text>
+                    <text class="_price" wx:if='{{item.count != 0 }}'>{{item.price*item.count}}</text>
+                </view>
+            </view>
+
+
+            <!-- 支付方式 -->
+            <view class='pay_way'>
+                <!-- title -->
+                <view class="pay_title">支付方式选择:</view>
+
+                <!-- 支付方式选择 -->
+                <view class="pay_box">
+                    <view class="alone {{item.show?'active':''}}" 
+                        wx:for='{{pays}}' wx:key='{{index}}' @tap.stop='payWay' data-index='{{index}}'>
+                        {{item.pay}}
+                        <text wx:if='{{index ==1 }}' style='color:red; font-size:24rpx'>剩余金额{{wallet}}</text>
+                    </view>
+                </view>
+            </view>
+
+
+            <!-- 订单须知 -->
+            <view class="know">
+                <view class="k_title">预订须知</view>
+                <view class="k_view">支付完成后将不可取消且无法退款</view>
+                <view class="k_view">包厢保留至{{orderDetails.day}}   {{orderDetails.end}}</view>
+                <view class="k_hint">包厢门系统提前30分钟可开启，一键开门可远程打开包厢门禁系统请到达店内启用</view>
+            </view>
+        </view>
+
+
+        <!-- 底部 -->
+        <view class="footer">
+            <view class="cancel" @tap.stop='cancel'>取消订单</view>
+            <view class="pay" @tap.stop='pay'>立即支付</view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class LinEPay extends wepy.page {
+    config = {
+        navigationBarTitleText: '在线支付'
+    }
+
+    components = {}
+
+    data = {
+        orderId:0,  // 上个页面订单提交成功后返回的订单id
+        orderDetails:{}, // 所有订单信息
+        orders:[ // 订单详情
+            {before:'订房人',value:'裴元书'},
+            {before:'手机号',value:'18302882468'},
+            {before:'订单号',value:'4845874165'},
+            {before:'订单金额',value:'￥2000'},
+            {before:'实际金额',value:'￥1422'},
+        ],
+
+        goods:[], // 购买的商品
+        goodsPrice:null, // 商品价格
+        roomPrice:null, // 包间价格
+
+        // 倒计时
+        timer:{}, 
+        // time:300,
+        // m:5,
+        // s:'00',
+        show:"00 : 00",
+
+        // 微信支付选择
+        pays:[
+            {pay:'微信支付',show:true},
+            {pay:'余额支付',show:false},
+        ],
+        pay_way:0,  // 支付方式
+        wallet:0, // 余额 
+    }
+
+    computed = {}
+
+    methods = {
+        // 门店导航
+        nav(){
+            var _this = this 
+            var name = _this.orderDetails.shop_name
+            var lat = _this.orderDetails.latitude
+            var lng = _this.orderDetails.longitude
+            wx.navigateTo({
+                url:'/pages/shop/address?lat='+lat +'&lng='+lng +'&name='+name
+            }) 
+        },
+
+        // 拨打电话
+        phone(){
+            var _this = this
+            wx.showModal({
+                title: '提示',
+                content: '是否确定拨打电话',
+                success (res) {
+                    if (res.confirm) {
+                        wx.makePhoneCall({
+                            phoneNumber: _this.orderDetails.mobile, 
+                            success: function () {
+                                console.log("拨打电话成功！")
+                            },
+                            fail: function () {
+                                console.log("拨打电话失败！")
+                            }
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+        },
+
+
+        // 确定支付方式
+        payWay(e){
+            var index = e.currentTarget.dataset.index
+            if(!this.pays[index].show){ 
+                for(var i=0; i<this.pays.length; i++){
+                    this.pays[i].show = false
+                    this.$apply()
+                }
+                this.pays[index].show = true
+            }else{
+                this.pays[index].show = false
+            }
+        },
+
+
+        // 取消订单
+        cancel(){
+            var _this = this
+            var parameter = {}
+            parameter.id = _this.orderId
+            commonGetData.getDataOrder('order/cancel','POST',function(res){
+                console.log('取消订单',res)
+                if(res.data.code == 200 ){
+                    wx.showModal({
+                        content:res.data.msg,
+                        showCancel:false,
+                        confirmText:'知道啦 !',
+                        confirmColor:'#72B9C3',
+                        success (res) {
+                            if (res.confirm) {
+                                wx.switchTab({
+                                    url: '/pages/home'
+                                })
+                            } else if (res.cancel) {
+                                console.log('取消了取消订单')
+                            }
+                        }
+                    })
+                }else{
+                    wx.showModal({
+                        content:res.data.msg,
+                        showCancel:false,
+                        confirmText:'知道啦 !',
+                        confirmColor:'#72B9C3',
+                    })
+                }
+            },parameter)
+        },
+
+
+        // 立即支付
+        pay(){
+            var _this = this 
+            this.pays.map((v,i)=>{
+                if(v.show == true){
+                    this.pay_way = i
+                }
+            })
+
+            if( this.pay_way == 0){ // 微信支付
+                var _this = this
+                var parameter = {}
+                parameter.id = this.orderId
+                parameter.pay_type = 2
+                commonGetData.getDataOrder('order/pay','POST',function(res){  // 得到prepay_id
+                    console.log('微信支付预支付结果',res)
+                    var resData = JSON.parse(res.data.data.bridgeConfig)
+                    var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
+                    if(res.data.code == 200){
+                        // 微信支付
+                        wx.requestPayment({
+                            timeStamp: time , // 当前的时间戳
+                            nonceStr: str, // 随机字符串(32个以下)
+                            package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+                            signType: 'MD5',
+                            paySign: paySignid, // 签名
+                            success (res) { 
+                                console.log('微信支付成功',res)
+                                // 支付成功跳转到详情页
+                                wx.navigateTo({
+                                    url:'/pages/shop/order_details_backups?id='+_this.orderId
+                                })
+                            },
+                            fail (res) {  }
+                        })
+                    }
+
+                    if(res.msg == '订单已过期'){
+                        wx.showModal({
+                            content:'订单超过支付时间,请重新下单',
+                            showCancel:false,
+                            confirmText:'知道啦 !',
+                            confirmColor:'#72B9C3',
+                            success (res) {
+                                wx.switchTab({
+                                    url: '/pages/order'
+                                })
+                            }
+                        }) 
+                    }
+                },parameter)
+            }
+            
+            
+            else{ // 余额支付
+                var _this = this 
+                if(this.wallet == 0){ // 该用户无余额
+                    wx.showModal({
+                        content:'您当前账户无余额,请选择微信支付',
+                        showCancel:false,
+                        confirmText:'知道啦 !',
+                        confirmColor:'#72B9C3',
+                    })
+                }else{
+                    var parameter = {}
+                    parameter.id = _this.orderId
+                    parameter.pay_type = 1
+                    commonGetData.getDataOrder('order/pay','POST',function(res){  
+                        console.log('余额支付预支付结果',res)
+                        if(res.data.code == 200){ 
+                            if(res.data.data.bridgeConfig != null){ // 余额不足
+                                var price =(Number(_this.orderDetails.price) - Number(_this.orderDetails.wallet) ).toFixed(2)
+                                wx.showModal({
+                                    title: '提示',
+                                    content: '余额不足是否使用微信支付剩余金额' + price + '元',
+                                    success (res1) {
+                                        if (res1.confirm) {
+                                            var resData = JSON.parse(res.data.data.bridgeConfig)
+                                            var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
+                                            // 微信支付
+                                            wx.requestPayment({
+                                                timeStamp: time , // 当前的时间戳
+                                                nonceStr: str,    // 随机字符串(32个以下)
+                                                package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+                                                signType: 'MD5',
+                                                paySign: paySignid, // 签名
+                                                success (res) { 
+                                                    console.log('微信支付成功',res)
+                                                    // 支付成功跳转到详情页
+                                                    wx.navigateTo({
+                                                        url:'/pages/shop/order_details_backups?id='+_this.orderId
+                                                    })
+                                                },
+                                                fail (res) {  }
+                                            })
+                                        } else if (res1.cancel) {
+                                            
+                                        }
+                                    }
+                                })
+                            }
+                        }
+
+                        if(res.data.code == 201){ // 余额充足
+                           wx.showModal({
+                                content:'余额支付成功',
+                                showCancel:false,
+                                confirmText:'知道啦 !',
+                                confirmColor:'#72B9C3',
+                                success (res) {
+                                    wx.navigateTo({
+                                        url:'/pages/shop/order_details_backups?id='+_this.orderId
+                                    })
+                                }
+                            }) 
+                        }
+
+                        if(res.msg == '订单已过期'){
+                            wx.showModal({
+                                content:'订单超过支付时间,请重新下单',
+                                showCancel:false,
+                                confirmText:'知道啦 !',
+                                confirmColor:'#72B9C3',
+                                success (res) {
+                                    wx.switchTab({
+                                        url: '/pages/order'
+                                    })
+                                }
+                            }) 
+                        }
+                    },parameter)
+                }
+            }
+            
+        },
+
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取上个页面参数
+        this.getPrevParameter()
+
+        // 倒计时
+        this.count_down()
+
+        // 获取订单详情
+        this.getOrderDetails()
+    }
+
+    onHide(){
+        console.log(123,this.timer)
+        clearInterval(this.timer)
+    }
+    
+
+    // 获取上个页面的参数
+    getPrevParameter(){
+        //当前页面的上一个页面
+        var pages = getCurrentPages();
+        var prevPage = pages[pages.length - 2];
+        this.orderId = prevPage.data.orderId
+    }
+
+    // 倒计时
+    count_down(){
+        var that = this
+        // that.timer = setInterval(function(){
+        //     that.setData({
+        //         time:that.time --,
+        //         m:Math.floor(that.time / 60 % 60),
+        //         s:Math.floor(that.time % 60),
+        //     })
+        //     if(that.time == 0){
+        //         clearInterval(that.timer)
+        //         that.payWay = true;
+        //         that.$apply()
+        //     }
+        // },1000)
+
+        const countDown = (second) => {
+            const s = second % 60;
+            const m = Math.floor(second / 60);
+            return `${`00${m}`.slice(-2)} : ${`00${s}`.slice(-2)}`;
+        };
+        let time = 5 * 60;
+        that.timer = setInterval(() => {
+            that.show = countDown(time--);
+            that.$apply()
+            if(time < 0) {
+                console.log('倒计时结束！');
+                clearInterval(that.timer);
+            }
+        }, 1000);
+    }
+
+
+    // 获取订单详情
+    getOrderDetails(){
+        var _this = this
+        commonGetData.getDataOrder('order/info/'+ _this.orderId ,'GET',function(res){
+            var resData = res.data.data
+            console.log('订单详情',resData)
+            _this.wallet = resData.wallet // 检查是否有钱包
+            _this.orders[0].value = resData.name
+            _this.orders[1].value = resData.phone
+            _this.orders[2].value = resData.order_num
+            _this.orders[3].value = resData.price
+            _this.orders[4].value = resData.rel_price
+            _this.orderDetails = resData 
+
+            // 得到购买的商品
+            _this.goods = resData.goods
+
+            // 计算价格
+            var plusPrice = []
+            for(var i=0; i<resData.goods.length; i++){
+                plusPrice.push(Number(resData.goods[i].count) * Number(resData.goods[i].price))
+            }
+            _this.goodsPrice = Number(_this.sum(plusPrice))
+            _this.roomPrice = (Number(resData.price) - Number(_this.goodsPrice)).toFixed(2)
+
+            _this.$apply()
+        })
+    }
+
+    // 数组求和
+    sum(arr) {
+        var s = 0;
+        for (var i=arr.length-1; i>=0; i--) {
+            s += arr[i];
+        }
+        return s;
+    }
+}
+</script>

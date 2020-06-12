@@ -1,0 +1,501 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            padding-bottom: 140rpx;
+            box-sizing: border-box;
+        }
+
+        // 选择支付方式
+        .pay_way{
+            padding: 40rpx 0;
+            box-sizing: border-box;
+
+            // 方式选择盒子
+            .pay_box{
+                height: 120rpx;
+                margin-top: 30rpx;
+                display:flex;
+                justify-content: space-around;
+                // 模板
+                .alone{
+                    width:45%;
+                    height:100%;
+                    border:1rpx solid $cf36;
+                    border-radius: 20rpx;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                // 激活样式
+                .active{
+                    border:1rpx solid $c753;
+                    color:$c753;
+                    font-weight: 700;
+                }
+            }
+        }
+        .pay{
+            width:100%;
+            height: 80rpx;
+            background:$changebg;
+            border-radius: 20rpx;
+            margin-bottom: 30rpx;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        // 支付成功提示
+        .successBox{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            image{
+                width:112rpx;
+                height: 112rpx;
+            }
+
+            // 支付成功
+            .success{
+                font-size: $fs36;
+                margin: $p30 0;
+            }
+
+            // 提示语
+            .txt{
+                width:80%;
+                color:$cf6f;
+                font-size: $fs28;
+                text-align: center;
+                margin-bottom: $p30;
+            }
+        }
+
+        // 留白
+        .test{
+            width:100%;
+            height: $p30;
+            background:$cf6f;
+        }
+
+        // ktv
+        .header{
+            margin: $p40 0;
+            font-size: $fs36;
+            font-weight: 700;
+        }
+
+        // title
+        .title{
+            padding-bottom: 20rpx;
+            box-sizing: border-box;
+            border-bottom:1rpx solid $cf6f;
+            margin-bottom: $p30;
+        }
+
+        // 订单详情
+        .order{
+            // 订单列表
+            .orderLists{
+                display:flex;
+                justify-content: space-between;
+                margin-bottom: 20rpx;
+                .th{
+                    color:$cf6f;
+                }
+            }
+        }
+
+        // 消费详情
+        .consume{
+            padding-top: $p30;
+            box-sizing: border-box;
+            // 消费列表
+            .consumeLists{
+                margin-bottom: 20rpx;
+                display:flex;
+                color:$cf6f;
+            }
+        }
+
+        // 购买须知
+        .buyKonwn{
+            color:$cf6f;
+            font-size: $fs28;
+            .th{
+                margin: 30rpx 0 20rpx;
+            }
+        }
+
+        // bottom
+        .bottom{
+            width:100%;
+            height: 100rpx;
+            position: fixed;
+            bottom: 0;
+            display:flex;
+            view{
+                width:50%;
+                height: 100%;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .back{
+                background:#252730;
+                color:$cf6f;
+            }
+            .contact{
+                background:$c753;
+            }
+        }
+    }
+</style>
+
+
+<template>
+    <view class="box">
+        <!-- 头部选择支付 -->
+        <view class="typearea" wx:if='{{show == 1 }}'>
+            <!-- 选择支付方式 -->
+            <view class='pay_way'>
+                <!-- title -->
+                <view class="pay_title">选择支付方式</view>
+
+                <!-- 支付方式选择 -->
+                <view class="pay_box">
+                    <view class="alone {{item.show?'active':''}}" 
+                        wx:for='{{pays}}' wx:key='{{index}}' @tap.stop='payWay' data-index='{{index}}'>
+                        {{item.pay}}
+                        <text wx:if='{{index ==1 }}' style='color:red; font-size:24rpx'>剩余金额{{wallet}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 支付按钮 -->
+            <view class="pay" @tap.stop='pay'>立即支付</view>
+
+        </view>
+        <view class="test" wx:if='{{show == 1}}'></view>
+
+
+        <!-- 头部支付成功提示 -->
+        <view class="typearea" wx:if='{{show == 4}}'>
+            <view class="successBox">
+                <image src='../../static/imgs/success.png'/>
+                <view class="success">支付成功</view>
+                <view class="txt">服务人员正在备货，将在5-10分钟送到您房间，祝您欢唱愉快！</view>
+            </view>
+        </view>
+        <view class="test" wx:if='{{show == 4}}'></view>
+
+
+        <!-- 订单详情 -->
+        <view class="typearea">
+            <!-- 门店名称 -->
+            <view class='header'>{{storeName}}</view>
+
+            <!-- 订单详情 -->
+            <view class="order">
+                <view class="title">订单详情</view>
+
+                <!-- 订单列表 -->
+                <view class="orderLists" wx:for='{{orderLists}}' wx:key='{{index}}'>
+                    <view class="th">{{item.th}}:</view>
+                    <view class="td">{{item.txt}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 消费详情 -->
+        <view class="typearea">
+            <view class="consume">
+                <view class="title">消费信息</view>
+
+                <!-- 消费列表 -->
+                <view class="consumeLists" wx:for='{{consumeLists}}' wx:key='{{index}}'>
+                    <view class="name" style='width:60%'>{{item.goods_name}}</view>
+                    <view class="num" style='width:20%'>*{{item.count}}</view>
+                    <view class="price" style='width:20%; text-align:right; color:#fff'>￥{{item.sum_price}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+
+        <!-- 购买须知 -->
+        <view class="typearea">
+            <view class="buyKonwn">
+                <view class="th">购买须知</view>
+                <view>支付完成后将不可取消，商品将在10分钟内直接送到房间，如果没有送到请联系服务人员。</view>
+            </view>
+        </view>
+
+
+        <!-- bottom -->
+        <view class="bottom" wx:if='{{show == 4}}'>
+            <view class="back" @tap.stop='back'>返回订单</view>
+            <view class="contact" @tap.stop='relation'>联系服务</view>
+        </view>
+
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class Order extends wepy.page {
+    config = {
+        navigationBarTitleText: '预定订单详情'
+    }
+
+    components = {}
+
+    data = {
+        pays:[  // 微信支付选择
+            {pay:'微信支付',show:true},
+            {pay:'余额支付',show:false},
+        ],
+        pay_way:0,  // 默认选择微信支付
+        wallet:0, // 余额
+
+        show:0, // 默认都不显示(1、4、5:待支付、已支付、已失效)
+        storeName:'', // 门店名称
+        order_id:null, // 订单id
+        orderLists:[
+            {th:'购买人', txt:'刘德华'},
+            {th:'手机号', txt:'18302882468'},
+            {th:'订单号', txt:'14654421'},
+            {th:'包厢号', txt:'A02'},
+            {th:'购买时间', txt:'2019-10-10 18:00'},
+            {th:'订单金额', txt:'2345.00'},
+        ],
+        consumeLists:[] // 商品列表
+    }
+
+    computed = {}
+
+
+    methods = {
+        // 选择支付方式
+        payWay(e){
+            var index = e.currentTarget.dataset.index
+            if(!this.pays[index].show){ 
+                for(var i=0; i<this.pays.length; i++){
+                    this.pays[i].show = false
+                    this.$apply()
+                }
+                this.pays[index].show = true
+            }else{
+                this.pays[index].show = false
+            }
+            this.pay_way = index // 支付方式
+        },
+
+
+        // 支付
+        pay(){
+            var that = this
+            var parameter = {}
+            parameter.id = this.order_id
+            if(this.pay_way == 0){ // 微信支付
+                parameter.pay_type = 2
+                commonGetData.getDataOrder('order/pay','POST',function(res){  
+                    if(res.data.code == 200){ // 微信与支付成功
+                        var resData = JSON.parse(res.data.data.bridgeConfig)
+                        var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
+                        // 调起微信支付
+                        wx.requestPayment({
+                            timeStamp: time , 
+                            nonceStr: str, 
+                            package: packageid, 
+                            signType: 'MD5',
+                            paySign: paySignid, 
+                            success (res) { 
+                                // 支付成功在该页面重新请求数据
+                                that.getOrder(that.order_id)
+                            },
+                            fail (res) {  }
+                        })
+                    }
+                },parameter)
+            }
+            
+            else{ // 余额支付
+                if(this.wallet == 0){ // 无余额
+                    wx.showModal({
+                        content:'您当前账户无余额,请选择微信支付',
+                        showCancel:false,
+                        confirmText:'知道啦 !',
+                        confirmColor:'#72B9C3',
+                    })
+                }
+
+                else{ // 有余额
+                    parameter.pay_type = 1
+                    commonGetData.getDataOrder('order/pay','POST',function(res){  
+                        if(res.data.code == 201){ // 余额充足且支付成功
+                           wx.showModal({
+                                content:'余额支付成功',
+                                showCancel:false,
+                                confirmText:'知道啦 !',
+                                confirmColor:'#72B9C3',
+                                success (res) {
+                                    that.getOrder(that.order_id)
+                                }
+                            }) 
+                        }
+
+                        if(res.data.code == 200){ // 余额不足
+                            if(res.data.data.bridgeConfig != null){  // 微信预支付成功
+                                var price =(Number(that.orderDetails.price) - Number(that.orderDetails.wallet) ).toFixed(2)
+                                wx.showModal({
+                                    title: '提示',
+                                    content: '余额不足,是否使用微信支付剩余金额'+ price +'元',
+                                    success (res1) {
+                                        if (res1.confirm) {
+                                            var resData = JSON.parse(res.data.data.bridgeConfig)
+                                            var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
+                                            // 调起微信支付
+                                            wx.requestPayment({
+                                                timeStamp: time , 
+                                                nonceStr: str,    
+                                                package: packageid, 
+                                                signType: 'MD5',
+                                                paySign: paySignid, 
+                                                success (res) { 
+                                                    // 支付成功在该页面重新请求数据
+                                                    that.getOrder(that.order_id)
+                                                },
+                                                fail (res) {  }
+                                            })
+                                        } else if (res1.cancel) {}
+                                    }
+                                })
+                            }
+                        }
+
+                        
+                    },parameter)
+                }
+            }
+        },
+
+
+        // 返回订单
+        back(){
+            wx.switchTab({
+                url:'/pages/order'
+            })
+        },
+
+
+        // 联系服务
+        relation(){
+            wx.showModal({
+                title: '提示',
+                content: '是否确定拨打门店电话'+wepy.$instance.globalData.phone,
+                success (res) {
+                    if (res.confirm) {
+                        wx.makePhoneCall({
+                            phoneNumber: wepy.$instance.globalData.phone,
+                            success: function () {
+                                console.log("拨打电话成功！")
+                            },
+                            fail: function () {
+                                console.log("拨打电话失败！")
+                            }
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+        }
+    }
+
+
+    events = {}
+
+    onLoad(option) {
+        this.order_id = option.id
+
+        // 获取会员余额
+        this.getMoney()
+
+        // 获取订单详情
+        this.getOrder(option.id)
+    }
+
+
+    // 监听头部返回
+    onUnload(){
+        wx.switchTab({
+            url:'/pages/order'
+        })
+    }
+
+
+    // 获取账户余额
+    getMoney(){
+        var that = this
+        var parameter = {}
+        parameter.sid = wepy.$instance.globalData.sid
+        commonGetData.getDataOrder('member/wallet','post',function(res){
+            var resData = res.data.data
+            console.log('账户余额',resData)
+            that.wallet = resData[0].money
+            that.$apply()
+        },parameter)
+    }
+
+
+    // 获取订单信息
+    getOrder(id){
+        var that = this 
+        commonGetData.getDataOrder('order/mallOrderInfo/'+id,'get',function(res){
+            console.log('订单详情接口',res)
+            if(res.data.code == 200){
+                var resData = res.data.data
+                console.log('订单详情',resData)
+
+                if(resData.status == 4 ){ // 已支付(显示支付成功模块)
+                    that.show = 4
+                }
+                if(resData.status == 1){ // 待支付(显示支付方式选择模块)
+                    that.show = 1
+                }
+                if(resData.status == 5){ // 已失效(都不显示)
+                    that.show = 5
+                }
+
+                that.storeName = resData.shop_name // 门店名称
+                that.orderLists[0].txt = resData.name // 购买人
+                that.orderLists[1].txt = resData.phone // 手机号
+                that.orderLists[2].txt = resData.order_num // 订单号
+                if(resData.code == null){
+                    that.orderLists[3].txt = '大厅' 
+                }else{
+                    that.orderLists[3].txt = resData.code // 包厢号
+                }
+                that.orderLists[4].txt = resData.create_time // 购买时间
+                that.orderLists[5].txt = resData.rel_price // 订单金额
+
+                that.consumeLists = resData.goods // 消费列表
+                that.$apply()
+            }
+        })
+    }
+}
+</script>

@@ -1,0 +1,273 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        font-size: $fs32;
+        // title
+        .title{
+            font-weight: 700;
+            color:$c753;
+        }
+
+        // 确定电话号码
+        .phone_box{
+            height:300rpx;
+            background:$cfff;
+            border-radius: 20rpx;
+            margin: $p30 0 40rpx;
+            padding: $p30;
+            box-sizing: border-box;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .phone{
+                color:$c730;
+                position:relative;
+                .icon-shouji{
+                    font-size: $fs42;
+                    position:absolute;
+                    left: 0;
+                    top: 21rpx;
+                }
+                input{
+                    height:80rpx;
+                    border-bottom:1rpx solid $c730;
+                    font-size: $fs42;
+                    padding-left: 66rpx;
+                    box-sizing: border-box;
+                }
+                .icon-cuowu{
+                    font-size: $fs42;
+                    position:absolute;
+                    right: 0;
+                    top: 21rpx;
+                    z-index: 999;
+                }   
+            }
+            
+            button{
+                width:100%;
+                height:80rpx;
+                line-height: 80rpx;
+                background:$changebg;
+                border-radius: $p30;
+            }
+        }
+
+        // 订单
+        .order{
+            background:$cfff;
+            margin: $p30 0;
+            border-radius: 20rpx;
+            padding:50rpx 30rpx;
+            box-sizing: border-box;
+            position:relative;
+
+            // 上
+            .up{
+                padding-bottom: $p30;
+                box-sizing: border-box;
+                border-bottom:1px dashed #ccc;
+                view{
+                    margin-bottom: 10rpx;
+                }
+                // 店铺名字
+                .shop_name{
+                    font-weight: 700;
+                    font-size: $fs36;
+                }
+            }
+
+            // xia
+            .down{
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: $p30;
+
+                // 前
+                .befor{
+                    display:flex;
+                    align-items: center;
+                    text{
+                        font-weight: 700;
+                        font-size: $fs42;
+                        color:$c753;
+                        margin-right: $p30;
+                    }
+                }
+                
+                // 帮他买单
+                .btn{
+                    padding: 10rpx 20rpx;
+                    box-sizing: border-box;
+                    background:$changebg;
+                    border-radius: 20rpx;
+                }
+            }
+
+            // 圆
+            .circle1{
+                width:60rpx;
+                height: 60rpx;
+                background:$pagebg;
+                border-radius: 100%;
+                position:absolute;
+                left:-34rpx;
+                top: 210rpx;
+            }
+            .circle2{
+                width:60rpx;
+                height: 60rpx;
+                background:$pagebg;
+                border-radius: 100%;
+                position:absolute;
+                right:-34rpx;
+                top: 210rpx;
+            }
+           
+        }
+        
+    }
+</style>
+
+<template>
+    <view class="box">
+        <view class="typearea">
+            <view class="title"> 帮他买单 </view>
+
+            <!-- 确定电话号码 -->
+            <view class="phone_box">
+               <view class="phone">
+                   <text class="iconfont icon-shouji"></text>
+                   <input type="text" value="{{phoneNumber}}" bindinput='phoneNumber'>
+                   <text class="iconfont icon-cuowu" @tap.stop='empty'></text>
+               </view>
+
+               <button @tap.stop='search'>搜索</button>
+            </view>
+
+            <view class="title"> 他的订单 </view>
+
+            <!-- 订单 -->
+            <view class="order" wx:if='{{show}}'>
+                <!-- 圆 -->
+                <view class="circle1"></view>
+
+                <!-- 上 -->
+                <view class="up">
+                    <view class="shop_name">{{orders.shop_name}}</view>
+                    <view>{{orders.code}}({{orders.member}}人){{roomType}}</view>
+                    <view>{{orders.day}} {{orders.start}}-{{orders.end}}</view>
+                </view>
+
+                <!-- 下 -->
+                <view class="down">
+                    <view class="befor"><text>￥{{orders.rel_price}}</text> 待支付 </view>
+                    <view class="btn" @tap.stop='buyOrder' data-id='{{orders.id}}'>帮他买单</view>
+                </view>
+
+                <!-- 圆 -->
+                <view class="circle2"></view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class Card extends wepy.page {
+    config = {
+        navigationBarTitleText: '帮他买单'
+    }
+
+    components = {}
+
+    data = {
+        phoneNumber:null, // 初始电话号码
+        show:false, // 默认不显示订单
+        orders:{},
+        roomType:'', // 包间类型
+    }
+
+    computed = {}
+
+    methods = {
+        // 清空电话号码
+        empty(){
+            this.phoneNumber = ''
+        },
+
+        // 输入电话号码
+        phoneNumber(e){
+            this.phoneNumber = e.detail.value
+        },
+
+        // 搜索
+        search(){
+            var _this = this
+            var parameter = {}
+            parameter.phone = _this.phoneNumber
+            console.log('参数',parameter)
+            commonGetData.getDataOrder('order/other','POST',function(res){
+                console.log('帮人买单',res.data.data)
+                // if(res.data.code == 200){ // 成功
+                    if(res.data.data.length == 0){
+                        _this.show = false
+                        wx.showModal({
+                            content:'暂无数据',
+                            showCancel:false,
+                            confirmText:'知道啦 !',
+                            confirmColor:'#72B9C3',
+                        })
+                        _this.$apply() 
+                    }else{
+                        _this.orders = res.data.data
+                        if(_this.orders.hour_count == 0){
+                            _this.roomType = '包间买断'
+                        }else{
+                            _this.roomType = '按时欢唱'
+                        }
+                        _this.show = true
+                        _this.$apply() 
+                    }
+                // }
+            },parameter)
+        },
+
+        // 帮人付款
+        buyOrder(e){
+            var id = e.currentTarget.dataset.id
+            console.log('订单id',id)
+            wx.navigateTo({
+                url:'/pages/shop/order_details_backups?id='+id
+            })
+        }
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取修改后的用户电话号码
+        this.getAmendUserInfo()
+    }
+
+    onShow(){
+        this.show = false
+    }
+
+
+    // 从后台获取修改后的用户信息
+    getAmendUserInfo(){
+        var _this = this
+        commonGetData.getDataOrder('member','get',function(res){
+            console.log('修改后的用户信息',res)
+            _this.phoneNumber = res.data.data.phone
+            _this.$apply()
+        })
+    }
+
+}
+</script>

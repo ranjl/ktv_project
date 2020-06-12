@@ -1,0 +1,537 @@
+<style lang="scss">
+    @import '../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .home{
+            // banner
+            .banner{
+                width: 100%;
+                height: 300rpx;
+                margin: 43rpx 0 58rpx;
+                swiper {
+                    swiper-item {
+                        display:flex;
+                        justify-content: center;
+                        image{
+                            height: 100%;
+                            width:100%;
+                            margin: 0 15rpx;
+                            border-radius: 20rpx;
+                        }
+                    }
+                }
+            }
+
+            // title
+            .title{
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+
+                // ktv名称
+                .name{
+                    font-size: $fs42;
+                }
+
+                // 定位、切换城市
+                .location{
+                    color:$c753;
+                    .iconfont{
+                        margin-right: 10rpx;
+                    }
+                }
+
+                // 筛选
+                .choose{
+                    display:flex;
+                    .alone{
+                        width:139rpx;
+                        height: 54rpx;
+                        border: 2rpx solid $c339;
+                        margin-left: 11rpx;
+                        border-radius: 27rpx;
+                        color:$c753;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        
+                        // 三角形盒子
+                        .sjx{
+                            height: 100%;
+                            width:32rpx;
+                            position:relative;
+                            // 三角形
+                            .iconfont{
+                                color:#66342D;
+                            }
+                            // 向上
+                            .icon-shangsanjiaoxing{
+                                position:absolute;
+                                top: 0;
+                            }
+                            // 向下
+                            .icon-xiasanjiaoxing{
+                                position:absolute;
+                                bottom: 0;
+                            }
+                            // 三角形的激活样式
+                            .sjx_active{
+                                color:$c753;
+                            }
+                        }
+                    }
+                    .alone:nth-child(1){
+                        margin-left: 0;
+                    }
+                }
+            }
+
+            // content
+            .content{
+                margin-top: $p40;
+                // 模板
+                .alone{
+                    margin-bottom: $p40;
+                    // 图片盒子
+                    .img_box{
+                        height:420rpx;
+                        position:relative;
+                        image{
+                            height: 100%;
+                            width:100%;
+                            border-radius: 20rpx;
+                        }
+                        .righttop{
+                            width:100rpx;
+                            height: 40rpx;
+                            background:$changebg;
+                            border-radius: 10rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 20rpx;
+                            position:absolute;
+                            top: 20rpx;
+                            right:20rpx;
+                        }
+                        // 左下
+                        .leftbottom{
+                            
+                            height: 50rpx;
+                            background:#000;
+                            border-radius: 17rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 24rpx;
+                            color:$cf6f;
+                            position:absolute;
+                            left: 20rpx;
+                            bottom: 20rpx;
+                            padding: 0 20rpx;
+                            box-sizing: border-box;
+                            .iconfont{
+                                color:$c847;
+                                font-size: 24rpx;
+                                margin:5rpx 10rpx 0 0;
+                            }
+                        }
+                    }
+
+                    // 门店名称
+                    .name{
+                        font-size: 34rpx;
+                        margin: 20rpx 0;
+                        display:flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        // 立即订房
+                        .label{
+                            height: 60rpx;
+                            background:$changebg;
+                            border-radius: 10rpx;
+                            display:flex;
+                            justify-content: center;
+                            line-height: 60rpx;
+                            padding:0 20rpx;
+                            box-sizing: border-box;
+                        }
+                    }
+                    // 地址价格
+                    .addressprice{
+                        display:flex;
+                        justify-content: space-between;
+                        margin-bottom: 38rpx;
+                        // 左侧地址
+                        .address{
+                            font-size: $fs28;
+                            color:$cf6f;
+                            line-height: $p40;
+                        }
+                        // 价格
+                        .price{
+                            color:$c753;
+                            text{
+                                font-size: 55rpx;
+                                margin: 0 5rpx;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="home">
+        <!-- banner -->
+        <view class="banner">
+            <swiper
+                indicator-dots="false" circular="true" autoplay="true"
+                interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
+                <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                    <swiper-item >
+                        <image src="https://ab-kev-pdev.abontest.com{{item.path}}"/>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+        <!-- 版心 -->
+        <view class="typearea">
+            <!-- title_box -->
+            <view class="title" >
+                <!-- title -->
+                <view class='name' wx:if='{{1==2}}'>XowTime</view>
+                
+                <!-- 定位、城市切换 -->
+                <view class="location" @tap='skip_city' >
+                    <text class="iconfont icon-dingwei"></text>
+                    <text>{{city}}</text>
+                </view>
+                
+                <!-- 刷选 -->
+                <view class="choose" >
+                    <!-- 热度 -->
+                    <view class="alone" data-index='{{index}}' @tap='heat'>
+                        <view class="txt">热度</view>
+                        <view class="sjx">
+                            <text class="iconfont icon-shangsanjiaoxing {{heatpole==0?'sjx_active':''}}"></text>
+                            <text class="iconfont icon-xiasanjiaoxing {{heatpole==1?'sjx_active':''}}"></text>
+                        </view>
+                    </view>
+
+                    <!-- 距离 -->
+                    <view class="alone" data-index='{{index}}' @tap='distance'>
+                        <view class="txt">距离</view>
+                        <view class="sjx">
+                            <text class="iconfont icon-shangsanjiaoxing {{distancepole==0?'sjx_active':''}}"></text>
+                            <text class="iconfont icon-xiasanjiaoxing {{distancepole==1?'sjx_active':''}}"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- content -->
+            <view class="content">
+                <view class="alone" wx:for='{{storeLists}}' wx:key='{{index}}' data-id='{{item.id}}' @tap.stop='skip_details'>
+                    <!-- 图片盒子 -->
+                    <view class="img_box">
+                        <image src='https://ab-kev-pdev.abontest.com{{item.cover.path}}'/>
+                        <view class="righttop">营业中</view>
+                        <view class="leftbottom">
+                            <text class="iconfont icon-dingwei"></text>
+                            <text>距您{{item.dis}}公里</text>
+                        </view>
+                    </view>
+
+                    <view class="name">
+                        <view>{{item.shop_name}}</view>
+                        <view class="label">点击订房</view>
+                    </view>
+
+                    <!-- 地址价格 -->
+                    <view class="addressprice">
+                        <view class="address">
+                            <view>{{item.add}}</view>
+                            <view>{{item.address}}</view>
+                        </view>
+                        <view class="price">￥<text>{{item.price}}</text>元起</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../api/api.js")
+
+export default class Home extends wepy.page {
+    config = {
+        navigationBarTitleText: '邦客KTV'
+    };
+
+    // 注册组件
+    components = {}
+
+    // 数据
+    data = {
+        storeLists:[], // 门店列表
+        latitude:0,
+        longitude:0,
+        
+        imgUrls: [], // banner图
+        
+        city:'不限', // 默认城市
+        chooses:[ // 热度距离筛选
+            {title:'热度'},
+            {title:'距离'}
+        ],
+
+        // 热度距离标杆(默认降序)
+        heatpole:1,
+        distancepole:1,
+    }
+
+    // 监听data中的数据变化
+    watch = {
+        alertisshow(newVal,oldVal){
+            console.log('旧值',oldVal)
+            console.log('新值',newVal)
+        }
+    }
+
+    // 计算属性-监听自定义数据的变化
+    computed = {}
+
+
+    // 方法
+    methods = {
+        // 切换城市
+        skip_city(){
+            wx.navigateTo({
+                url:'/pages/choice_city/index'
+            })
+        },
+
+        // 热度筛选
+        heat(e){
+            if(this.heatpole == 1){ 
+                this.heatpole = 0
+                console.log('热度升序')
+            }else if(this.heatpole == 0){ 
+                this.heatpole = 1
+                console.log('热度降序')
+            }
+        },
+
+        // 距离筛选
+        distance(){
+            if(this.distancepole == 1){ 
+                this.distancepole = 0
+                console.log('距离升序')
+                this.storeLists = this.storeLists.sort(this.sortWay("dis")).reverse()
+            }else if(this.distancepole == 0){
+                this.distancepole = 1
+                console.log('距离降序')
+                this.storeLists = this.storeLists.sort(this.sortWay("dis"))
+            }
+        },
+
+        // 跳转到门店详情
+        skip_details(e){
+            var id = e.currentTarget.dataset.id
+            wx.navigateTo({
+                url:'/pages/shop/store?id='+id
+            })
+        }
+    }
+    
+    // 组件传值
+    events = {}
+
+
+    // 监听页面加载
+    onLoad(options) {
+        // 获取首页banner
+        this.getBanner()
+
+        // 获取门店列表(不传cid,返回全部门店)
+        this.getStoreList()
+    }
+
+
+    // 初始化完成
+    onLaunch(){}
+
+
+    // 页面显示
+    onShow(){
+        if(wepy.$instance.globalData.city != null){
+            // 渲染城市
+            this.city = wepy.$instance.globalData.city
+
+            // 获取门店列表(传入cid,获取当前城市门店)
+            this.getStoreList(wepy.$instance.globalData.cityid)
+        }
+    }
+    
+    // 页面隐藏
+    onHide(){}
+
+
+    // 获取banner
+    getBanner(){
+        var _this = this 
+        commonGetData.getData('images/list','POST',function(res){
+            var resData = res.data.data
+            console.log('首页banner',resData)
+            _this.imgUrls = resData
+            _this.$apply()
+        }) 
+    }
+
+
+    // 获取门店列表
+    getStoreList(e){
+        var _this = this 
+        if(e != undefined ){
+            var parameter = {}
+            parameter.cid = e
+            commonGetData.getData('shop/list','POST',function(res){
+                var resData = res.data.data
+                console.log('城市对应门店列表',resData)
+                _this.storeLists = resData
+                
+                // 获取经纬度
+                _this.getLocation()
+                _this.$apply()
+            },parameter)
+        }else{
+            commonGetData.getData('shop/list','POST',function(res){
+                var resData = res.data.data
+                console.log('全部门店列表',resData)
+                _this.storeLists = resData
+                
+                // 获取经纬度
+                _this.getLocation()
+                _this.$apply()
+            })
+        }
+    }
+
+
+    // 获取本地经纬度
+    getLocation(){
+        var _this = this 
+        wx.getLocation({
+            type: 'wgs84',
+            success: (res)=> {
+                console.log('我的位置',res)
+                _this.latitude = res.latitude
+                _this.longitude = res.longitude
+
+                wepy.$instance.globalData.latitude = res.latitude
+                wepy.$instance.globalData.longitude = res.longitude
+
+                _this.storeLists.map((v,i)=>{
+                    console.log('门店纬度',v.latitude) // 经度X1
+                    console.log('门店精度',v.longitude) // 纬度Y1
+                    // _this.latitude // X2
+                    // _this.longitude // Y2
+                    _this.distance(v.latitude,v.longitude,_this.latitude,_this.longitude,function(s){
+                        console.log('距离',s)
+                        _this.storeLists[i].dis = s.toFixed(0)
+                    })
+                })
+                _this.$apply()
+                console.log('门店信息',_this.storeLists)
+            }
+        })
+    }
+
+
+    // 计算距离
+    distance(lat1, lng1, lat2, lng2,cb){
+        var radLat1 = lat1*Math.PI / 180.0;
+        var radLat2 = lat2*Math.PI / 180.0;
+        var a = radLat1 - radLat2;
+        var b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+        Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+        s = s *6378.137 ;
+        s = Math.round(s * 10000) / 10000;
+        cb && cb(s)
+    }
+
+
+    // 排序
+    sortWay(parameter){
+        return function(object1,object2){
+            var value1=object1[parameter];
+            var value2=object2[parameter];
+            if(value1<value2){
+                return -1;
+            }else if(value1>value2){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 页面初次渲染完成
+    onReady(){}
+
+    // 监听页面卸载
+    onUnload(){}
+
+    // 下拉
+    onPullDownRefresh(){}
+
+    // 触底
+    onReachBottom(){
+        // console.log('触底')
+    }
+    
+    // 右上角分享
+    onShareAppMessage(){}
+
+    // 页面滚动触发
+    onPageScroll(){}
+
+    // 当前是tab页时，点击tab触发
+    onTabItemTap(){}
+}
+</script>
