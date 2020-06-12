@@ -1,0 +1,639 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            padding-bottom: 130rpx;
+            box-sizing: border-box;
+        }
+
+        // 留白
+        .test{
+            height:30rpx;
+            width:100%;
+            background:$cf6f;
+        }
+
+        // 选择包间号
+        .roomNum{
+            border-bottom:1px solid $cf6f;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 34rpx 0;
+            box-sizing: border-box;
+        }
+
+        // 选择支付方式
+        .pay_way{
+            padding: 40rpx 0;
+            box-sizing: border-box;
+
+            // 方式选择盒子
+            .pay_box{
+                height: 120rpx;
+                margin-top: 30rpx;
+                display:flex;
+                justify-content: space-around;
+                // 模板
+                .alone{
+                    width:45%;
+                    height:100%;
+                    border:1rpx solid $cf36;
+                    border-radius: 20rpx;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                // 激活样式
+                .active{
+                    border:1rpx solid $c753;
+                    color:$c753;
+                    font-weight: 700;
+                }
+            }
+        }
+
+        // 联系人
+        .template{
+            height: 100rpx;
+            border-bottom: 1rpx solid $cf36;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            .left{
+                color:$cf6f;
+                width: 150rpx;
+            }
+            // 右
+            .right{
+                display:flex;
+                // 姓名电话输入框
+                input{
+                    text-align: right;
+                }
+                // 性别选择
+                .alone{
+                    display:flex;
+                    align-items: center;
+                    margin-left: 50rpx;
+                    .out{
+                        width:30rpx;
+                        height:30rpx;
+                        border:1rpx solid $cf36;
+                        border-radius: 100%;
+                        margin:8rpx 20rpx 0 0;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        view{
+                            display:inline-block;
+                            width:20rpx;
+                            height:20rpx;
+                            background:$c753;
+                            border-radius: 100%;
+                        }
+                    }
+                    .outactive{
+                        border: 1rpx solid $c753;
+                    }
+                }
+                
+            }
+        }
+
+        // 消费信息
+        .info{
+            // 标题
+            .title{
+                font-size:$fs36;
+                font-weight: bold;
+                margin: $p30 0;
+            }
+
+            // 列表
+            .lists{
+                // 表头
+                .th{
+                    color:$cf6f;
+                    display:flex;
+                    justify-content: space-between;
+                    border-bottom:1px solid $cf6f;
+                    padding-bottom: $p30;
+                    box-sizing: border-box;
+                    text:nth-child(1){
+                        width:45%;
+                    }
+                }
+
+                // 内容
+                .td{
+                    margin: 10rpx 0;
+                    display:flex;
+                    justify-content: space-between;
+                    .name{
+                        width:58%;
+                    }
+                    .num{
+                        width:10%;
+                        color:$cf6f;
+                    }
+                    .price{
+                        width:22%;
+                        font-size: $fs36;
+                        color:$c753;
+                        text-align: right;
+                    }
+                }
+            }
+
+            // 备注
+            .remark{
+                // 标题
+                .title{
+                    font-size:$fs32;
+                    margin: $p30 0;
+                    color:$cf6f;
+                }
+                // 文本输入框
+                textarea{
+                    width:100%;
+                    height: 200rpx;
+                    border:1px solid $cf6f;
+                    border-radius: 20rpx;
+                    padding: 32rpx;
+                    box-sizing: border-box;
+                }
+            }
+        }
+
+        // 购买须知
+        .buy{
+            margin-top: 30rpx;
+            font-size: $fs28;
+            color:$cf6f;
+            .txt{
+                margin-top: 20rpx;
+                line-height: 40rpx;
+            }
+        }
+
+        // 支付
+        .pay{
+            width:100%;
+            height: 100rpx;
+            position: fixed;
+            bottom:0;
+            z-index: 10001;
+            background:#17181D;
+            padding: 0 45rpx;
+            box-sizing: border-box;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            // 价格
+            .price{
+                font-size: $fs42;
+                color:$c753;
+            }
+            // 支付
+            .btn{
+                width: 40%;
+                height: 70%;
+                background:$changebg;
+                border-radius: 10rpx;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+</style>
+
+
+<template>
+    <view class="box">
+        <!-- 包间号、支付方式 -->
+        <view class="typearea">
+            <!-- 选择包间号 -->
+            <view class="roomNum" @tap.stop='room'>
+                <text>选择包间号</text>
+                <text>{{roomNum}}</text>
+                <text class="iconfont icon-jiantou"></text>
+            </view>
+
+            <!-- 选择支付方式 -->
+            <view class='pay_way'>
+                <!-- title -->
+                <view class="pay_title">选择支付方式</view>
+
+                <!-- 支付方式选择 -->
+                <view class="pay_box">
+                    <view class="alone {{item.show?'active':''}}" 
+                        wx:for='{{pays}}' wx:key='{{index}}' @tap.stop='payWay' data-index='{{index}}'>
+                        {{item.pay}}
+                        <text wx:if='{{index ==1 }}' style='color:red; font-size:24rpx'>剩余金额{{wallet}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 联系人、性别、联系电话  -->
+        <view class="typearea">
+            <!-- 联系人 -->
+            <view class="template">
+                <view class="left">联系人</view>
+                <view class="right">
+                    <input type="text" placeholder="{{userInfo.name}}" bindinput ="name">
+                </view>
+            </view>
+
+            <!-- 性别 -->
+            <view class="template">
+                <view class="left">性别</view>
+                <view class="right">
+                    <view class="alone" wx:for='{{genders_arr}}' wx:key='{{index}}' 
+                        data-index='{{index}}' data-value='{{item.txt}}' @tap='sex'>
+                        <view class="out {{genders==index+1?'outactive':''}}">
+                            <view wx:if='{{genders==index+1}}'></view>
+                        </view>
+                        <text>{{item.txt}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 联系电话 -->
+            <view class="template">
+                <view class="left">联系电话</view>
+                <view class="right">
+                    <input type="text" placeholder="{{userInfo.phone}}" bindinput ="phone">
+                </view>
+            </view>
+        </view>
+        <view class="test"></view>
+
+
+        <!-- 消费信息 -->
+        <view class="typearea">
+            <!-- 消费信息 -->
+            <view class="info">
+                <view class="title">消费信息</view>
+
+                <!-- 商品列表 -->
+                <view class="lists">
+                    <!-- 表头 -->
+                    <view class="th">
+                        <text>商品名称</text>  
+                        <text>数量</text>  
+                        <text>价格</text>
+                    </view>
+
+                    <!-- 内容 -->
+                    <view class="td" wx:for='{{lists}}' wx:key='{{index}}'>
+                       <view class="name">{{item.goods_name}}</view>
+                       <view class="num">*{{item.num}}</view>
+                       <view class="price">￥{{item.addPrice}}</view>
+                    </view>
+                </view>
+
+                <!-- 备注 -->
+                <view class="remark">
+                    <view class="title">备注信息</view>
+                    <textarea bindinput="textarea"></textarea>
+                </view>
+            </view>
+
+            <!-- 购买须知 -->
+            <view class="buy">
+                <view>购买须知</view>
+                <view class="txt">支付完成后将不可取消，商品将在10分钟内直接送到房间，如果没有送到请联系服务人员。</view>
+            </view>
+        </view>
+
+
+        <!-- 支付 -->
+        <view class="pay">
+            <view class="price">￥{{allPrice}}</view>
+            <view class="btn" @tap.stop='pay'>支付</view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class Affirmorder extends wepy.page {
+    config = {
+        navigationBarTitleText: '确认订单'
+    }
+
+    components = {}
+
+    data = {
+        roomNum:'', // 没有选择房间则默认为空
+        rid:0, // 选择的房间id(默认0为空)
+
+        pays:[  // 微信支付选择
+            {pay:'微信支付',show:true},
+            {pay:'余额支付',show:false},
+        ],
+        pay_way:0,  // 默认选择微信支付
+        wallet:0, // 余额 
+
+        userInfo: {}, // 用户信息
+        genders_arr:[
+            {txt:'先生',is:false},
+            {txt:'女士',is:false}
+        ],
+        genders:1, // 默认为男
+        name:'', // 修改后的姓名、性别、电话
+        gender:'',
+        phone:'',
+        textarea:'', // 备注内容
+
+        lists:[ ],// 选择的商品
+        allPrice:'0.00', // 总价
+    }
+
+    computed = {}
+
+
+    methods = {
+        // 选择包间
+        room(){
+            wx.navigateTo({
+                url: '/pages/line_store/room'
+            })
+        },
+
+        // 选择支付方式
+        payWay(e){
+            var index = e.currentTarget.dataset.index
+            if(!this.pays[index].show){ 
+                for(var i=0; i<this.pays.length; i++){
+                    this.pays[i].show = false
+                    this.$apply()
+                }
+                this.pays[index].show = true
+            }else{
+                this.pays[index].show = false
+            }
+            this.pay_way = index // 支付方式
+        },
+
+        // 姓名输入
+        name(e){
+            this.name = e.detail.value
+        },
+
+        // 性别选择
+        sex(e){
+            var index = e.currentTarget.dataset.index
+            this.genders = index+1
+            if(index == 0 ){
+                this.gender = 1
+            }else{
+                this.gender = 2
+            }
+        },
+
+        // 电话输入
+        phone(e){
+            this.phone = e.detail.value
+        },
+
+        // 备注
+        textarea(e){
+            this.textarea = e.detail.value
+        },
+
+
+        // 支付
+        pay(){
+            var that = this
+            var parameter = {}
+            parameter.sid = wepy.$instance.globalData.sid // 门店id
+            parameter.rid = this.rid  // 选择的房间id
+
+            if(this.rid == 0){
+                wx.showModal({
+                    content:'请选择配送房间',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+                return false
+            }
+
+            if(this.pay_way == 0 ){
+                parameter.pay_type = 2  // 支付类型(2:wx,1:余额支付)
+            }if(this.pay_way == 1){
+                parameter.pay_type = 1  
+            }
+            if(this.name == '' ){
+                this.name = this.userInfo.name
+            }
+            if(this.gender == ''){
+                this.gender = this.userInfo.gender
+            }
+            if(this.phone == ''){
+                this.phone = this.userInfo.phone
+            }
+            parameter.name = this.name // 姓名
+            parameter.gender = this.gender // 性别
+            parameter.phone = this.phone // 电话
+            parameter.goods = []
+            this.lists.map((v,i)=>{
+                parameter.goods.push({'id':v.id,'number':v.num}) // 商品
+            })
+            parameter.remarks = this.textarea // 备注
+            console.log('提交的参数',parameter)
+
+            commonGetData.getDataOrder('order/mallAdd','post',function(res){
+                console.log('接口返回数据',res)
+                var id = res.data.data.info.id
+                console.log('订单id',id)
+                if(that.pay_way == 0){ // 微信支付
+                    if(res.data.code == 200){ // 微信支付
+                        var resData = JSON.parse(res.data.data.bridgeConfig)
+                        console.log('线上商城提交订单并结算',resData)
+                        wx.requestPayment({
+                            timeStamp: resData.timeStamp , // 当前的时间戳
+                            nonceStr: resData.nonceStr, // 随机字符串(32个以下)
+                            package: resData.package, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
+                            signType: 'MD5',
+                            paySign: resData.paySign, // 签名
+                            success (res) { 
+                                console.log('微信支付成功',res)
+                                wepy.$instance.globalData.allGoods = [] // 清空购物车缓存商品
+                                // 支付成功跳转到详情页
+                                wx.navigateTo({
+                                    url:'/pages/line_store/order?id='+id
+                                })
+                            },
+                            fail (res) {  }
+                        })
+                    }
+                }
+                
+                if(that.pay_way == 1){ // 余额支付
+                    if(that.wallet == 0){  // 无余额
+                        wx.showModal({
+                            content:'您当前无余额,请选择微信支付',
+                            showCancel:false,
+                            confirmText:'知道啦 !',
+                            confirmColor:'#72B9C3',
+                        })
+                        return false
+                    }
+
+                    if(that.wallet > that.allPrice){ // 余额充足
+                        wx.showModal({
+                            content:res.data.msg,
+                            showCancel:false,
+                            confirmText:'知道啦 !',
+                            confirmColor:'#72B9C3',
+                            success(){
+                                wepy.$instance.globalData.allGoods = [] // 清空购物车缓存商品
+                                wx.navigateTo({
+                                    url:'/pages/line_store/order?id='+id
+                                })
+                            }
+                        })
+                    }
+
+                    if(that.wallet < that.allPrice){ // 余额不充足
+                        let price = that.allPrice - that.wallet
+                        var resData = JSON.parse(res.data.data.bridgeConfig)
+                        wx.showModal({
+                            title: '提示',
+                            content: '余额不足,是否确定使用微信支付剩余金额('+price+'元)',
+                            success (res) {
+                                if (res.confirm) { // 确定(重新调起微信支付)
+                                    wx.requestPayment({
+                                        timeStamp: resData.timeStamp ,
+                                        nonceStr: resData.nonceStr, 
+                                        package: resData.package, 
+                                        signType: 'MD5',
+                                        paySign: resData.paySign, 
+                                        success (res) { 
+                                            wepy.$instance.globalData.allGoods = [] // 清空购物车缓存商品
+                                            wx.navigateTo({
+                                                url:'/pages/line_store/order?id='+id
+                                            })
+                                        },
+                                        fail (res) {  }
+                                    })
+                                } else if (res.cancel) { // 取消
+                                    //  不执行操作
+                                }
+                            }
+                        })
+                    }
+                }
+            },parameter)
+        }
+    }
+
+
+    events = {}
+
+    onLoad(option) {
+        // 获取选择的商品
+        this.getGoods()
+
+        // 获取房间选择页面选择的房间
+        if(option.parameter  != undefined){
+            this.roomNum = JSON.parse(option.parameter).code
+            this.rid = JSON.parse(option.parameter).id
+            this.$apply()
+        }
+
+        // 获取账户余额
+        this.getMoney()
+
+        // 获取会员信息
+        this.getInfo()
+    }
+
+
+    // 监听头部返回
+    onUnload(){
+        this.rid = 0
+    }
+
+
+    // 获取选择的商品
+    getGoods(){
+        var goods = wepy.$instance.globalData.allGoods
+        var arr = [] 
+        goods.map((v,i)=>{
+            if(v.num != 0){
+                arr.push(v)
+            }
+        })
+        this.lists  = arr
+
+        var arr1 = [] // 每种商品总价
+        var price = 0
+        arr.map((v,i)=>{
+            price = ( Number(v.price) * Number(v.num) ).toFixed(2)
+            this.lists[i]['addPrice'] = price
+            arr1.push(price)
+        })
+        console.log('选择的商品',this.lists)
+
+        // 渲染总价
+        this.allPrice = this.sum(arr1).toFixed(2)
+
+        this.$apply()
+    }
+
+
+    // 获取账户余额
+    getMoney(){
+        var that = this
+        var parameter = {}
+        parameter.sid = wepy.$instance.globalData.sid
+        commonGetData.getDataOrder('member/wallet','post',function(res){
+            var resData = res.data.data
+            console.log('账户余额',resData)
+            that.wallet = resData[0].money
+            that.$apply()
+        },parameter)
+    }
+
+
+    // 获取会员信息
+    getInfo(){
+        var _this = this 
+        commonGetData.getDataOrder('member','get',function(res){
+            var resData = res.data.data
+            console.log('用户信息',resData)
+            if(resData.name == null){
+                resData.name = resData.nickname
+            }
+            _this.userInfo = resData
+            _this.genders = resData.gender
+            _this.$apply();
+        })
+    }
+
+
+    // 数组求和
+    sum(arr) {
+        var s = 0;
+        for (var i=arr.length-1; i>=0; i--) {
+            s += Number(arr[i]);
+        }
+        return s;
+    }
+}
+</script>

@@ -1,0 +1,698 @@
+<style lang="scss">
+    @import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        height: 100%;
+        .box{
+            height: 100%;
+            padding-bottom: 9%;
+            box-sizing: border-box;
+        }
+
+        // 搜索
+        .search{
+            width:100%;
+            height: 80rpx;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+
+            // 输入框
+            input{
+                width:74%;
+                height: 100%;
+                border:1rpx solid $c753;
+                border-radius: 50rpx;
+                display:flex;
+                align-items: center;
+                padding-left: 66rpx;
+                box-sizing: border-box;
+            }
+
+            // 图标
+            .iconfont{
+                font-size: $fs42;
+                color:$c753;
+                position:absolute;
+                top: 20rpx;
+                left: 16rpx;
+            }
+
+            // 确定
+            .btn{
+                width:20%;
+                height:80%;
+                background:$changebg;
+                border-radius: 16rpx;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        // 搜索结果
+        .result{
+            // title
+            .title{
+                padding: $p30 0;
+                box-sizing: border-box;
+                border-bottom: 1rpx solid $cf6f;
+            }
+
+            // 列表
+            .lists{
+                margin-top: $p40;
+                display:flex;
+                justify-content: space-between;
+
+                // 左侧图片
+                .left{
+                    height:180rpx;
+                    width:180rpx;
+                    background:$cfff;
+                    border-radius: 20rpx;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    // 商品展示图
+                    image{
+                        height:150rpx;
+                        width:150rpx;
+                        border-radius: 20rpx;
+                    }
+                }
+
+                // 右侧文本
+                .right{
+                    width: 70%;
+                    height: 180rpx;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content: space-between;
+
+                    // 月销
+                    .sell{
+                        color:$cf6f;
+                        font-size: $fs28;
+                    }
+
+                    // 价格数量
+                    .numPrice{
+                        display:flex;
+                        justify-content: space-between;
+                        color:$c753;
+
+                        // 价格
+                        .price{
+                            font-size: $fs36;
+                        } 
+
+                        // 数量选择
+                        .num{
+                            font-size: $fs36;
+                            // 图标
+                            .iconfont{
+                                font-size: $fs42;
+                            }
+                            // 数量
+                            .number{
+                                margin: 0 20rpx;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 购物车盒子
+        .card{
+            width: 100%;
+            height: 8%;
+            padding: 0 0 0 40rpx;
+            box-sizing: border-box;
+            display:flex;
+            position:fixed;
+            bottom: 0;
+            z-index: 1001;
+            background: $pagebg;
+            // 购物车
+            .cart{
+                width:60%;
+                height: 100%;
+                display:flex;
+                align-content: space-between;
+                align-items: center;
+                // 文本
+                .txt{
+                    display:flex;
+                    align-items: center;
+                    position:relative;
+                    // 购物车激活样式
+                    .cartActive{
+                        color:$c753;
+                    }
+
+                    // 商品数量
+                    .num{
+                        width:36rpx;
+                        height:36rpx;
+                        border-radius: 100%;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        background:$c753;
+                        position:absolute;
+                        left: 36rpx;
+                        top:-12rpx;
+                        font-size: 24rpx;
+                    }
+                }
+
+                // 价格
+                .price{
+                    margin-left: 30rpx;
+                    display:flex;
+                    align-items: center;
+                    color:$c753;
+                    text{
+                        font-size: $fs42;
+                    }
+                }
+            }
+
+            // 结算
+            .account{
+                width:40%;
+                height: 100%;
+                background:$c753;
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                font-size: $fs36;
+            }
+            .account1{
+                background:$cf6f;
+            }
+            
+        }
+
+        // 购物车
+        .cardBox{
+            width:100%;
+            height: 92%;
+            position: fixed;
+            bottom:8%;
+            background:rgba(0,0,0,.5);
+            // 内容
+            .cardContent{
+                width:100%;
+                position: absolute;
+                bottom: 0;
+                background:$cfff;
+                border-radius: 20rpx 20rpx 0 0 ;
+                padding: 45rpx;
+                box-sizing: border-box;
+
+                // 列表
+                .lists{
+                    // 名称
+                    .c_name{
+                        width:30%;
+                    }
+
+                    // 数量
+                    .c_num{
+                        width:50%;
+                        text-align: center;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        // 图标
+                        .iconfont{
+                            font-size: $fs42;
+                        }
+                        // 数量
+                        .number{
+                            margin: 0 20rpx;
+                        }
+                    }
+
+                    // 价格
+                    .c_price{
+                        width:20%;
+                        text-align: right;
+                    }
+
+                    // 表头 // 列表类容
+                    .th,.td{
+                        color:#000;
+                        display:flex;
+                        justify-content: space-between;
+                    }
+                    .th{
+                        border-bottom: 1rpx solid #000;
+                        padding-bottom: 10rpx;
+                        box-sizing: border-box;
+                    }
+                    .td{
+                        margin-top:20rpx;
+                    }
+                    
+                }
+            }
+        }
+    }
+</style>
+
+
+<template>
+    <view class="box">
+        <view class="typearea">
+            <!-- 搜索 -->
+            <view class="search">
+                <input type="text" placeholder="请输入商品名称搜索" bindinput='getValue'>
+                <text class="iconfont icon-sousuo"></text>
+                <view class="btn" @tap.stop='search'>确定</view>
+            </view>
+
+            <!-- 搜索结果 -->
+            <view class="result">
+                <view class="title">搜索结果</view>
+
+                <!-- 列表 -->
+                <view class="lists" wx:for='{{goods}}' wx:key='{{index}}'>
+                    <!-- 商品图片 -->
+                    <view class="left">
+                        <image src='https://ktv.jcxowtime.com{{item.cover_img}}' />
+                    </view>
+
+                    <!-- 商品信息 -->
+                    <view class="right">
+                        <view class="name">{{item.goods_name}}</view>
+                        <view class="sell">月销1000份</view>
+
+                        <!-- 价格数量 -->
+                        <view class="numPrice">
+                            <view class="price">￥ {{item.price}}</view>
+                            <view class="num">
+                                <text class="iconfont icon-ziyuan" data-index='{{index}}' @tap.stop='reduce'></text>
+                                <text class="number">{{item.num}}</text>
+                                <text class="iconfont icon-jiahao" data-index='{{index}}' @tap.stop='add'></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+        <!-- 购物车盒子 -->
+        <view class="card">
+            <!-- 购物车(数量、金额)) -->
+            <view class="cart" @tap.stop='card'>
+                <view class="txt">
+                    <text class="iconfont icon-gouwuche {{numberSettleShow?'cartActive':''}}" style='font-size:50rpx; margin-right:20rpx'></text>
+                    <text>购物车</text>
+                    <text class="num" wx:if='{{numberSettleShow}}'>{{goodsNum}}</text>
+                </view>
+                <view class="price">￥ <text>{{allPrice}}</text></view>
+            </view>
+            
+            <!-- 结算 -->
+            <view class="account" wx:if='{{numberSettleShow}}' @tap.stop='total'>结算</view>
+            <view class="account account1" wx:if='{{!numberSettleShow}}'>结算</view>
+        </view>
+
+        
+        <!-- 购物车 -->
+        <view class="cardBox" wx:if='{{cardActive}}'>
+            <!-- 内容 -->
+            <view class="cardContent">
+                <!-- 列表 -->
+                <view class="lists">
+                    <!-- 表头- -->
+                    <view class="th">
+                        <view class="c_name">商品名称</view>
+                        <view class="c_num">数量</view>
+                        <view class="c_price">价格</view>
+                    </view>
+
+                    <!-- 表格内容 -->
+                    <view class='td' wx:for='{{lists}}' wx:key='{{index}}'>
+                        <view class="c_name">{{item.goods_name}}</view>
+                        <view class="c_num">
+                            <text class="iconfont icon-ziyuan" data-index='{{index}}' @tap.stop='creduce'></text>
+                            <text class="number">{{item.num}}</text>
+                            <text class="iconfont icon-jiahao" data-index='{{index}}' @tap.stop='cadd'></text>
+                        </view>
+                        <view class="c_price">￥{{item.addPrice}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+
+export default class Search extends wepy.page {
+    config = {
+        navigationBarTitleText: '搜索'
+    }
+
+    components = {}
+
+    data = {
+        goodsImg:'https://ktv.jcxowtime.com/uploads/5d7a1b89c7f9b.png', // 商品临时图片
+        value:'', // 默认的输入内容 
+        selectGoods:[],// 两个页面选择已经选择的商品
+        goods:[], // 搜索到的商品
+        centerGoods:[], // 缓存
+        numberSettleShow:false, // 数量和结算的显示与隐藏
+        goodsNum:0, // 商品的数量
+        allPrice:'0.00', // 商品的总价
+
+        arr:[], // 每次所搜后选择的商品
+        test:[],
+
+        cardActive:false, // 购物车和默认不显示
+        lists:[], // 购物车商品
+    }
+
+    computed = {}
+
+
+    methods = {
+        // 获取输入框输入的内容
+        getValue(e){
+            this.value = e.detail.value
+        },
+
+        // 确定
+        search(){
+            this.goods = [] // 清空之前搜索到的数据
+            this.getSearchGoods(this.value)
+            wepy.$instance.globalData.arr.push(this.arr)  // 保存上次搜索选择的商品
+        },
+
+
+        // 搜索到的商品的减少与添加
+        // 减少
+        reduce(e){
+            var that = this
+            var index = e.currentTarget.dataset.index
+
+            // 判断最少选择的数量
+            if(this.goods[index].num == 0){
+                this.goods[index].num == 0
+            }else{
+                this.goods[index].num --
+            }
+
+            // 计算选择的商品的价格和数量
+            this.getPriceNum(index)
+
+            // 渲染页面
+            this.$apply()
+        },
+        // 添加
+        add(e){
+            var that = this
+            var index = e.currentTarget.dataset.index
+
+            // 判断商品是否超库存
+            if(this.goods[index].num == this.goods[index].store ){
+                wx.showModal({
+                    content:'选择的商品超过该商品库存',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                this.goods[index].num ++
+            }
+
+            // 计算选择的商品的价格和数量
+            this.getPriceNum(index)
+            
+            // 渲染页面
+            this.$apply()
+        },
+
+
+        // 购物车列表显示与隐藏
+        card(){
+            console.log('购物车商品',this.lists)
+
+            if(this.lists.length == 0 ){ // 购物车为空
+                // 不执行操作
+            } else { 
+                // 切换显示与隐藏
+                this.cardActive = !this.cardActive
+
+                // 列表赋值
+                var goods = this.lists
+                var price = 0
+                goods.map((v,i)=>{
+                    price = ( Number(v.price) * Number(v.num) ).toFixed(2)
+                    goods[i]['addPrice'] = price
+                })
+                this.lists  = goods
+                console.log('数据处理后购物车商品',this.lists)
+            }
+            this.$apply()
+        },
+
+
+        // 购物车列表的减少与添加
+        // 减少
+        creduce(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断商品选择的最小数量
+            if(this.lists[index].num == 0){
+                this.lists[index].num == 0
+            }else{
+                this.lists[index].num --
+            }
+
+            // 计算
+            this.getCardPriceNum()
+
+            // 渲染页面
+            this.$apply()
+        },
+        // 添加
+        cadd(e){
+            var index = e.currentTarget.dataset.index
+
+            // 判断选择是否超过库存
+            if(this.lists[index].num == this.lists[index].store ){
+                wx.showModal({
+                    content:'选择的商品超过该商品库存',
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                })
+            }else{
+                this.lists[index].num ++
+            }
+
+            // 计算
+            this.getCardPriceNum()
+        
+            // 渲染页面
+            this.$apply()
+
+        },
+
+
+
+        // 结算
+        total(){
+            // 缓存新的商品清单
+            if(this.test.length == 0){ 
+                // 不执行操作
+            }else{
+                wepy.$instance.globalData.allGoods = this.test
+            }
+      
+            wx.navigateTo({
+                url: '/pages/line_store/affirmOrder'
+            })
+        },
+    }
+
+    events = {}
+    onLoad() {}
+
+    onShow(){
+        // 获取两个页面选择的商品的数量以及价格
+        this.isGoods()
+    }
+
+    // 监听头部返回
+    onUnload(){
+        // 缓存新的商品清单
+        wepy.$instance.globalData.allGoods  = this.test
+    }
+   
+
+    // 获取搜索的商品
+    getSearchGoods(v){
+        var that = this 
+        var parameter = {}
+        parameter.sid = 8
+        parameter.type = 2
+        parameter.name = v
+        commonGetData.getDataOrder('goods/list','POST',function(res){
+            var resData = res.data.data
+            // console.log('返回的未处理的数据',resData)
+            resData.map((v,i)=>{
+                v.goods.map((k,l)=>{
+                    k['num'] = 0
+                    that.goods.push(k)
+                })
+            })
+            console.log('搜索到的商品',that.goods)
+            that.$apply()
+        },parameter)
+    }
+
+
+    // 判断是否有选择的商品
+    isGoods(){
+        this.selectGoods = wepy.$instance.globalData.allGoods // 读取两个页面选择的商品
+        this.lists = this.selectGoods // 读取两个页面选择的商品赋值给购物车
+        console.log('两个页面已经选择了的商品',this.selectGoods)
+        if(this.selectGoods != null){
+            var numArr = [] // 保存已选择商品数量的数组
+            var priceNum = 0 // 选择的每种商品的总数
+            var priceArr = [] // 保存已选择商品价格的数组
+            this.selectGoods.map((v,i)=>{
+                numArr.push(v.num)
+                priceNum = ( Number(v.price) * Number(v.num) ).toFixed(2)
+                priceArr.push(priceNum)
+            })
+            console.log('数量',this.sum(numArr))
+            console.log('价格',this.sum(priceArr).toFixed(2))
+            if(this.sum(numArr) != 0){
+                this.numberSettleShow = true
+            }else{
+                this.numberSettleShow = false
+            }
+            this.goodsNum = this.sum(numArr)
+            this.allPrice = this.sum(priceArr).toFixed(2)
+                
+            // 渲染页面
+            this.$apply()
+        }
+    }
+
+
+    // 搜索商品计算数量和价格
+    getPriceNum(i){
+        // console.log('本次搜搜到的商品',this.goods)
+        var arr = []
+        this.goods.map((v,i)=>{
+            if(v.num != 0){
+                arr.push(v)
+            }
+        })
+        console.log('上次搜索选择的商品',wepy.$instance.globalData.arr)
+        console.log('本次搜索选择的商品',arr)
+        this.arr = arr // 这步很重要(结合确定功能中的wepy.$instance.globalData.arr.push(this.arr) )
+        var centerGoods = wepy.$instance.globalData.arr.concat(arr)
+        // console.log('点击多次搜索选择的商品混合',centerGoods)
+        var test = []
+        centerGoods.map((v,i)=>{
+            if (Object.prototype.toString.call(v) === "[object Array]") { // 数组
+                v.map((k,l)=>{
+                    if(k.length != 0){
+                        test.push(k)
+                    }
+                })
+            }else if(Object.prototype.toString.call(v)==='[object Object]'){
+                test.push(v)
+            }
+        })
+        console.log('点击多次搜索选择的商品数组',test)
+        var endArr = wepy.$instance.globalData.allGoods.concat(test)
+        console.log('点击后两个页面选择的商品',endArr)
+
+        this.lists = endArr // 加入购物车列表
+        this.test = endArr // 本页面缓存两个页面选择的所有的商品
+
+        var arr1 = [] // 保存两个页面选择的商品的数量
+        var price = 0 // 两个页面选择的每种商品的总价
+        var arr2 = [] // 保存两个页面所有商品的总价
+        endArr.map((v,i)=>{
+            arr1.push(v.num)
+            price = ( Number(v.price) * Number(v.num) ).toFixed(2)
+            arr2.push(price)
+        })
+       
+        if(this.sum(arr1) != 0){
+            this.numberSettleShow = true 
+        }
+
+        this.goodsNum = this.sum(arr1)
+        this.allPrice = this.sum(arr2).toFixed(2)
+        
+
+        this.$apply()
+        console.log('--------------------------------------------------------------------------------------------------')
+    }
+
+
+    // 操作购物车列表商品时计算数量和价格
+    getCardPriceNum(){
+        console.log('购物车中产品',this.lists)
+        var cArr = [] // 保存购物车中选择后的产品
+        this.lists.map((v,i)=>{
+            if(v.num !=0 ){
+                cArr.push(v)
+            }
+        })
+        console.log('点击后购物车中的商品',cArr)
+        this.lists = cArr // 购物车中该商品数量为0则不显示 ***
+        wepy.$instance.globalData.allGoods = cArr // 在购物车加减后的商品重新缓存 *** 
+       
+        var cArr1 = [] // 保存购物车中每种商品的的数量
+        var cPrice = 0 // 默认购物车中每种商品的总价
+        var cArr2 = [] // 保存购物车中选择的每种产品的总价
+        this.lists.map((v,i)=>{
+            cArr1.push(v.num)
+            cPrice = ( Number(v.price) * Number(v.num) ).toFixed(2)
+            cArr2.push(cPrice)
+            this.lists[i].addPrice = cPrice // 将计算后的每种商品的总价添加到原来的数组中
+        })
+        this.goodsNum = this.sum(cArr1) // 购物车栏商品总数
+        this.allPrice = this.sum(cArr2).toFixed(2) // 购物车栏商品总价
+        if(this.goodsNum != 0){
+            this.numberSettleShow = true
+        }else{
+            this.numberSettleShow = false // 不能结算
+            this.cardActive = false // 不显示购物车列表
+        }
+        // 渲染页面
+        this.$apply()
+    }
+
+
+    // 数组求和
+    sum(arr) {
+        var s = 0;
+        for (var i=arr.length-1; i>=0; i--) {
+            s += Number(arr[i]);
+        }
+        return s;
+    }
+}
+</script>

@@ -1,0 +1,154 @@
+<style lang="scss">
+@import '../../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box {
+            // 搜索框盒子
+            .input_box {
+                height: 65rpx;
+                margin: 30rpx 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                input {
+                    width: 560rpx;
+                    height: 100%;
+                    border: 2rpx solid $c339;
+                    border-radius: 33rpx;
+                    padding-left: 60rpx;
+                    box-sizing: border-box;
+                }
+                input::-webkit-input-placeholder {
+                    color: $c753;
+                }
+                text {
+                    color: $c753;
+                }
+                .iconfont {
+                    position: absolute;
+                    left: 16rpx;
+                    font-size: 36rpx;
+                }
+            }
+
+            // 定位城市
+            .city{
+                color:$cf6f;
+                display:flex;
+                align-items: center;
+                margin-bottom: $p30;
+                text{
+                    font-size: $fs36;
+                    color:$cfff;
+                    margin-left: 10rpx;
+                }
+            }
+
+            // 列表
+            .lists{
+                margin-top: 30rpx;
+                // 模板
+                .alone{
+                    height:80rpx;
+                    background:$cfff;
+                    border-radius: 10rpx;
+                    margin-bottom: $p30;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    color:$pagebg;
+                }
+            }
+        }
+    }
+</style>
+<template>
+    <view class="box">
+        <view class="typearea">
+            <!-- 搜索 -->
+            <view class="input_box" wx:if='{{1==2}}'>
+                <text class="iconfont icon-sousuo"></text>
+                <input type="text" placeholder="搜索" placeholder-style="color:$c753" bindinput='getCtiy'>
+                <text @tap.stop='confirm'>确定</text>
+            </view>
+
+            <!-- 默认城市 -->
+            <view class="city" wx:if='{{1==2}}'>定位城市:<text>成都</text></view>
+
+            <!-- 列表 -->
+            <view class="lists">
+                <view class="alone" wx:for='{{citys}}' wx:key='{{index}}' @tap.stop='skip' 
+                data-id='{{item.id}}' data-value='{{item.city_name}}'>{{item.city_name}}</view>
+            </view>
+        </view>
+
+        
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../../api/api.js")
+export default class ChoiceCity extends wepy.page {
+    config = {
+        navigationBarTitleText: '城市选择'
+    }
+
+    components = {}
+
+    data = {
+        city:'成都', // 默认城市
+        citys:[]
+    }
+
+    computed = {}
+
+    methods = {
+        // 输入的城市
+        getCtiy(e){
+            this.city = e.detail.value
+        },
+
+        // 确定搜索
+        confirm(){
+            wx.showModal({
+                content:this.city,
+                showCancel:false,
+                confirmText:'知道啦 !',
+                confirmColor:'#72B9C3',
+            })
+        },
+
+        // 选择城市
+        skip(e){
+            var city = e.currentTarget.dataset.value
+            var cid = e.currentTarget.dataset.id
+            wepy.$instance.globalData.city = city
+            wepy.$instance.globalData.cityid = cid
+            wx.switchTab({
+                url:'/pages/home'
+            })
+        }
+    }
+
+    events = {}
+
+    onLoad() {
+        // 获取城市列表
+        this.getCtiyLists()
+    }
+
+    // 获取城市列表
+    getCtiyLists(){
+        var _this = this 
+        commonGetData.getData('city/list','POST',function(res){
+            console.log('城市列表',res.data.data)
+            _this.citys = res.data.data
+            _this.$apply()
+        })
+    }
+}
+</script>

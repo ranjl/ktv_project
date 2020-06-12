@@ -1,0 +1,44 @@
+
+$pagebg:#111217;
+
+
+// 颜色
+$changebg:-webkit-linear-gradient(left , rgb(244, 86, 73) 1% , rgb(236, 62, 102) 99%);
+$changebg1:-webkit-linear-gradient(left , rgb(42, 241, 165) 1% , rgb(68, 178, 241) 99%);
+
+
+$cfff:#ffffff;
+
+$c339:#D86339;
+$c753:#D54753;
+
+$c847:#F74947;
+
+$cf6f:#5C5F6F;
+$cf36:#2D2F36;
+
+$c730:#252730;
+$cea7:#9C9EA7;
+
+
+
+// 距离
+$p30:30rpx;
+$p40:40rpx;
+
+
+
+// 字体大小
+$fs24:24rpx;
+$fs32:32rpx;
+$fs42:42rpx;
+$fs28:28rpx;
+$fs36:36rpx;
+
+
+// 类名
+// 版心
+.typearea{
+    padding: 0 45rpx;
+    box-sizing: border-box;
+}

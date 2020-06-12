@@ -1,0 +1,852 @@
+<style lang="scss">
+    @import '../styles/common';
+    page {
+        background: $pagebg;
+        color:$cfff;
+        font-size: $fs32;
+        .box{
+            padding-top: 80rpx;
+            box-sizing: border-box;
+            position: relative;
+
+            // 包间消费记录/商品消费记录
+            .Tab{
+                width:100%;
+                height: 80rpx;
+                background:#17181D;
+                position:fixed;
+                top: 0;
+                z-index: 1001;
+                display:flex;
+                view{
+                    width:50%;
+                    height: 100%;
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                // 激活样式
+                .viewActive{
+                    background:$c753;
+                }
+            }
+
+
+            // tab
+            .tab{
+                height: 88rpx;
+                display:flex;
+                justify-content: space-around;
+                align-items: center;
+                view{
+                    font-size: $fs28;
+                    color:$cf6f;
+                }
+                .tabactive{
+                    font-size: $fs36;
+                    color:$cfff;
+                }
+            }
+
+            // content
+            .content{
+                padding: 30rpx 0;
+                box-sizing: border-box;
+                // 模板0
+                .alone{
+                    padding: 0 45rpx;
+                    box-sizing: border-box;
+                    margin-bottom: 80rpx;
+                    position: relative;
+                    // 订单号盒子
+                    .order{
+                        display:flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        // 订单号
+                        .txt{
+                            font-size: $fs36;
+                        }
+                        // 标签
+                        .btn{
+                            width:120rpx;
+                            height:42rpx;
+                            background:$changebg;
+                            border-radius: 10rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: $fs28;
+                        }
+                    }
+
+                    // 图片——门店信息
+                    .img_store_info{
+                        padding: 30rpx 0 ;
+                        box-sizing: border-box;
+                        display:flex;
+                        justify-content: space-between;
+                        border-bottom: 1rpx solid $cf36;
+                        image{
+                            width:240rpx;
+                            height: 180rpx;
+                            border-radius: 14rpx;
+                        }
+                        .store_info{
+                            width:60%;
+                            display:flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            // 门店名称
+                            .store_name{
+                                font-size: $fs36;
+                            }
+                            .store_phone{
+                                color:$c753;
+                            }
+                            .detail_address{
+                                font-size: $fs28;
+                                color:$cf6f;
+                            }
+                        }
+                    }
+
+                    // 包间信息
+                    .room_box{
+                        padding: 30rpx 0;
+                        box-sizing: border-box;
+                        border-bottom: 1rpx solid $cf36;
+                        // 小计
+                        .subtotal{
+                            color:$cf6f;
+                        }
+                        // 价格
+                        .price{
+                            color:$c753;
+                        }
+                        // 包间信息
+                        .room_info{
+                            margin-top: 30rpx;
+                            display:flex;
+                            justify-content: space-between;
+                            font-size: 28rpx;
+                        }
+                        // 剩余时间
+                        .room_time{
+                            margin-top: 30rpx;
+                            font-size: $fs28;
+                            display:flex;
+                            justify-content:space-between;
+                            text{
+                                margin-left: 20rpx;
+                            }
+                        }
+                    }
+
+                    // 取消订单——立即支付
+                    .cancel_pay{
+                        padding: 30rpx 0 0;
+                        box-sizing: border-box;
+                        display:flex;
+                        justify-content: flex-end;
+                        view{
+                            width:150rpx;
+                            height: 54rpx;
+                            border: 1rpx solid $c753;
+                            border-radius: 27rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: $fs28;
+                            color:$c753;
+                            margin-left: 15rpx;
+                            margin-bottom: 30rpx;
+                        }
+                    }
+
+                    // 留白
+                    .test{
+                        width:120%;
+                        height: 30rpx;
+                        background:$cf36;
+                        position:absolute;
+                        bottom: -28rpx;
+                        left: -45rpx;
+                    }
+                }
+            }
+
+
+            // content1
+            .content1{
+                // 模板
+                .alone{
+                    margin-top: 30rpx;
+                    padding: 0 45rpx $p30;
+                    box-sizing: border-box;
+                    position: relative;
+                    // 留白
+                    .test{
+                        width:120%;
+                        height: 30rpx;
+                        background:$cf36;
+                        position:absolute;
+                        left: -45rpx;
+                        bottom: 0;
+                    }
+                }
+                
+                // 订单号+支付状态
+                .orderNum{
+                    font-size: $fs36;
+                    display:flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    // 支付状态
+                    .btn{
+                        width:20%;
+                        height:42rpx;
+                        background:$changebg;
+                        border-radius: 10rpx;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: $fs28;
+                    }
+                }
+
+                // 门店名称
+                .storeName{
+                    font-size: $fs36;
+                    margin: $p30 0 20rpx;
+                }
+
+                // 包间名称+电话
+                .nameTel{
+                    color:$c753;
+                    display:flex;
+                    align-items: center;
+                    view{
+                        margin-right: $p30;
+                        text{
+                            margin-left: 10rpx;
+                        }
+                    }
+                }
+
+                // 地址
+                .address{
+                    padding: $p30 0;
+                    box-sizing: border-box;
+                    border-bottom: 1rpx solid $cf6f;
+                }
+
+                // 支付信息
+                .payInfo{
+                    padding: $p30 0;
+                    box-sizing: border-box;
+                    border-bottom: 1rpx solid $cf6f;
+                    .title{
+                        font-size: $fs36;
+                    }
+                    // 信息
+                    .info{
+                        display:flex;
+                        justify-content: space-between;
+                        margin-top: 20rpx;
+                        .txt{
+                            color:$c753;
+                        }
+                    }
+                }
+
+                // 取消订单+立即支付+查看详情
+                .btns{
+                    width:100%;
+                    height: 100rpx;
+                    display:flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    view{
+                        width:24%;
+                        height: 60%;
+                        border: 1rpx solid $c753;
+                        border-radius: 20rpx;
+                        margin-left: 10rpx;
+                        display:flex;
+                        justify-content: center;
+                        align-items: center;
+                        color:$c753;
+                        font-size: $fs28;
+                    }
+                }
+            }
+        }
+    }
+</style>
+
+<template>
+    <view class="box">
+        <!-- 包间消费记录/商品消费记录 -->
+        <view class="Tab">
+            <view wx:for='{{Tabs}}' wx:key='{{index}}' data-index='{{index}}' @tap.stop='cut' class="{{tabActive==index?'viewActive':''}}">
+                {{item.txt}}
+            </view>
+        </view>
+
+
+
+        <!-- 包厢消费记录 -->
+        <view class="typearea" wx:if='{{tabActive==0}}'>
+            <!-- tab -->
+            <view class="tab" >
+                <view class="{{tabindex0==index?'tabactive':''}}" wx:for='{{tabs0}}' wx:key='{{index}}' 
+                    data-index='{{index}}' @tap='tab0'>{{item.title}}</view>
+            </view>
+        </view>
+        <!-- 订单 -->
+        <scroll-view scroll-y class="content" wx:if='{{tabActive==0}}'>
+            <!-- 模板 -->
+            <view class="alone" wx:for='{{Orders}}' wx:key='{{index}}'>
+                <!-- 订单号 -->
+                <view class="order">
+                    <view class="txt">订单号: {{item.order_num}}</view>
+                    <view class="btn">{{item.status}}</view>
+                </view>
+
+                <!-- 图片——门店信息 -->
+                <view class="img_store_info">
+                    <!-- 门店图片展示 -->
+                    <image src='https://ktv.jcxowtime.com/uploads/5d7a1b89c7f9b.png' />
+
+                    <!-- 门店信息 -->
+                    <view class="store_info">
+                        <view class="store_name">{{item.shop_name}}</view>
+                        <view class="store_phone">门店电话: {{item.mobile}}</view>
+                        <view class="address">{{item.address}}</view>
+                        <view class="detail_address" wx:if='{{1==2}}'>{{item.address}}</view>
+                    </view>
+                </view>
+
+                <!-- 包间信息 -->
+                <view class="room_box">
+                    <view class="room_title">包间信息</view>
+                    <view class="room_info">
+                        <text>{{item.code}}</text>
+                        <!-- <text wx:if='{{item.type == 1}}'>包厢买断</text> -->
+                        <text wx:if='{{item.type == 2}}'>按时欢唱</text>
+                        <text wx:if='{{item.type == 1}}'>{{item.name}}包断({{item.start}} ~ {{item.end}})</text>
+                        <text wx:if='{{item.type == 2}}'>({{item.start}} ~ {{item.end}})</text>
+                        <text class="subtotal">小计</text>
+                        <text class="price">￥{{item.rel_price}}</text>
+                    </view>
+
+                    <view class="room_time" wx:if='{{1==2}}'>
+                        <view>剩余支付时间<text>30:00</text></view>
+                        <view>
+                            <text class="subtotal">小计</text>
+                            <text class="price">￥299</text>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 取消订单——立即支付 -->
+                <view class="cancel_pay" wx:if="{{item.status == '待支付' }}">
+                    <view @tap.stop='cancel' data-id='{{item.id}}'>取消订单</view>
+                    <view @tap.stop='pay' data-id='{{item.id}}'>立即支付</view>
+                </view>
+
+                <!-- 支付过的订单查看详情 -->
+                <view class="cancel_pay" wx:if="{{item.status != '待支付' }}">
+                    <view @tap.stop='look' data-id='{{item.id}}' data-st='{{item.status}}'>查看详情</view>
+                </view>
+
+                <!-- 留白 -->
+                <view class="test"></view>
+            </view>
+        </scroll-view>
+
+
+
+        <!-- 商品消费记录 -->
+        <view class="typearea" wx:if='{{tabActive==1}}'>
+            <!-- tab -->
+            <view class="tab" >
+                <view class="{{tabindex1==index?'tabactive':''}}" wx:for='{{tabs1}}' wx:key='{{index}}' 
+                    data-index='{{index}}' @tap='tab1'>
+                    {{item.title}}
+                </view>
+            </view>
+        </view>
+        <!-- 内容 -->
+        <scroll-view scroll-y class="content1" wx:if='{{tabActive==1}}'>
+            <view class="alone" wx:for='{{goodsOrders}}' wx:key='{{index}}'>
+                <!-- 订单号+支付状态 -->
+                <view class="orderNum">
+                    <view class="num">订单号:{{item.order_num}}</view>
+                    <view class='btn'>{{item._status}}</view>
+                </view>
+
+                <!-- 门店名称 -->
+                <view class="storeName">{{item.shop_name}}</view>
+
+                <!-- 包间名称+电话 -->
+                <view class="nameTel">
+                    <view>包间:<text>{{item._code}}</text></view>
+                    <view>门店电话:<text>{{item.mobile}}</text></view>
+                </view>
+
+                <!-- 地址 -->
+                <view class="address">{{item.address}}</view>
+
+                <!-- 支付信息 -->
+                <view class="payInfo">
+                    <view class="title">支付信息</view>
+                    <!-- 信息 -->
+                    <view class="info">
+                        <view>购买时间</view>
+                        <view class='txt'>{{item.exp_time}}</view>
+                    </view>
+                    <view class="info">
+                        <view>订单金额</view>
+                        <view class='txt'>￥{{item.rel_price}}</view>
+                    </view>
+                    <view class="info">
+                        <view>支付方式</view>
+                        <view class='txt'>{{item.pay_type}}</view>
+                    </view>
+                </view>
+
+                <!-- 操作 -->
+                <view class="btns">
+                    <view wx:if='{{item.status == 1}}' @tap.stop='gclean' data-id='{{item.id}}'>取消订单</view>
+                    <view wx:if='{{item.status == 1}}' @tap.stop='gpay' data-id='{{item.id}}'>立即支付</view>
+                    <view @tap.stop='glook' data-id='{{item.id}}' wx:if='{{item.status != 1}}'>查看详情</view>
+                </view>
+
+                <!-- 留白 -->
+                <view class="test"></view>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+const commonGetData = require("../api/api.js")
+
+export default class Record extends wepy.page {
+    config = {
+        navigationBarTitleText: '消费记录'
+    }
+
+    components = {}
+
+    data = {
+        code:null,
+        userInfo:{},
+
+        Tabs:[
+            {txt:'包厢消费'},
+            {txt:'商品消费'},
+        ],
+        tabActive: 0, // 默认显示包间消费记录
+
+        tabs0:[ // 订单状态选择
+            {title:'全部'},
+            {title:'待支付'}, //1
+            {title:'待使用'}, //2
+            {title:'已使用'}, //4
+            {title:'已取消'}, //5
+        ],
+        tabindex0: 0, // 默认为全部的包间订单信息
+        Orders:[], // 要渲染的包厢订单
+        allOrders:[], // 全部
+        Orders1:[], // 待支付
+        Orders2:[], // 待使用
+        Orders4:[], // 已使用
+        Orders5:[], // 已取消
+        
+
+        tabs1:[ // 商品的订单状态
+            {title:'全部'},
+            {title:'待支付'}, 
+            {title:'已支付'}, 
+            {title:'已失效'}, 
+        ],
+        tabindex1:1, // 默认为待支付
+        goodsOrders:[], // 要渲染的商品订单
+        allGoodsOrder:[], // 全部
+        goodsOrder1:[],  // 待支付
+        goodsOrder2:[], // 已支付
+        goodsOrder3:[], // 已取消
+    }
+
+    computed = {}
+
+    methods = {
+        // 切换消费记录
+        cut(e){
+            var index =  e.currentTarget.dataset.index
+            this.tabActive = index
+        },
+
+
+        // 切换tab0
+        tab0(e){
+            this.tabindex0 = e.currentTarget.dataset.index
+            
+            if(this.tabindex0 == 0){ // 全部
+                this.Orders = this.allOrders
+            }
+            if(this.tabindex0 == 1){ // 待支付
+                this.Orders = this.Orders1
+            }
+            if(this.tabindex0 == 2){ // 待使用
+                this.Orders = this.Orders2
+            }
+            if(this.tabindex0 == 3){ // 已使用
+                this.Orders = this.Orders4
+            }
+            if(this.tabindex0 == 4){
+                this.Orders = this.Orders5 // 已取消
+            }
+
+            this.$apply()
+        },
+
+
+        // 切换tab1
+        tab1(e){
+            this.tabindex1 = e.currentTarget.dataset.index
+            if(this.tabindex1 == 0){
+                this.goodsOrders = this.allGoodsOrder
+            }
+            if(this.tabindex1 == 1){
+                this.goodsOrders = this.goodsOrder1
+            }
+            if(this.tabindex1 == 2){
+                this.goodsOrders = this.goodsOrder2
+            }
+            if(this.tabindex1 == 3){
+                this.goodsOrders = this.goodsOrder3
+            }
+            this.$apply()
+        },
+
+
+        // 取消包厢订单
+        cancel(e){
+            var _this = this
+            var id = e.currentTarget.dataset.id
+            var parameter = {}
+            parameter.id = id
+            commonGetData.getDataOrder('order/cancel','POST',function(res){
+                console.log('取消订单',res)
+                wx.showModal({
+                    content:res.data.msg,
+                    showCancel:false,
+                    confirmText:'知道啦 !',
+                    confirmColor:'#72B9C3',
+                    success (res) {
+                        if (res.confirm) {
+                           // 重新加载页面(重新获取数据)
+                            _this.getOrderList()
+                            _this.tabindex0 = 0
+
+                            _this.$apply()
+                        } else if (res.cancel) {
+                           
+                        }
+                    }
+                })
+            },parameter)
+        },
+
+        // 支付包厢订单
+        pay(e){
+            var id = e.currentTarget.dataset.id
+            console.log('订单id',id)
+            wx.navigateTo({
+                url:'/pages/shop/order_details_backups?id=' + id
+            })
+        },
+
+        // 查看包厢详情
+        look(e){
+            var id = e.currentTarget.dataset.id
+            var st = e.currentTarget.dataset.status
+            wx.navigateTo({
+                url:'/pages/shop/order_details_backups?id='+id+'&st='+st
+            })
+        },
+
+
+        // 取消商品订单
+        gclean(e){
+            var that = this 
+            var id = e.currentTarget.dataset.id
+            var parameter = {}
+            parameter.id = id
+            commonGetData.getDataOrder('order/cancelMallOrder','POST',function(res){
+                console.log('取消订单',res)
+                if(res.data.code == 200){
+                    wx.showModal({
+                        content:res.data.msg,
+                        showCancel:false,
+                        confirmText:'知道啦 !',
+                        confirmColor:'#72B9C3',
+                        success(){
+                            // 重新获取商品列表
+                            that.getGoodsList()
+                            that.tabindex1 = 0
+                            that.$apply()
+                        }
+                    })
+                }
+            },parameter)
+        },
+
+
+        // 支付商品订单
+        gpay(e){
+            var id = e.currentTarget.dataset.id
+            wx.navigateTo({
+                url:'/pages/line_store/order?id=' + id
+            })
+        },
+
+
+        // 查看商品订单
+        glook(e){
+            var id = e.currentTarget.dataset.id
+            wx.navigateTo({
+                url:'/pages/line_store/order?id='+id
+            })
+        }
+    }
+
+    events = {}
+
+    // 页面加载
+    onLoad() {
+        var that = this 
+
+        wx.showLoading({title:'加载中'})
+
+        // 微信登陆
+        that.login() 
+        
+        // 查看是否授权
+        wx.getSetting({
+            success: function(res) {
+                if (res.authSetting['scope.userInfo']) { // 已经授权
+                    wx.getUserInfo({
+                        success: function(res) {
+                            console.log('已经授权','用户信息:',res)
+                            that.userInfo = res.userInfo
+                            that.getToken() // 提交用户信息得到token
+                        }
+                    });
+                } else {  // 用户没有授权
+                    wx.switchTab({
+                        url: '/pages/my'
+                    })
+                }
+            }
+        });
+    }
+
+    // 页面显示
+    onShow(){
+        this.tabindex0 = 0
+        this.tabindex1 = 0
+        this.$apply()
+
+        // 更新订单超时未使用状态
+        this.updateOrder()
+
+        // 更新房间状态(作用不大)
+        this.update()
+    }
+
+    // 页面隐藏
+    onHide(){
+        
+    }
+
+
+
+    // 获取包厢订单列表
+    getOrderList(){
+        var _this = this
+        this.tabindex = 0
+        commonGetData.getDataOrder('order/list','POST',function(res){
+            var resData = res.data.data
+
+            _this.allOrders = resData 
+
+            _this.Orders1 = [];
+            _this.Orders2 = [];
+            _this.Orders4 = [];
+            _this.Orders5 = [];
+
+            _this.allOrders.map((v,i)=>{
+                if(v.status == 1){
+                    v.status = '待支付'
+                    _this.Orders1.push(v)
+                }
+                if(v.status == 2){
+                    v.status = '待使用'
+                    _this.Orders2.push(v)
+                }
+                if(v.status == 4){
+                    v.status = '已使用'
+                    _this.Orders4.push(v)
+                }
+                if(v.status == 5){
+                    v.status = '已取消'
+                    _this.Orders5.push(v)
+                }
+            })
+
+            console.log('全部的包厢订单',_this.allOrders)
+            console.log('待支付',_this.Orders1)
+            console.log('待使用',_this.Orders2)
+            console.log('已使用',_this.Orders4)
+            console.log('已取消',_this.Orders5)
+
+            _this.Orders = _this.allOrders // 默认渲染全部的包厢订单
+
+            wx.hideLoading()
+
+            _this.$apply()
+        })
+    }
+    
+    // 获取商品订单列表
+    getGoodsList(){
+        var that = this 
+        commonGetData.getDataOrder('order/getMallOrderList','POST',function(res){
+            var resData = res.data.data
+            // console.log('商品订单列表',resData)
+            resData.map((v,i)=>{
+                if(v.status == 1){
+                    v['_status'] = '待支付'
+                }
+                if(v.status == 4){
+                    v['_status'] = '已支付'
+                }
+                if(v.status == 5){
+                    v['_status'] = '已取消'
+                }
+                if(v.code == null){
+                    v['_code'] = '大厅'
+                }
+                if(v.code != null){
+                    v['_code'] = v.code
+                }
+            })
+
+            that.allGoodsOrder = resData // 全部
+
+            that.goodsOrder1 = [] 
+            that.goodsOrder2 = []
+            that.goodsOrder3 = []
+
+            resData.map((v,i)=>{
+                if(v.status == 1){ // 待支付
+                    that.goodsOrder1.push(v)
+                }
+                if(v.status == 4){ // 已支付
+                    that.goodsOrder2.push(v)
+                }
+                if(v.status == 5){ // 已失效
+                    that.goodsOrder3.push(v)
+                }
+            })
+
+            
+            console.log('全部商品订单列表',that.allGoodsOrder)
+            console.log('待支付',that.goodsOrder1)
+            console.log('已支付',that.goodsOrder2)
+            console.log('已失效',that.goodsOrder3)
+
+            that.goodsOrders = that.allGoodsOrder // 默认渲染全部的商品订单
+
+            wx.hideLoading()
+            
+            that.$apply()
+        })
+    }
+
+
+
+    // 获取订单超时未使用状态
+    updateOrder(){
+        var _this = this
+        commonGetData.getData('order/update','POST',function(res){
+            console.log('订单更新成功')
+            if(wepy.$instance.globalData.token !=null){
+                // 加载包厢订单列表
+                _this.getOrderList()
+                // 加载商品订单列表
+                _this.getGoodsList()
+            }
+        })
+    }
+
+    // 更新已订房间数据状态
+    update(){
+        commonGetData.getData('roomLog/update','POST',function(res){
+            console.log('房间状态更新成功')
+        })
+    }
+
+
+
+    // 微信登陆
+    login(){
+        wx.login({
+            success : res => {
+                console.log('登陆成功',res)
+                this.code = res.code
+            },
+            fail: res => {
+                console.log('登陆失败',res)
+            },
+            complete: res => {
+                console.log('登陆完成',res)
+            }
+        })
+    }
+
+    // 提交用户信息给后台获取token
+    getToken(){
+        var _this = this
+        var parameter = {}
+        parameter.code = this.code
+        parameter.nickName = this.userInfo.nickName
+        parameter.avatarUrl = this.userInfo.avatarUrl
+        parameter.gender = this.userInfo.gender
+        parameter.province = this.userInfo.province
+        parameter.country = this.userInfo.country
+        parameter.city = this.userInfo.city
+        console.log('提交的用户信息',parameter)
+        commonGetData.getData('member/login','post',function(res){
+            console.log('提交用户信息结果',res.data.msg)
+
+            // 保存token到全局变量
+            wepy.$instance.globalData.token = res.data.data.token
+
+            wx.hideLoading()
+
+            // 获取包厢订单列表
+            _this.getOrderList()
+
+            // 获取商品订单列表
+            _this.getGoodsList() 
+        },parameter)
+    }
+}
+</script>
