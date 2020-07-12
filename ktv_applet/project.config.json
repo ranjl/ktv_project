@@ -39,13 +39,17 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/order",
-					"pathName": "pages/order",
+					"name": "pages/my/scan_payment",
+					"pathName": "pages/my/scan_payment",
 					"query": "",
 					"scene": null
 				}

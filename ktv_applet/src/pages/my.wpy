@@ -314,7 +314,16 @@ export default class My extends wepy.page {
             }if(value == 'scan'){ // 扫一扫
                 wx.scanCode({
                     success: (res) => {
-                        console.log('扫一扫',res)
+                        wx.navigateTo({
+                            url:'/pages/my/scan_payment?data='+ res.result
+                        })
+                    },
+                    fail:(res)=>{
+                        wx.showToast({
+                            title: '扫码失败,请重新扫码',
+                            icon: 'none',
+                            duration: 2000
+                        })
                     }
                 })
             }
