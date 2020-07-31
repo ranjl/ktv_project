@@ -397,7 +397,7 @@ export default class ValueCard extends wepy.page {
                         timeStamp: time , // 当前的时间戳
                         nonceStr: str, // 随机字符串(32个以下)
                         package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                        signType: 'MD5',
+                        signType: resData.signType,
                         paySign: paySignid, // 签名
                         success (res) { 
                             console.log('支付',res)

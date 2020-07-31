@@ -194,8 +194,15 @@ export default class ScanPayment extends wepy.page {
                 var parameter = {}
                 parameter.id = this.payData.id
                 parameter.pay_type = 2
-                commonGetData.getDataOrder('order/pay','POST',function(res){  // 得到prepay_id
+                commonGetData.getDataOrder('order/wxPay','POST',function(res){  // 得到prepay_id
                     console.log('微信支付预支付结果',res)
+                    if( res.data.code == 0 ){
+                        wx.showToast({
+                            title: res.data.msg,
+                            icon: 'warning',
+                            duration: 1500
+                        })
+                    }
                     var resData = JSON.parse(res.data.data.bridgeConfig)
                     var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
                     if(res.data.code == 200){
@@ -203,7 +210,7 @@ export default class ScanPayment extends wepy.page {
                             timeStamp: time , // 当前的时间戳
                             nonceStr: str, // 随机字符串(32个以下)
                             package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                            signType: 'MD5',
+                            signType: resData.signType,
                             paySign: paySignid, // 签名
                             success (res) { 
                                 wx.showToast({
@@ -247,11 +254,11 @@ export default class ScanPayment extends wepy.page {
                     var parameter = {}
                     parameter.id = this.payData.id
                     parameter.pay_type = 1
-                    commonGetData.getDataOrder('order/pay','POST',function(res){  
+                    commonGetData.getDataOrder('order/wxPay','POST',function(res){  
                         console.log('余额支付预支付结果',res)
                         if(res.data.code == 200){ // 余额不足
                             if(res.data.data.bridgeConfig != null){ 
-                                var price =(Number(_this.orderDetails.price) - Number(_this.orderDetails.wallet) ).toFixed(2)
+                                var price =( Number(_this.payData.rel_price) - Number(_this.wallet) ).toFixed(2)
                                 wx.showModal({
                                     title: '提示',
                                     content: '余额不足是否使用微信支付剩余金额' + price + '元',
@@ -264,7 +271,7 @@ export default class ScanPayment extends wepy.page {
                                                 timeStamp: time , // 当前的时间戳
                                                 nonceStr: str,    // 随机字符串(32个以下)
                                                 package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                                                signType: 'MD5',
+                                                signType: resData.signType,
                                                 paySign: paySignid, // 签名
                                                 success (res) { 
                                                     wx.showToast({
@@ -317,9 +324,7 @@ export default class ScanPayment extends wepy.page {
                     },parameter)
                 }
             }
-            
         },
-
     }
 
     events = {}

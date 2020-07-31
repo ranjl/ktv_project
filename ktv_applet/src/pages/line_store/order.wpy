@@ -311,7 +311,7 @@ export default class Order extends wepy.page {
             parameter.id = this.order_id
             if(this.pay_way == 0){ // 微信支付
                 parameter.pay_type = 2
-                commonGetData.getDataOrder('order/pay','POST',function(res){  
+                commonGetData.getDataOrder('order/wxPay','POST',function(res){  
                     if(res.data.code == 200){ // 微信与支付成功
                         var resData = JSON.parse(res.data.data.bridgeConfig)
                         var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
@@ -320,7 +320,7 @@ export default class Order extends wepy.page {
                             timeStamp: time , 
                             nonceStr: str, 
                             package: packageid, 
-                            signType: 'MD5',
+                            signType: resData.signType,
                             paySign: paySignid, 
                             success (res) { 
                                 // 支付成功在该页面重新请求数据
@@ -344,7 +344,7 @@ export default class Order extends wepy.page {
 
                 else{ // 有余额
                     parameter.pay_type = 1
-                    commonGetData.getDataOrder('order/pay','POST',function(res){  
+                    commonGetData.getDataOrder('order/wxPay','POST',function(res){  
                         if(res.data.code == 201){ // 余额充足且支付成功
                            wx.showModal({
                                 content:'余额支付成功',
@@ -372,7 +372,7 @@ export default class Order extends wepy.page {
                                                 timeStamp: time , 
                                                 nonceStr: str,    
                                                 package: packageid, 
-                                                signType: 'MD5',
+                                                signType: resData.signType,
                                                 paySign: paySignid, 
                                                 success (res) { 
                                                     // 支付成功在该页面重新请求数据

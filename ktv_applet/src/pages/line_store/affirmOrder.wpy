@@ -468,7 +468,7 @@ export default class Affirmorder extends wepy.page {
                             timeStamp: resData.timeStamp , // 当前的时间戳
                             nonceStr: resData.nonceStr, // 随机字符串(32个以下)
                             package: resData.package, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                            signType: 'MD5',
+                            signType: resData.signType,
                             paySign: resData.paySign, // 签名
                             success (res) { 
                                 console.log('微信支付成功',res)
@@ -478,7 +478,9 @@ export default class Affirmorder extends wepy.page {
                                     url:'/pages/line_store/order?id='+id
                                 })
                             },
-                            fail (res) {  }
+                            fail (res) { 
+
+                            }
                         })
                     }
                 }
@@ -521,7 +523,7 @@ export default class Affirmorder extends wepy.page {
                                         timeStamp: resData.timeStamp ,
                                         nonceStr: resData.nonceStr, 
                                         package: resData.package, 
-                                        signType: 'MD5',
+                                        signType: resData.signType,
                                         paySign: resData.paySign, 
                                         success (res) { 
                                             wepy.$instance.globalData.allGoods = [] // 清空购物车缓存商品
@@ -529,7 +531,13 @@ export default class Affirmorder extends wepy.page {
                                                 url:'/pages/line_store/order?id='+id
                                             })
                                         },
-                                        fail (res) {  }
+                                        fail (res) { 
+                                            wx.showToast({
+                                                title: res.errMsg,
+                                                icon: 'none',
+                                                duration: 1500
+                                            })
+                                         }
                                     })
                                 } else if (res.cancel) { // 取消
                                     //  不执行操作
