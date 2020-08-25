@@ -474,7 +474,7 @@
                     <view class="rightalone" wx:for='{{goods}}' wx:key='{{index}}'>
                         <!-- 左侧图片 -->
                         <view class="imageBox">
-                            <image src='https://ab-kev-pdev.abontest.com{{item.cover_img}}'/>
+                            <image src='https://ktv.demo.abontest.com{{item.cover_img}}'/>
                         </view>
 
                         <!-- 右侧文本 -->
@@ -554,10 +554,10 @@ export default class Store extends wepy.page {
     components = {}
 
     data = {
-        storeImg:'https://ab-kev-pdev.abontest.com/uploads/5d7a1b89c7f9b.png', // 默认的门店图片
+        storeImg:'https://ktv.demo.abontest.com/uploads/5d7a1b89c7f9b.png', // 默认的门店图片
         imgUrls: [ // 默认的banner图
-            {img:'https://ab-kev-pdev.abontest.com/uploads/5d7a1ba538287.png'},
-            {img:'https://ab-kev-pdev.abontest.com/uploads/5d7a1ba538287.png'},
+            {img:'https://ktv.demo.abontest.com/uploads/5d7a1ba538287.png'},
+            {img:'https://ktv.demo.abontest.com/uploads/5d7a1ba538287.png'},
         ], 
         storeName:'', // 门店名称
         allGoods:[], // 该页面请求回的所有分类的商品

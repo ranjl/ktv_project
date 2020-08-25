@@ -287,7 +287,7 @@
                 <view class="lists" wx:for='{{goods}}' wx:key='{{index}}'>
                     <!-- 商品图片 -->
                     <view class="left">
-                        <image src='https://ab-kev-pdev.abontest.com{{item.cover_img}}' />
+                        <image src='https://ktv.demo.abontest.com{{item.cover_img}}' />
                     </view>
 
                     <!-- 商品信息 -->
@@ -369,7 +369,7 @@ export default class Search extends wepy.page {
     components = {}
 
     data = {
-        goodsImg:'https://ab-kev-pdev.abontest.com/uploads/5d7a1b89c7f9b.png', // 商品临时图片
+        goodsImg:'https://ktv.demo.abontest.com/uploads/5d7a1b89c7f9b.png', // 商品临时图片
         value:'', // 默认的输入内容 
         selectGoods:[],// 两个页面选择已经选择的商品
         goods:[], // 搜索到的商品

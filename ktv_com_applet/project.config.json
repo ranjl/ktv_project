@@ -1,13 +1,15 @@
 {
 	"description": "A WePY project",
 	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -15,11 +17,13 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"enhance": true,
+		"nodeModules": true
 	},
 	"compileType": "miniprogram",
 	"appid": "wx616ce5aa98c54a80",
-	"projectname": "self_help_ktv",
+	"projectname": "bangke",
 	"miniprogramRoot": "dist/",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

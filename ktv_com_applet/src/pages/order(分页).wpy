@@ -349,7 +349,7 @@
                 <!-- 图片——门店信息 -->
                 <view class="img_store_info">
                     <!-- 门店图片展示 -->
-                    <image src='https://ab-kev-pdev.abontest.com/uploads/5d7a1b89c7f9b.png' />
+                    <image src='https://ktv.demo.abontest.com/uploads/5d7a1b89c7f9b.png' />
 
                     <!-- 门店信息 -->
                     <view class="store_info">

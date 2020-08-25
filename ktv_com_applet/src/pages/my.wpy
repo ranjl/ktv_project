@@ -551,7 +551,7 @@ export default class My extends wepy.page {
         return {
             title:wepy.$instance.globalData.store_name,
             path: '/pages/home',       
-　　　　     imageUrl: 'https://ab-kev-pdev.abontest.com/uploads/5d7a1b89c7f9b.png',     
+　　　　     imageUrl: 'https://ktv.demo.abontest.com/uploads/5d7a1b89c7f9b.png',     
             success: function (res) {},
             fail: function (res) {}
         }

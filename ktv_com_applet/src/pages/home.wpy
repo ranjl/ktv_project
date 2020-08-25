@@ -194,7 +194,7 @@
                 interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
                 <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
                     <swiper-item >
-                        <image src="https://ab-kev-pdev.abontest.com{{item.path}}"/>
+                        <image src="https://ktv.demo.abontest.com{{item.path}}"/>
                     </swiper-item>
                 </block>
             </swiper>
@@ -240,7 +240,7 @@
                 <view class="alone" wx:for='{{storeLists}}' wx:key='{{index}}' data-id='{{item.id}}' @tap.stop='skip_details'>
                     <!-- 图片盒子 -->
                     <view class="img_box">
-                        <image src='https://ab-kev-pdev.abontest.com{{item.cover.path}}'/>
+                        <image src='https://ktv.demo.abontest.com{{item.cover.path}}'/>
                         <view class="righttop">营业中</view>
                         <view class="leftbottom">
                             <text class="iconfont icon-dingwei"></text>

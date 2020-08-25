@@ -497,7 +497,7 @@
                 <!-- 模板 -->
                 <view class="alone" wx:for='{{foods}}' wx:key='{{index}}'>
                     <!-- 左侧图片 -->
-                    <image src='https://ab-kev-pdev.abontest.com{{item.cover_img}}' />
+                    <image src='https://ktv.demo.abontest.com{{item.cover_img}}' />
 
                     <!-- 右侧内容 -->
                     <view class="right">

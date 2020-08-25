@@ -416,7 +416,7 @@
                 interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
                 <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
                     <swiper-item >
-                        <image src="https://ab-kev-pdev.abontest.com{{item.path}}"/>
+                        <image src="https://ktv.demo.abontest.com{{item.path}}"/>
                     </swiper-item>
                 </block>
             </swiper>
