@@ -262,7 +262,7 @@ export default class My extends wepy.page {
 
     data = {
         portrait: '../static/imgs/logo.jpg',  // 默认头像
-        nickName: '邦客KTV',  // 默认昵称 
+        nickName: 'XowTime',  // 默认昵称 
         number: '未完善', // 账号
         phone: '未完善', // 手机号码
         money:'0.00', // 我的财产
@@ -314,7 +314,16 @@ export default class My extends wepy.page {
             }if(value == 'scan'){ // 扫一扫
                 wx.scanCode({
                     success: (res) => {
-                        console.log('扫一扫',res)
+                        wx.navigateTo({
+                            url:'/pages/my/scan_payment?data='+ res.result
+                        })
+                    },
+                    fail:(res)=>{
+                        wx.showToast({
+                            title: '扫码失败,请重新扫码',
+                            icon: 'none',
+                            duration: 2000
+                        })
                     }
                 })
             }

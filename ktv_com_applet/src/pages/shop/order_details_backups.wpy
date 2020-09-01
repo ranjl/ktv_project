@@ -398,15 +398,15 @@ export default class OrderDetails extends wepy.page {
                 console.log(parameter)
                 commonGetData.getDataOrder('order/pay','POST',function(res){  // 得到prepay_id
                     console.log('预支付结果',res)
-                    var resData = JSON.parse(res.data.data.bridgeConfig)
-                    var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
                     if(res.data.code == 200){
+                        var resData = JSON.parse(res.data.data.bridgeConfig)
+                        var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
                         // 微信支付
                         wx.requestPayment({
                             timeStamp: time , // 当前的时间戳
                             nonceStr: str, // 随机字符串(32个以下)
                             package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                            signType: 'MD5',
+                            signType: resData.signType,
                             paySign: paySignid, // 签名
                             success (res) { 
                                 console.log('微信支付成功',res)
@@ -416,18 +416,17 @@ export default class OrderDetails extends wepy.page {
                             fail (res) {  }
                         })
                     }
-                    if(res.msg == '订单已过期'){
-                        wx.showModal({
-                            content:'订单超过支付时间,请重新下单',
-                            showCancel:false,
-                            confirmText:'知道啦 !',
-                            confirmColor:'#72B9C3',
-                            success (res) {
-                                wx.switchTab({
-                                    url: '/pages/order'
-                                })
-                            }
-                        }) 
+                    else{
+                        wx.showToast({
+                              title: res.data.msg,
+                              icon: 'none',
+                              duration: 1500
+                        })
+                        setTimeout(function(){
+                            wx.switchTab({
+                                url: '/pages/order'
+                            })
+                        },1500)
                     }
                 },parameter)
             }
@@ -463,7 +462,7 @@ export default class OrderDetails extends wepy.page {
                                                 timeStamp: time , // 当前的时间戳
                                                 nonceStr: str,    // 随机字符串(32个以下)
                                                 package: packageid, // 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***
-                                                signType: 'MD5',
+                                                signType: resData.signType,
                                                 paySign: paySignid, // 签名
                                                 success (res) { 
                                                     console.log('微信支付成功',res)
@@ -490,18 +489,12 @@ export default class OrderDetails extends wepy.page {
                             }) 
                         }
 
-                        if(res.msg == '订单已过期'){
-                            wx.showModal({
-                                content:'订单超过支付时间,请重新下单',
-                                showCancel:false,
-                                confirmText:'知道啦 !',
-                                confirmColor:'#72B9C3',
-                                success (res) {
-                                    wx.switchTab({
-                                        url: '/pages/order'
-                                    })
-                                }
-                            }) 
+                        else{
+                            wx.showToast({
+                                  title: res.data.msg,
+                                  icon: 'none',
+                                  duration: 1500
+                            })
                         }
                     },parameter)
                 }
@@ -536,7 +529,7 @@ export default class OrderDetails extends wepy.page {
         commonGetData.getDataOrder('order/info/'+ id ,'GET',function(res){
             var resData = res.data.data
             console.log('订单详情',resData)
-            _this.wallet = resData.wallet // 检查是否有钱包 
+            _this.wallet = resData.wallet ? resData.wallet : 0 // 检查是否有钱包 
             _this.orders[0].value = resData.name
             _this.orders[1].value = resData.phone
             _this.orders[2].value = resData.order_num

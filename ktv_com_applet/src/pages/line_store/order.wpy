@@ -320,7 +320,7 @@ export default class Order extends wepy.page {
                             timeStamp: time , 
                             nonceStr: str, 
                             package: packageid, 
-                            signType: 'MD5',
+                            signType: resData.signType,
                             paySign: paySignid, 
                             success (res) { 
                                 // 支付成功在该页面重新请求数据
@@ -372,7 +372,7 @@ export default class Order extends wepy.page {
                                                 timeStamp: time , 
                                                 nonceStr: str,    
                                                 package: packageid, 
-                                                signType: 'MD5',
+                                                signType: resData.signType,
                                                 paySign: paySignid, 
                                                 success (res) { 
                                                     // 支付成功在该页面重新请求数据

@@ -37,6 +37,7 @@ export default class extends wepy.app {
             'pages/my/value_card',
             'pages/my/card_store',
             'pages/my/data',
+            'pages/my/scan_payment', // 扫一扫付款
         ],
         window: {
             backgroundTextStyle: 'light',

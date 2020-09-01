@@ -3,10 +3,12 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"postcss": true,
+		"enhance": true,
+		"postcss": false,
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": true,
@@ -17,9 +19,7 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		},
-		"enhance": true,
-		"nodeModules": true
+		}
 	},
 	"compileType": "miniprogram",
 	"appid": "wx616ce5aa98c54a80",
@@ -43,13 +43,17 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/order",
-					"pathName": "pages/order",
+					"name": "pages/my/scan_payment",
+					"pathName": "pages/my/scan_payment",
 					"query": "",
 					"scene": null
 				}
