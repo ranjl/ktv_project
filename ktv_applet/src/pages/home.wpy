@@ -192,7 +192,7 @@
             <swiper
                 indicator-dots="false" circular="true" autoplay="true"
                 interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
-                <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                <block wx:for="{{imgUrls}}"  wx:key="index">
                     <swiper-item >
                         <image src="https://ktv.jcxowtime.com{{item.path}}"/>
                     </swiper-item>
@@ -237,7 +237,7 @@
 
             <!-- content -->
             <view class="content">
-                <view class="alone" wx:for='{{storeLists}}' wx:key='{{index}}' data-id='{{item.id}}' @tap.stop='skip_details'>
+                <view class="alone" wx:for='{{storeLists}}' wx:key='index' data-id='{{item.id}}' @tap.stop='skip_details'>
                     <!-- 图片盒子 -->
                     <view class="img_box">
                         <image src='https://ktv.jcxowtime.com{{item.cover.path}}'/>

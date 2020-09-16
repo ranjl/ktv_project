@@ -114,9 +114,11 @@
                         // 数量选择
                         .num{
                             font-size: $fs36;
+                            display: flex;
+                            align-items: center;
                             // 图标
                             .iconfont{
-                                font-size: $fs42;
+                                font-size: 60rpx;
                             }
                             // 数量
                             .number{

@@ -11,11 +11,12 @@
 
             // 上面部分
             .up{
-                height: 15%;
+                height:28%;
                 // 搜索盒子
                 .search{    
-                    width: 100%;
-                    height: 30%;
+                    width:100%;
+                    height:15%;
+                    margin-bottom: 2%;
                     padding: 0 45rpx;
                     box-sizing: border-box;
                     // 搜索
@@ -38,9 +39,9 @@
 
                 // 门店
                 .store{
-                    height: 58%;
+                    height: 32%;
                     width: 100%;
-                    margin: 2% 0;
+                    margin-bottom: 2%;
                     padding: 0 45rpx;
                     box-sizing: border-box;
                     display:flex;
@@ -53,20 +54,41 @@
                         margin-right: 10rpx;
                     }
                 }
+
+                // banner
+                .banner{
+                    height: 43%;
+                    width: 100%;
+                    margin-bottom: 2%;
+                    swiper {
+                        height:100%;
+                        swiper-item {
+                            display:flex;
+                            justify-content: center;
+                            image{
+                                height: 100%;
+                                width:100%;
+                                margin: 0 15rpx;
+                                border-radius: 20rpx;
+                                z-index: 1001;
+                            }
+                        }
+                    }
+                }
             }
 
             // 内容
             .content{
-                height: 77%;
+                height: 64%;
                 display:flex;
                 // 左
                 .left{
-                    width: 22%;
+                    width: 25%;
                     height: 100%;
                     // 模板
                     .alone{
                         height: 9%;
-                        padding-left: 30rpx;
+                        padding-left: 45rpx;
                         box-sizing: border-box;
                         display:flex;
                         justify-content: space-between;
@@ -88,23 +110,50 @@
 
                 // 右
                 .right{
-                    width:78%;
+                    width:75%;
                     height: 100%;
                     background:$c730;
 
-                    // 排序盒子(此版本暂无此功能)
+                    // 子类(未使用)
+                    .subclass{
+                        padding: 0 40rpx;
+                        box-sizing: border-box;
+                        border-bottom:1rpx solid $cf6f;
+                        overflow: auto;
+                        display:flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        // 模板
+                        .alone{
+                            padding: 5rpx 20rpx;
+                            box-sizing: border-box;
+                            background:$cf6f;
+                            border-radius: 16rpx;
+                            margin-right: 10rpx;
+                            display:flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+
+                        // 激活样式
+                        .active{
+                            background:$c753;
+                        }
+                    }
+
+                    // 排序盒子
                     .filtr{
                         height: 9%;
                         display:flex;
                         align-items: center;
-                        padding:0 30rpx;
+                        padding:0 40rpx;
                         box-sizing: border-box;
                         // 排序模板
                         .alone{
                             width:139rpx;
                             height: 54rpx;
                             border: 2rpx solid $c339;
-                            margin-right: 11rpx;
+                            margin-left: 11rpx;
                             border-radius: 27rpx;
                             color:$c753;
                             display:flex;
@@ -140,44 +189,17 @@
 
                     // 商品
                     .commodity{
-                        height: 100%;
-                        padding: 30rpx;
+                        height: 91%;
+                        padding: 5rpx 40rpx 0;
                         box-sizing: border-box;
                         display:flex;
                         flex-wrap: wrap;
-                        position: relative;
-                        @keyframes rotate{from{-webkit-transform: rotate(0deg)}
-                            to{-webkit-transform: rotate(360deg)}
-                        }
-                        // 加载
-                        .icon-jiazai{
-                            color: red;
-                            position: absolute;
-                            left: 50%;
-                            margin-left: -30rpx;
-                            top: 30%;
-                            margin-top: -30rpx;
-                            font-size: 60rpx;
-                            animation: rotate 3s linear infinite;
-                        }
-
                         // 模板
                         .rightalone{
                             width: 100%;
-                            margin: 0 0 36rpx 0;
+                            margin: 20rpx 0 30rpx;
                             display:flex;
-                            flex-direction: column;
                             justify-content: space-between;
-                            // 种类
-                            .category{
-                                margin-top: 0;
-                            }
-                            
-                            & > view{
-                                margin-bottom: 16rpx;
-                                display:flex;
-                                justify-content: space-between;
-                            }
                 
                             // 图片盒子
                             .imageBox{
@@ -198,7 +220,7 @@
 
                             // 右侧文本
                             .rightTxt{
-                                width: 62%;
+                                width:58%;
                                 display:flex;
                                 flex-direction: column;
                                 justify-content: space-between;
@@ -213,9 +235,15 @@
                                 .price_add{
                                     display:flex;
                                     justify-content: space-between;
-                                    align-items: flex-end;
+                                    align-items: center;
                                     color:$c753;
-                        
+                                    // 价格
+                                    // .price{
+                                    //     text{
+                                    //         font-size: $fs36;
+                                    //     }
+                                    // }
+
                                     // 添加减少盒子
                                     .add{
                                         display:flex;
@@ -223,7 +251,7 @@
                                         // 添加、减少
                                         .iconfont{
                                             color:$c753;
-                                            font-size: 60rpx;
+                                            font-size: $fs42;
                                         }
                                         // 数量
                                         .number{
@@ -374,7 +402,6 @@
         }
     }
 </style>
-
 <template>
     <view class="box">
         <!-- 上面部分 -->
@@ -392,22 +419,36 @@
                 <image src='{{storeImg}}'/>
                 <view>{{storeName}}</view>
             </view>
+
+            <!-- banner -->
+            <view class="banner">
+                <swiper
+                    indicator-dots="true" circular="true" autoplay="true"
+                    interval="3000" duration="600" previous-margin="30rpx" next-margin="30rpx">
+                    <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                        <swiper-item >
+                            <image src="{{item.img}}"/>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </view>
         </view>
 
         <!-- 内容 -->
         <view class="content">
             <!-- 左 -->
             <scroll-view scroll-y class="left">
-                <view class="alone {{currentLeft==index?'leftaloneactive':''}}" wx:for='{{leftMenus}}' wx:key='index' data-pos='{{index}}' @tap='leftclick'>
+                <view class="alone {{leftaloneisshow==index?'leftaloneactive':''}}" wx:for='{{leftMenus}}' wx:key='{{index}}' 
+                    data-index='{{index}}' @tap='leftclick'>
                     <text>{{item.name}}</text>
-                    <text class='iconfont icon-yousanjiaoxing' wx:if='{{currentLeft==index}}'></text>
+                    <text class='iconfont icon-yousanjiaoxing' wx:if='{{sjxisshow==index}}'></text>
                 </view>
             </scroll-view>
 
             <!-- 右 -->
             <view class="right">
-                <!-- 人气价格排序(此版本暂无此功能) -->
-                <view class="filtr" wx:if="{{1==2}}">
+                <!-- 人气价格排序 -->
+                <view class="filtr">
                     <!--销量 -->
                     <view class="alone" @tap.stop='person'>
                         <view class="filtrson">销量</view>
@@ -428,35 +469,28 @@
                 </view>
 
                 <!-- 商品 -->
-                <scroll-view class="commodity" scroll-y scroll-with-animation="true" scroll-into-view="{{selectId}}" bindscroll="scrollEvent" scroll-top="{{scrollTop}}">
-                    <!-- lodaing -->
-                    <text class="iconfont icon-jiazai" wx:if="{{loading}}"></text>
+                <scroll-view scroll-y class="commodity">
+                    <!-- 模板 -->
+                    <view class="rightalone" wx:for='{{goods}}' wx:key='{{index}}'>
+                        <!-- 左侧图片 -->
+                        <view class="imageBox">
+                            <image src='https://ktv.jcxowtime.com{{item.cover_img}}'/>
+                        </view>
 
-                    <!-- 分类 -->
-                    <view id='item{{index}}' class="rightalone" wx:for='{{allGoods}}' wx:for-item="item" wx:for-index="index" wx:key='index'>
-                        <!-- 分类名称 -->
-                        <view class="category">{{item.type_name}}</view>
-
-                        <!-- 分类对应的商品 -->
-                        <view wx:for='{{item.goods}}' wx:for-item="item1" wx:for-index="index1" wx:key='index1'>
-                            <!-- 左侧图片 -->
-                            <view class="imageBox">
-                                <image src='https://ktv.jcxowtime.com{{item1.cover_img}}'/>
-                            </view>
-                            <!-- 右侧文本 -->
-                            <view class="rightTxt">
-                                <view class='name'>{{item1.goods_name}}</view>
-                                <view class="oldprice">月销1000</view>
-                                <view class="price_add">
-                                    <view class="price">￥<text>{{item1.price}}</text></view> 
-                                    <view class='add'>
-                                        <text class="iconfont icon-ziyuan" @tap.stop="reduce('{{index}}','{{index1}}')"></text>
-                                        <text class="number">{{item1.num}}</text>
-                                        <text class="iconfont icon-jiahao" @tap.stop="add('{{index}}','{{index1}}')"></text>
-                                    </view>
+                        <!-- 右侧文本 -->
+                        <view class="rightTxt">
+                            <view class='name'>{{item.goods_name}}</view>
+                            <view class="oldprice">月销1000</view>
+                            <view class="price_add">
+                                <view class="price">￥<text>{{item.price}}</text></view> 
+                                <view class='add'>
+                                    <text class="iconfont icon-ziyuan"  data-index='{{index}}' @tap.stop='reduce'></text>
+                                    <text class="number">{{item.num}}</text>
+                                    <text class="iconfont icon-jiahao"  data-index='{{index}}' @tap.stop='add'></text>
                                 </view>
                             </view>
                         </view>
+                       
                     </view>
                 </scroll-view>
             </view>
@@ -494,7 +528,7 @@
                     </view>
 
                     <!-- 表格内容 -->
-                    <view class='td' wx:for='{{lists}}' wx:key='index'>
+                    <view class='td' wx:for='{{lists}}' wx:key='{{index}}'>
                         <view class="c_name">{{item.goods_name}}</view>
                         <view class="c_num">
                             <text class="iconfont icon-ziyuan" data-index='{{index}}' @tap.stop='creduce'></text>
@@ -516,46 +550,32 @@ export default class Store extends wepy.page {
     config = {
         navigationBarTitleText: '线上商城'
     }
+
     components = {}
+
     data = {
         storeImg:'https://ktv.jcxowtime.com/uploads/5d7a1b89c7f9b.png', // 默认的门店图片
+        imgUrls: [ // 默认的banner图
+            {img:'https://ktv.jcxowtime.com/uploads/5d7a1ba538287.png'},
+            {img:'https://ktv.jcxowtime.com/uploads/5d7a1ba538287.png'},
+        ], 
         storeName:'', // 门店名称
-
-        leftMenus:[], // 左侧菜单
-        loading: true,
         allGoods:[], // 该页面请求回的所有分类的商品
-
-        person:1, // 人气筛选标杆(默认降序,此版本暂无此功能)
-        price:1,  // 价格筛选标杆(默认降序,此版本暂无此功能)
-
+        leftMenus:[], // 左侧菜单
+        leftaloneisshow:0, // 左侧默认选中第一项
+        sjxisshow:0, // 左侧默认激活第一项的小三角形
+        person:1, // 人气筛选标杆(默认降序)
+        price:1,  // 价格筛选标杆(默认降序)
+        goods:[], // 左侧分类对应的右侧商品
         selectGoods:[], // 两个页面已经选择的商品 ***
         numberSettleShow:false, // 数量和结算的显示与隐藏
         goodsNum:0, // 商品的数量 
         allPrice:'0.00', // 默认的商品总价
         cardActive:false, // 购物车和默认不显示
         lists:[], // 购物车商品
-
-        currentLeft: 0, // 左侧当前选中的下标
-        selectId: "item0",  // 右侧当前显示的元素ID
-        scrollTop: 0, // 到顶部的距离
-        heightArr: [], // 右侧每种分类的高度
-        distance: 0, // 记录scroll-view滚动过程中距离顶部的高度
     }
 
     computed = {}
-    events = {}
-    onLoad() {
-        // 设置门店名称
-        this.storeName = wepy.$instance.globalData.store_name
-    }
-    // 页面显示
-    onShow(){
-        // 重新获取商品
-        this.getStoreGoodsLists()
-        // 判断是否有选择的商品了
-        this.isGoods() 
-        this.$apply()
-    }
 
     methods = {
         // 搜索
@@ -566,14 +586,23 @@ export default class Store extends wepy.page {
             })
         },
 
+
         // 左侧选择
         leftclick(e){
-            this.currentLeft = e.currentTarget.dataset.pos,
-            this.selectId = 'item' + e.currentTarget.dataset.pos
+            var index = e.currentTarget.dataset.index
+            this.leftaloneisshow = index
+            this.sjxisshow = index
+
+            // 渲染左侧分类对应的商品
+            this.goods = this.allGoods[index].goods
+            // console.log('左侧索引',index)
+            // console.log('对应的右侧的商品',this.goods)
             this.$apply()
         },
 
-        // 按销量排序(此版本无此功能)
+
+        // 销量和价格筛选
+        // 按销量排序
         person(e){
             if(this.person == 1){ 
                 this.person = 0
@@ -584,7 +613,7 @@ export default class Store extends wepy.page {
             }
             this.goods.reverse()
         },
-        // 按价格排序(此版本无此功能)
+        // 按价格排序
         price(){
             if(this.price == 1){ 
                 this.price = 0
@@ -596,35 +625,48 @@ export default class Store extends wepy.page {
             this.goods.reverse()
         },
 
-        // 商品列表减少
-        reduce(index,index1){
+
+        // 分类选择的减少与添加
+        // 减少
+        reduce(e){
+            var index = e.currentTarget.dataset.index
+
             // 判断商品选择的最小数量
-            if( this.allGoods[index].goods[index1].num == 0 ){
-                this.allGoods[index].goods[index1].num = 0
+            if(this.goods[index].num == 0){
+                this.goods[index].num == 0
             }else{
-                this.allGoods[index].goods[index1].num -- 
+                this.goods[index].num --
             }
-            this.$apply()
+
             // 计算价格和数量
             this.getPriceNum()
+           
+            // 渲染页面
+            this.$apply()
         },
-        // 商品列表添加
-        add(index,index1){
+        // 添加
+        add(e){
+            var index = e.currentTarget.dataset.index
+
             // 判断选择是否超过库存
-            if( this.allGoods[index].goods[index1].num == this.allGoods[index].goods[index1].store ){
+            if(this.goods[index].num == this.goods[index].store ){
                 wx.showModal({
                     content:'选择的商品超过该商品库存',
                     showCancel:false,
-                    confirmText:'知道了',
+                    confirmText:'知道啦 !',
                     confirmColor:'#72B9C3',
                 })
             }else{
-                this.allGoods[index].goods[index1].num ++
+                this.goods[index].num ++
             }
-            this.$apply()
+            
             // 计算价格和数量
             this.getPriceNum()
+
+            // 渲染页面
+            this.$apply()
         },
+
 
         // 购物车列表显示与隐藏
         card(){
@@ -651,7 +693,8 @@ export default class Store extends wepy.page {
 
 
 
-        // 购物车列表减少
+        // 购物车列表的减少与添加
+        // 减少
         creduce(e){
             var index = e.currentTarget.dataset.index
 
@@ -668,7 +711,7 @@ export default class Store extends wepy.page {
             // 渲染页面
             this.$apply()
         },
-        // 购物车列表添加
+        // 添加
         cadd(e){
             var index = e.currentTarget.dataset.index
 
@@ -692,6 +735,7 @@ export default class Store extends wepy.page {
 
         },
 
+
         // 结算
         total(){
             wx.navigateTo({
@@ -700,7 +744,33 @@ export default class Store extends wepy.page {
         },
     }
 
-    // 获取门店下商品数据
+
+    events = {}
+    onLoad() {}
+
+
+    // 页面显示
+    onShow(){
+        // 设置门店名称
+        this.storeName = wepy.$instance.globalData.store_name
+
+        // 清空之前的商品
+        this.allGoods = [] 
+        this.leftMenus = [] // 左侧
+        this.goods = [] // 右侧
+        
+        // 重新获取商品
+        this.getStoreGoodsLists()
+
+        // 判断是否有选择的商品了
+        this.isGoods() 
+
+        // 渲染页面
+        this.$apply()
+    }
+
+
+    // 获取门店商品列表
     getStoreGoodsLists(){
         var that = this 
         var parameter = {}
@@ -709,62 +779,21 @@ export default class Store extends wepy.page {
         parameter.sort_column = 'price' // 价格
         parameter.sort_type = 3 // 降序
         commonGetData.getDataOrder('goods/list','POST',function(res){
-            const resData = res.data.data
-            that.leftMenus = []
+            var resData = res.data.data
             resData.map((v,i)=>{
                 v.goods.map((k,l)=>{
                     k['num'] = 0 // 默认选择的商品数量为0
                 })
                 that.leftMenus.push({name:v.type_name,id:v.id})  // 左侧分类
             })
-            that.allGoods = resData 
-            that.loading = false
+            that.allGoods = resData // 保存包含所有分类的商品  // resData[1].goods[0].store = 3 // 测试用
+            that.goods = resData[0].goods  // 右侧默认渲染左侧第一类的商品
+            console.log('所有的商品',that.allGoods)
+            console.log('右侧默认渲染的商品',that.goods)
             console.log('左侧分类',that.leftMenus)
-            console.log('右侧商品(所有)',that.allGoods)
             that.$apply()
-            that.selectHeight() // 计算右侧分类的高度
         },parameter)
     }
-
-    // 计算右侧每一个分类的高度
-    selectHeight() {
-        const that = this
-        that.heightArr = []
-        let h = 0;
-        const query = wx.createSelectorQuery()
-        query.selectAll('.rightalone').boundingClientRect()
-        query.exec(function(res) {
-            res[0].forEach((item) => {
-                h += item.height;
-                that.heightArr.push(h);
-            })
-            console.log('右侧每一个分类的高度',that.heightArr);
-        })
-    }
-
-    // 监听scroll-view的滚动事件
-    scrollEvent(event) {
-        if (this.heightArr.length == 0) {
-            return;
-        }
-        let scrollTop = event.detail.scrollTop;
-        let current = this.data.currentLeft;
-        if (scrollTop >= this.distance) { // 页面向上滑动
-            // 如果右侧当前可视区域最底部到顶部的距离 超过 当前列表选中项距顶部的高度（且没有下标越界），则更新左侧选中项
-            if ( current + 1 < this.heightArr.length && scrollTop >= this.heightArr[current] ) {
-                this.currentLeft = current + 1
-            }
-        } else { //页面向下滑动
-            // 如果右侧当前可视区域最顶部到顶部的距离 小于 当前列表选中的项距顶部的高度，则更新左侧选中项
-            if ( current - 1 >= 0 && scrollTop < this.heightArr[current - 1] ) {
-                this.currentLeft = current - 1
-            }
-        }
-        // 更新到顶部的距离
-        this.distance = scrollTop;
-        this.$apply()
-    }
-
 
 
     // 判断是否有选择的商品
@@ -797,6 +826,7 @@ export default class Store extends wepy.page {
         }
         
     }
+
 
     // 分类商品加减时计算数量和价格
     getPriceNum(){ 
@@ -840,6 +870,7 @@ export default class Store extends wepy.page {
         console.log('-----------------------------------------------------------------------------------------------')
     }
 
+
     // 操作购物车列表商品时计算数量和价格
     getCardPriceNum(){
         console.log('购物车中产品',this.lists)
@@ -873,6 +904,7 @@ export default class Store extends wepy.page {
         // 渲染页面
         this.$apply()
     }
+
 
     // 数组求和
     sum(arr) {

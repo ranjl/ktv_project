@@ -32,8 +32,6 @@ export const getDataOrder = function (url,type,cb,parameter) {
     })
 }
 
-
-
 // test
 export const getDataOrderTest = function (url,type,cb,parameter,test) {
     return wepy.request({

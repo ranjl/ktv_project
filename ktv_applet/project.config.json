@@ -2,12 +2,14 @@
 	"description": "A WePY project",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
+		"es6": true,
+		"postcss": true,
 		"minified": false,
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -15,7 +17,10 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"enhance": true,
+		"uglifyFileName": true,
+		"bundle": true
 	},
 	"compileType": "miniprogram",
 	"appid": "wxf1e88d4342ef55a6",
@@ -48,8 +53,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/my/scan_payment",
-					"pathName": "pages/my/scan_payment",
+					"name": "pages/line_store/index",
+					"pathName": "pages/line_store/index",
 					"query": "",
 					"scene": null
 				}

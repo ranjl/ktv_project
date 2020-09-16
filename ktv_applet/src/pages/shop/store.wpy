@@ -414,7 +414,7 @@
             <swiper
                 indicator-dots="false" circular="true" autoplay="true"
                 interval="3000" duration="600" previous-margin="40rpx" next-margin="40rpx">
-                <block wx:for="{{imgUrls}}"  wx:key="{{index}}">
+                <block wx:for="{{imgUrls}}"  wx:key="index">
                     <swiper-item >
                         <image src="https://ktv.jcxowtime.com{{item.path}}"/>
                     </swiper-item>
@@ -431,7 +431,7 @@
 
                 <!-- 5星 -->
                 <view class='star'>
-                    <text wx:for='{{5}}' wx:key='{{index}}' class='iconfont icon-xingji1'></text>
+                    <text wx:for='{{5}}' wx:key='index' class='iconfont icon-xingji1'></text>
                     <text>5分</text>
                 </view>
             </view>
@@ -453,7 +453,7 @@
 
                 <view class="phone" wx:if='{{1==2}}'>门店电话:{{Storedetails.mobile}}</view>
                 <view class="label" wx:if='{{1==2}}'>
-                    <view wx:for='{{labels}}' wx:key='{{index}}'>{{item.tag}}</view>
+                    <view wx:for='{{labels}}' wx:key='index'>{{item.tag}}</view>
                 </view>
             </view>
         </view>
@@ -479,7 +479,7 @@
             <!-- 时间选择 -->
             <scroll-view scroll-x class="time">
                 <view class="alone {{timeactive==index?'timeactive':''}}" 
-                    wx:for='{{MakeDate}}' wx:key='{{index}}' @tap='time' data-index='{{index}}'>
+                    wx:for='{{MakeDate}}' wx:key='index' @tap='time' data-index='{{index}}'>
                     <view class="date">{{item.day}}</view>
                     <view class="week {{timeactive==index?'weekactive':''}}">{{item.week}}</view>
                 </view>
@@ -491,7 +491,7 @@
             <!-- 包间选择 -->
             <scroll-view scroll-x class='room'>
                 <view class="alone {{roomactive==index?'aloneactive':''}}" 
-                    wx:for='{{StoreRoom}}' wx:key='{{index}}' @tap='room' data-index='{{index}}' >
+                    wx:for='{{StoreRoom}}' wx:key='index' @tap='room' data-index='{{index}}' >
                     <view class='txt'>{{item.name}}</view>
                     <view class="num">{{item.member}}</view>
                 </view>
@@ -501,7 +501,7 @@
 
 
             <!-- 档期选择 -->
-            <view class="select" wx:for='{{StoreRoomDate}}' wx:key='{{index}}}'>
+            <view class="select" wx:for='{{StoreRoomDate}}' wx:key='index'>
                 <view >{{item.name}}</view>
                 <view class='select_time'>{{item.start}}-{{item.end}}</view>
                 <view class="price"> ￥<text>{{item.price}}/起</text> </view>
@@ -527,7 +527,7 @@
                 <!-- 选择包断或者小时 -->
                 <view class="sBtnBox">
                     <!-- 选择类型 -->
-                    <view class="s_btn {{sBtnactive==index?'s_btn_active':''}}" wx:for={{s_btns}} wx:key='{{index}}' 
+                    <view class="s_btn {{sBtnactive==index?'s_btn_active':''}}" wx:for={{s_btns}} wx:key='index' 
                         @tap.stop='skip' data-index="{{index}}">
                         <view class="s_icon">
                             <text class="iconfont {{item.icon}}"></text>
@@ -540,7 +540,7 @@
                     <view class="s_time_box" wx:if='{{s_time}}'>
                         <!-- 时间 -->
                         <view class="s_time">
-                            <view wx:for='{{times}}' wx:key='{{index}}' class="s_alone {{item.show?'s_btn_active':''}}" 
+                            <view wx:for='{{times}}' wx:key='index' class="s_alone {{item.show?'s_btn_active':''}}" 
                                 @tap.stop='time_skip' data-index='{{index}}'>{{item.value}}</view>
                         </view>
 
