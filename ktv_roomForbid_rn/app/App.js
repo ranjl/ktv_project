@@ -8,7 +8,7 @@
 // 引入路由组件
 import {DrawerNavigator,TabNavigator,StackNavigator} from 'react-navigation'
 // 加载动画组件
-import StackViewStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator.js'
+// import StackViewStyleInterpolator from 'react-navigation/src/views/StackView/StackViewStyleInterpolator.js'
 
 
 // 加载欢迎页面
@@ -78,7 +78,7 @@ const RootStack = StackNavigator(
     {
         initialRouteName: 'Welcome', 
         headerMode: 'none', // 头部导航样式
-        transitionConfig: () => ({ screenInterpolator: StackViewStyleInterpolator.forHorizontal }),
+        // transitionConfig: () => ({ screenInterpolator: StackViewStyleInterpolator.forHorizontal }),
     }
 );
 

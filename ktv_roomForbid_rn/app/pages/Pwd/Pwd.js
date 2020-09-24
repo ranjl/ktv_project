@@ -190,6 +190,7 @@ export default class Pwd extends Component {
         }
 
         parameter.pwd = this.state.values.join('')
+        console.log('密码',parameter)
         this.ws(parameter)
     } 
 
