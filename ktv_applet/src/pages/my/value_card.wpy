@@ -266,7 +266,7 @@
                 <view class="title">充值金额</view>
                 
                 <view class="recharge_box">
-                    <view class="alone {{ active == index ?'active' :''}}" wx:for='{{ruleLists}}' wx:key='{{index}}' data-index='{{index}}' 
+                    <view class="alone {{ active == index ?'active' :''}}" wx:for='{{ruleLists}}' wx:key='index' data-index='{{index}}' 
                         data-id='{{item.id}}' @tap.stop='select' >
                         <!-- 背景图片 -->
                         <image src="{{bg2}}" />
@@ -351,6 +351,7 @@ export default class ValueCard extends wepy.page {
         wxpayisactive:false, // 微信支付
         minute:30, // min
         second:5, // s
+        lock:true,
     }
 
     computed = {}
@@ -383,12 +384,30 @@ export default class ValueCard extends wepy.page {
         // 立即充值
         recharge(){
             var _this = this 
+
+            if( this.lock ){
+                this.lock = false
+                setTimeout(function(){
+                    _this.lock = true
+                },1000)
+            }else{
+                return false
+            }
+
             var parameter = {}
             parameter.id = this.id
             parameter.phone = this.phone
             console.log('参数',parameter)
             commonGetData.getDataOrder('recharge/pay','POST',function(res){
                 console.log('立即充值预支付结果',res)
+                if( res.data.code == 0 ){
+                    wx.showToast({
+                        title: res.data.msg,
+                        icon: 'none',
+                        duration: 1500
+                    })
+                    return false
+                }
                 var resData = JSON.parse(res.data.data.bridgeConfig)
                 var time = resData.timeStamp, str = resData.nonceStr, packageid =resData.package, paySignid = resData.paySign
                 if(res.data.code == 200){

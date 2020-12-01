@@ -238,7 +238,7 @@
             <!-- 订单详情 -->
             <view class="order_detailed">
                 <view class="o_title">订单详情</view>
-                <view class="o_lists" wx:for='{{orders}}' wx:key='{{index}}'>
+                <view class="o_lists" wx:for='{{orders}}' wx:key='index'>
                     <text class="o_before">{{item.before}}</text>
                     <text class="o_after">{{item.value}}</text>
                 </view>
@@ -257,7 +257,7 @@
             <!-- 其它消费 -->
             <view class="order_detailed">
                 <view class="o_title">其它费用</view>
-                <view class="o_lists" wx:for='{{goods}}' wx:key='{{index}}'>
+                <view class="o_lists" wx:for='{{goods}}' wx:key='index'>
                     <text class="_name" wx:if='{{item.count != 0 }}'>{{item.goods_name}}</text>
                     <text class="_num" wx:if='{{item.count != 0 }}'>{{item.count}} x {{item.price}}</text>
                     <text class="_price" wx:if='{{item.count != 0 }}'>{{item.price*item.count}}</text>
@@ -273,7 +273,7 @@
                 <!-- 支付方式选择 -->
                 <view class="pay_box">
                     <view class="alone {{item.show?'active':''}}" 
-                        wx:for='{{pays}}' wx:key='{{index}}' @tap.stop='payWay' data-index='{{index}}'>
+                        wx:for='{{pays}}' wx:key='index' @tap.stop='payWay' data-index='{{index}}'>
                         {{item.pay}}
                         <text wx:if='{{index ==1 }}' style='color:red; font-size:24rpx'>剩余金额{{wallet}}</text>
                     </view>
@@ -338,6 +338,7 @@ export default class LinEPay extends wepy.page {
         ],
         pay_way:0,  // 支付方式
         wallet:0, // 余额 
+        lock:true,
     }
 
     computed = {}
@@ -428,10 +429,22 @@ export default class LinEPay extends wepy.page {
             },parameter)
         },
 
+       
+
 
         // 立即支付
         pay(){
             var _this = this 
+
+            if( this.lock ){
+                this.lock = false
+                setTimeout(function(){
+                    _this.lock = true
+                },1000)
+            }else{
+                return false
+            }
+
             this.pays.map((v,i)=>{
                 if(v.show == true){
                     this.pay_way = i
