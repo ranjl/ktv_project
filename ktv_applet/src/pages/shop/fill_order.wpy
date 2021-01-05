@@ -644,7 +644,8 @@ export default class fillOrder extends wepy.page {
         lookdetails:[
             {datails:'酒水套餐一',time:'13:00-17:00',num:'1',price:"￥29"},
             {datails:'包间（中包）',time:'14:00-15:00',num:'1',price:"￥29"}
-        ]
+        ],
+        lock:true, // 防止重复点击
     }
 
     computed = {}
@@ -764,8 +765,17 @@ export default class fillOrder extends wepy.page {
 
         // 提交订单
         submit(){
-            // 创建订单
-            this.setUpOrder()
+            if( this.lock ){
+                this.lock = false
+                const that = this
+                setTimeout(function(){
+                    that.lock = true
+                },1000)
+                // 创建订单
+                this.setUpOrder()
+            }else{
+                return false
+            }
         }
     }
 

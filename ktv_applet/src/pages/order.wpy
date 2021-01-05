@@ -289,7 +289,7 @@
     <view class="box">
         <!-- 包间消费记录/商品消费记录 -->
         <view class="Tab">
-            <view wx:for='{{Tabs}}' wx:key='{{index}}' data-index='{{index}}' @tap.stop='cut' class="{{tabActive==index?'viewActive':''}}">
+            <view wx:for='{{Tabs}}' wx:key='index' data-index='{{index}}' @tap.stop='cut' class="{{tabActive==index?'viewActive':''}}">
                 {{item.txt}}
             </view>
         </view>
@@ -300,14 +300,14 @@
         <view class="typearea" wx:if='{{tabActive==0}}'>
             <!-- tab -->
             <view class="tab" >
-                <view class="{{tabindex0==index?'tabactive':''}}" wx:for='{{tabs0}}' wx:key='{{index}}' 
+                <view class="{{tabindex0==index?'tabactive':''}}" wx:for='{{tabs0}}' wx:key='index' 
                     data-index='{{index}}' @tap='tab0'>{{item.title}}</view>
             </view>
         </view>
         <!-- 订单 -->
         <scroll-view scroll-y class="content" wx:if='{{tabActive==0}}'>
             <!-- 模板 -->
-            <view class="alone" wx:for='{{Orders}}' wx:key='{{index}}'>
+            <view class="alone" wx:for='{{Orders}}' wx:key='index'>
                 <!-- 订单号 -->
                 <view class="order">
                     <view class="txt">订单号: {{item.order_num}}</view>
@@ -372,7 +372,7 @@
         <view class="typearea" wx:if='{{tabActive==1}}'>
             <!-- tab -->
             <view class="tab" >
-                <view class="{{tabindex1==index?'tabactive':''}}" wx:for='{{tabs1}}' wx:key='{{index}}' 
+                <view class="{{tabindex1==index?'tabactive':''}}" wx:for='{{tabs1}}' wx:key='index' 
                     data-index='{{index}}' @tap='tab1'>
                     {{item.title}}
                 </view>
@@ -380,7 +380,7 @@
         </view>
         <!-- 内容 -->
         <scroll-view scroll-y class="content1" wx:if='{{tabActive==1}}'>
-            <view class="alone" wx:for='{{goodsOrders}}' wx:key='{{index}}'>
+            <view class="alone" wx:for='{{goodsOrders}}' wx:key='index'>
                 <!-- 订单号+支付状态 -->
                 <view class="orderNum">
                     <view class="num">订单号:{{item.order_num}}</view>
@@ -480,6 +480,7 @@ export default class Record extends wepy.page {
         goodsOrder1:[],  // 待支付
         goodsOrder2:[], // 已支付
         goodsOrder3:[], // 已取消
+        lock: true,
     }
 
     computed = {}
@@ -565,8 +566,17 @@ export default class Record extends wepy.page {
 
         // 支付包厢订单
         pay(e){
+            const that = this
             var id = e.currentTarget.dataset.id
             console.log('订单id',id)
+            if( this.lock ){
+                this.lock = false
+                setTimeout(function(){
+                    that.lock = true
+                },1000)
+            }else{
+                return false
+            }
             wx.navigateTo({
                 url:'/pages/shop/order_details_backups?id=' + id
             })
@@ -586,6 +596,16 @@ export default class Record extends wepy.page {
         gclean(e){
             var that = this 
             var id = e.currentTarget.dataset.id
+
+            if( this.lock ){
+                this.lock = false
+                setTimeout(function(){
+                    that.lock = true
+                },1000)
+            }else{
+                return false
+            }
+
             var parameter = {}
             parameter.id = id
             commonGetData.getDataOrder('order/cancelMallOrder','POST',function(res){

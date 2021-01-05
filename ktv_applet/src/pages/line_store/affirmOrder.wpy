@@ -234,7 +234,7 @@
                 <!-- 支付方式选择 -->
                 <view class="pay_box">
                     <view class="alone {{item.show?'active':''}}" 
-                        wx:for='{{pays}}' wx:key='{{index}}' @tap.stop='payWay' data-index='{{index}}'>
+                        wx:for='{{pays}}' wx:key='index' @tap.stop='payWay' data-index='{{index}}'>
                         {{item.pay}}
                         <text wx:if='{{index ==1 }}' style='color:red; font-size:24rpx'>剩余金额{{wallet}}</text>
                     </view>
@@ -258,7 +258,7 @@
             <view class="template">
                 <view class="left">性别</view>
                 <view class="right">
-                    <view class="alone" wx:for='{{genders_arr}}' wx:key='{{index}}' 
+                    <view class="alone" wx:for='{{genders_arr}}' wx:key='index' 
                         data-index='{{index}}' data-value='{{item.txt}}' @tap='sex'>
                         <view class="out {{genders==index+1?'outactive':''}}">
                             <view wx:if='{{genders==index+1}}'></view>
@@ -295,7 +295,7 @@
                     </view>
 
                     <!-- 内容 -->
-                    <view class="td" wx:for='{{lists}}' wx:key='{{index}}'>
+                    <view class="td" wx:for='{{lists}}' wx:key='index'>
                        <view class="name">{{item.goods_name}}</view>
                        <view class="num">*{{item.num}}</view>
                        <view class="price">￥{{item.addPrice}}</view>
@@ -360,6 +360,8 @@ export default class Affirmorder extends wepy.page {
 
         lists:[ ],// 选择的商品
         allPrice:'0.00', // 总价
+
+        lock: true,
     }
 
     computed = {}
@@ -418,6 +420,16 @@ export default class Affirmorder extends wepy.page {
         // 支付
         pay(){
             var that = this
+
+            if( this.lock ){
+                this.lock = false
+                setTimeout(function(){
+                    that.lock = true
+                },1000)
+            }else{
+                return false
+            }
+
             var parameter = {}
             parameter.sid = wepy.$instance.globalData.sid // 门店id
             parameter.rid = this.rid  // 选择的房间id
